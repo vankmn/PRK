@@ -2,27 +2,28 @@ package pl.edu.pw.PRK.security;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configurers.LogoutConfigurer;
-import org.springframework.security.provisioning.JdbcUserDetailsManager;
-import org.springframework.security.provisioning.UserDetailsManager;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
-
-import javax.sql.DataSource;
+import pl.edu.pw.PRK.service.UserService;
 
 @Configuration
 public class SecurityConfig {
 
     @Bean
-    public UserDetailsManager userDetailsManager(DataSource dataSource){
-        JdbcUserDetailsManager jdbcUserDetailsManager = new JdbcUserDetailsManager(dataSource);
+    public BCryptPasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
 
-        //comment setUsers and SetAuthority if you prefer to use standard spring names of database tables
-        jdbcUserDetailsManager.setUsersByUsernameQuery("select user_id,pw,active from members where user_id=?");
-        jdbcUserDetailsManager.setAuthoritiesByUsernameQuery("select user_id,role from roles where user_id=?");
-        //----------
-
-        return jdbcUserDetailsManager;
+    //authenticationProvider bean definition
+    @Bean
+    public DaoAuthenticationProvider authenticationProvider(UserService userService) {
+        DaoAuthenticationProvider auth = new DaoAuthenticationProvider();
+        auth.setUserDetailsService(userService); //set the custom user details service
+        auth.setPasswordEncoder(passwordEncoder()); //set the password encoder - bcrypt
+        return auth;
     }
 
     @Bean
@@ -30,8 +31,7 @@ public class SecurityConfig {
         httpSecurity
                 .authorizeHttpRequests(configurer -> configurer
                         .requestMatchers("/").permitAll()
-                        .requestMatchers("/leaders/**").hasRole("MANAGER")
-                        .requestMatchers("/systems/**").hasRole("ADMIN")
+                        .requestMatchers("/register/**").permitAll()
                         .anyRequest().authenticated())
                 .formLogin(form -> form.loginPage("/loginPage")
                         .loginProcessingUrl("/authenticateTheUser").permitAll())

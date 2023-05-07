@@ -44,7 +44,16 @@
     <!-- login button -->
     <input type="submit" value="Login"/>
 
-</form>
+    <br/>
 
+    <!--Back to home page-->
+    <a th:href="@{/}">Back to home page</a>
+</form>
+<div>
+    <a th:href="@{/register/showRegistrationForm}"
+       class="btn btn-primary mt-3"
+       role="button"
+       aria-pressed="true">Register New User</a>
+</div>
 </body>
 </html>

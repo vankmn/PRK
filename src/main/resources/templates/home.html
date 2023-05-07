@@ -10,9 +10,17 @@
 
 
 <body>
-
+<br/>
 <!--login button-->
 <a th:href="@{/loginPage}">Login</a>
-
+<br/>
+<!--logout button-->
+<form action="#" th:action="@{/logout}" method="post">
+    <input type="submit" value="Logout"/>
+</form>
+<br/>
+<!--test-->
+<a th:href="@{/testCreditials}">test cred</a>
+<br/>
 </body>
 </html>
