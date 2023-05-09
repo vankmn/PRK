@@ -3,33 +3,38 @@ package pl.edu.pw.PRK.entity;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name="Movies")
-public class Movies {
-
-	// define fields
-
+@Table(name="movies")
+public class Movie {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name="Id")
+	@Column(name="id")
 	private int id;
 
-	@Column(name="Name")
+	@Column(name="name")
 	private String name;
 
-	@Column(name="Description")
+	@Column(name="description")
 	private String description;
 
-	@Column(name="Duration")
+	@Column(name="duration")
 	private int duration;
 
 
 	// define constructors
 
-	public Movies() {
+	public Movie() {
 
 	}
 
-	public Movies(String name, String description, int duration) {
+	public Movie(int id, String name, String description, int duration) {
+		this.id = id;
+		this.name = name;
+		this.description = description;
+		this.duration = duration;
+	}
+
+
+	public Movie(String name, String description, int duration) {
 		this.name = name;
 		this.description = description;
 		this.duration = duration;
@@ -67,6 +72,12 @@ public class Movies {
 
 	public void setDuration(int duration) {
 		this.duration = duration;
+	}
+
+
+	@Override
+	public String toString() {
+		return "Employee [id=" + id + ", name=" + name + ", description=" + description + ", duration=" + duration + "]";
 	}
 		
 }
