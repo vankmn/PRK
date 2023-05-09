@@ -19,8 +19,9 @@
     <input type="submit" value="Logout"/>
 </form>
 <br/>
-<!--test-->
-<a th:href="@{/testCreditials}">test cred</a>
+<!--display username and role-->
+<div  th:text="'User name: ' +${userName}"/>
+<div  th:text="'User authorities: ' +${userAuthorities}"/>
 <br/>
 </body>
 </html>
