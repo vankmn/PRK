@@ -36,6 +36,7 @@ public class MovieServiceImpl implements MovieService {
 		
 		if (result.isPresent()) {
 			theEmployee = result.get();
+
 		}
 		else {
 			// we didn't find the employee
