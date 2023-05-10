@@ -4,31 +4,34 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import pl.edu.pw.PRK.service.MovieService;
 
-@org.springframework.stereotype.Controller
-public class Controller {
+@Controller
+public class HomeController {
 
     private MovieService movieService;
 
     @Autowired
-    public Controller(MovieService movieService) {
+    public HomeController(MovieService movieService) {
         this.movieService = movieService;
     }
 
-    @GetMapping("/")
+    @GetMapping("/home")
     public String showHome(Model model){
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-
-        UserDetails userDetails = (UserDetails) authentication.getPrincipal();
-
         model.addAttribute("userName", authentication.getName());
-        model.addAttribute("userAuthorities",userDetails.getAuthorities());
 
-        model.addAttribute("movies", movieService.findAllSortedByNameAsc());
+        if(authentication.getName().equals("anonymousUser")){
+            model.addAttribute("userAuthorities","none");
+        }else {
+            UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+            model.addAttribute("userAuthorities", userDetails.getAuthorities());
+        }
 
         return "home";
     }
+
 }

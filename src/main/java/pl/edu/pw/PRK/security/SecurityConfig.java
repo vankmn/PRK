@@ -2,6 +2,7 @@ package pl.edu.pw.PRK.security;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configurers.LogoutConfigurer;
@@ -30,11 +31,13 @@ public class SecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity httpSecurity) throws Exception{
         httpSecurity
                 .authorizeHttpRequests(configurer -> configurer
-                        .requestMatchers("/").permitAll()
+                        .requestMatchers("/home").permitAll()
                         .requestMatchers("/register/**").permitAll()
+                        .requestMatchers(HttpMethod.GET,"/administration/**").hasRole("ADMIN")
                         .anyRequest().authenticated())
                 .formLogin(form -> form.loginPage("/loginPage")
-                        .loginProcessingUrl("/authenticateTheUser").permitAll())
+                        .loginProcessingUrl("/authenticateTheUser").permitAll()
+                        .defaultSuccessUrl("/home", true))
                 .logout(LogoutConfigurer::permitAll)
                 .exceptionHandling(configurer -> configurer.accessDeniedPage("/accessDenied"))
         ;
