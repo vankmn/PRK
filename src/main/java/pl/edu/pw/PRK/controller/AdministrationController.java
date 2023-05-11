@@ -6,8 +6,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import pl.edu.pw.PRK.entity.Hall;
 import pl.edu.pw.PRK.entity.Movie;
+import pl.edu.pw.PRK.entity.Ticket;
 import pl.edu.pw.PRK.service.HallService;
 import pl.edu.pw.PRK.service.MovieService;
+import pl.edu.pw.PRK.service.TicketService;
 
 @Controller
 @RequestMapping("/administration")
@@ -15,11 +17,13 @@ public class AdministrationController {
 
     private MovieService movieService;
     private HallService hallService;
+    private TicketService ticketService;
 
     @Autowired
-    public AdministrationController(MovieService movieService, HallService hallService) {
+    public AdministrationController(MovieService movieService, HallService hallService, TicketService ticketService) {
         this.movieService = movieService;
         this.hallService = hallService;
+        this.ticketService = ticketService;
     }
     //-------------menu
     @GetMapping("/menu")
@@ -91,4 +95,35 @@ public class AdministrationController {
         return "redirect:/administration/menu/cinemaHalls";
     }
 
+    //----------------tickets
+    @GetMapping("/menu/tickets")
+    public String showTickets(Model model){
+        model.addAttribute("tickets", ticketService.findAllSortedByNumberAsc());
+        return "administration/tickets";
+    }
+
+    @GetMapping("/menu/tickets/showFormForAddTicket")
+    public String showFormForAddTicket(Model model){
+        model.addAttribute("ticket",new Ticket());
+        return "administration/addNewTicket";
+    }
+
+    @PostMapping("/menu/tickets/saveTicket")
+    public String saveTicket(@ModelAttribute("ticket") Ticket ticket){
+        ticketService.save(ticket);
+        return "redirect:/administration/menu/tickets";
+    }
+
+    @GetMapping("/menu/tickets/showFormForUpdateTicket")
+    public String showFormForUpdateTicket(@RequestParam("ticketId") int ticketId, Model model){
+        Ticket ticket = ticketService.findById(ticketId);
+        model.addAttribute("ticket",ticket);
+        return "administration/showFormForUpdateTicket";
+    }
+
+    @GetMapping("/menu/tickets/deleteTicket")
+    public String deleteTicket(@RequestParam("ticketId") int ticketId){
+        ticketService.deleteById(ticketId);
+        return "redirect:/administration/menu/tickets";
+    }
 }

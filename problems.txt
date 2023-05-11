@@ -1,0 +1,1 @@
+possible to add empty entries despite in mySQL notnull selected
