@@ -11,7 +11,7 @@ import java.util.Optional;
 @Service
 public class MovieServiceImpl implements MovieService {
 
-	private MovieDao movieDao;
+	private final MovieDao movieDao;
 	
 	@Autowired
 	public MovieServiceImpl(MovieDao movieDao) {
@@ -40,7 +40,7 @@ public class MovieServiceImpl implements MovieService {
 		}
 		else {
 			// we didn't find the employee
-			throw new RuntimeException("Did not find employee id - " + theId);
+			throw new RuntimeException("Did not find movie id - " + theId);
 		}
 		
 		return theEmployee;
