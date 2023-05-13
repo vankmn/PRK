@@ -9,5 +9,4 @@ public class PrkApplication {
 		SpringApplication.run(PrkApplication.class, args);
 	}
 
-	//aplikacja
 }
