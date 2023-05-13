@@ -1,3 +1,6 @@
 possible to add empty entries despite in mySQL notnull selected
 placeholders aren't displayed for numbers (difficult to identify input field)
 add dropdown list for foreign keys
+
+
+//to be deleted branch test
