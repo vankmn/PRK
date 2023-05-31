@@ -34,11 +34,11 @@
       <td th:text="${tempMovie.getMovieName()}"/>
       <td th:text="${tempMovie.getHallNumber()}"/>
                   <td>
-                      <a th:href="@{/administration/menu/movies/showFormForUpdateMovie(movieId=${tempMovie.id})}"
+                      <a th:href="@{/administration/menu/schedule/showFormForUpdateMovieToSchedule(movieToScheduleId=${tempMovie.id})}"
                          class="btn btn-primary btn-sm mb-3">
                           Update
                       </a>
-                      <a th:href="@{/administration/menu/movies/deleteMovie(movieId=${tempMovie.id})}"
+                      <a th:href="@{/administration/menu/schedule/deleteMovieToSchedule(movieToScheduleId=${tempMovie.id})}"
                          class="btn btn-danger btn-sm" onclick="if (!(confirm('Are you sure?'))) return false">
                           Delete
                       </a>

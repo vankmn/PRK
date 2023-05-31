@@ -17,17 +17,22 @@
 <div class="container">
     <h3>Update Movie</h3>
     <hr>
-    <form action="#" th:action="@{/administration/menu/schedule/saveMovieToSchedule}" th:object="${movie}" method="post">
+    <form action="#" th:action="@{/administration/menu/schedule/saveMovieToSchedule}" th:object="${movieToSchedule}" method="post">
 
         <input type="hidden" th:field="*{id}">
-        <input type="text" th:field="*{name}" placeholder="Name" class="form-control mb-4 w-25">
-        <input type="text" th:field="*{description}" placeholder="Description" class="form-control mb-4 w-25">
-        <input type="number" th:field="*{duration}" placeholder="Duration" class="form-control mb-4 w-25">
+        <input type="text" th:field="*{time}" placeholder="Time" class="form-control mb-4 w-25">
+        <input type="date" th:field="*{date}" placeholder="Date" class="form-control mb-4 w-25">
+        <select th:field="*{hall_id}">
+            <option th:each="hall : ${availableHalls}" th:value="${hall.getId()}" th:text="${hall.getNumber()}"></option>
+        </select>
+        <select th:field="*{movie_id}">
+            <option th:each="movie : ${availableMovies}" th:value="${movie.getId()}" th:text="${movie.getName()}"></option>
+        </select>
 
         <button type="submit" class="btn btn-info col-2">Save</button>
     </form>
     <hr>
-    <a th:href="@{/administration/menu/movies}">Back to movies list</a>
+    <a th:href="@{/administration/menu/schedule}">Back to movies list</a>
 </div>
 
 </body>

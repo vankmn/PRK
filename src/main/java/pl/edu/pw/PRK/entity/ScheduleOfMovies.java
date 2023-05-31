@@ -19,11 +19,11 @@ public class ScheduleOfMovies {
 	@Column(name="time")
 	private Time time;
 
-	@OneToOne(cascade = CascadeType.ALL)
+	@OneToOne(cascade = CascadeType.MERGE)
 	@JoinColumn(name="movie_id")
 	private Movie movie_id;
 
-	@OneToOne(cascade = CascadeType.ALL)
+	@OneToOne(cascade = CascadeType.MERGE)
 	@JoinColumn(name="hall_ID")
 	private Hall hall_id;
 
@@ -33,15 +33,6 @@ public class ScheduleOfMovies {
 	public ScheduleOfMovies() {
 
 	}
-
-//	public ScheduleOfMovies(int id, Date date, Time time, Movie movie_id, Hall hall_id) {
-//		this.id = id;
-//		this.date = date;
-//		this.time = time;
-//		this.movie_id = movie_id;
-//		this.hall_id=hall_id;
-//	}
-
 
 	public ScheduleOfMovies(Date date, Time time) {
 		this.date = date;

@@ -6,5 +6,5 @@ import pl.edu.pw.PRK.entity.ScheduleOfMovies;
 import java.util.List;
 
 public interface ScheduleOfMoviesDAO extends JpaRepository<ScheduleOfMovies,Integer>{
-//	void save(ScheduleOfMovies scheduleOfMovies);
+
 }

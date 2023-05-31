@@ -171,7 +171,7 @@ public class AdministrationController {
     public String showFormForAddMovieToSchedule(Model model){
         model.addAttribute("movieToSchedule",new ScheduleOfMovies());
         model.addAttribute("availableHalls",hallService.findAll());
-        model.addAttribute("avaliableMovies",movieService.findAll());
+        model.addAttribute("availableMovies",movieService.findAll());
         return "administration/schedule/showAddMovieToScheduleForm";
     }
 
@@ -186,6 +186,8 @@ public class AdministrationController {
     public String showFormForUpdateMovieToSchedule(@RequestParam("movieToScheduleId") int movieToScheduleId, Model model){
         ScheduleOfMovies movieToSchedule = scheduleOfMoviesService.findById(movieToScheduleId);
         model.addAttribute("movieToSchedule",movieToSchedule);
+        model.addAttribute("availableHalls",hallService.findAll());
+        model.addAttribute("availableMovies",movieService.findAll());
         return "administration/schedule/showFormForUpdateMovieToSchedule";
     }
 
