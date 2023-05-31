@@ -8,15 +8,16 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import pl.edu.pw.PRK.service.MovieService;
+import pl.edu.pw.PRK.service.ScheduleOfMoviesService;
 
 @Controller
 public class HomeController {
 
-    private MovieService movieService;
+    private ScheduleOfMoviesService scheduleOfMoviesService;
 
     @Autowired
-    public HomeController(MovieService movieService) {
-        this.movieService = movieService;
+    public HomeController(ScheduleOfMoviesService scheduleOfMoviesService) {
+        this.scheduleOfMoviesService = scheduleOfMoviesService;
     }
 
     @GetMapping("/home")
@@ -30,6 +31,8 @@ public class HomeController {
             UserDetails userDetails = (UserDetails) authentication.getPrincipal();
             model.addAttribute("userAuthorities", userDetails.getAuthorities());
         }
+
+        model.addAttribute("scheduledMovies", scheduleOfMoviesService.findAll());
 
         return "home";
     }

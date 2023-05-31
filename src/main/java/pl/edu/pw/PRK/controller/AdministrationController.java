@@ -4,14 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import pl.edu.pw.PRK.entity.Hall;
-import pl.edu.pw.PRK.entity.Movie;
-import pl.edu.pw.PRK.entity.Seat;
-import pl.edu.pw.PRK.entity.Ticket;
-import pl.edu.pw.PRK.service.HallService;
-import pl.edu.pw.PRK.service.MovieService;
-import pl.edu.pw.PRK.service.SeatService;
-import pl.edu.pw.PRK.service.TicketService;
+import pl.edu.pw.PRK.entity.*;
+import pl.edu.pw.PRK.service.*;
 
 @Controller
 @RequestMapping("/administration")
@@ -21,13 +15,16 @@ public class AdministrationController {
     private final HallService hallService;
     private final TicketService ticketService;
     private final SeatService seatService;
+    private final ScheduleOfMoviesService scheduleOfMoviesService;
 
     @Autowired
-    public AdministrationController(MovieService movieService, HallService hallService, TicketService ticketService, SeatService seatService) {
+    public AdministrationController(MovieService movieService, HallService hallService, TicketService ticketService, SeatService seatService,
+                                    ScheduleOfMoviesService scheduleOfMoviesService) {
         this.movieService = movieService;
         this.hallService = hallService;
         this.ticketService = ticketService;
         this.seatService = seatService;
+        this.scheduleOfMoviesService = scheduleOfMoviesService;
     }
     //-------------menu
     @GetMapping("/menu")
@@ -146,11 +143,6 @@ public class AdministrationController {
 
     @PostMapping("/menu/seats/saveSeat")
     public String saveSeat(@ModelAttribute("seat") Seat seat){
-        System.out.println(seat.getId());
-        System.out.println(seat.getNumber());
-        System.out.println(seat.getRow());
-        System.out.println(seat.getOccupied());
-        System.out.println(seat.getHallId());
         seatService.save(seat);
         return "redirect:/administration/menu/seats";
     }
@@ -166,5 +158,40 @@ public class AdministrationController {
     public String deleteSeat(@RequestParam("seatId") int seatId){
         seatService.deleteById(seatId);
         return "redirect:/administration/menu/seats";
+    }
+
+    //----------------schedule
+    @GetMapping("/menu/schedule")
+    public String showSchedule(Model model){
+        model.addAttribute("scheduleMovies", scheduleOfMoviesService.findAll());
+        return "administration/schedule/schedule";
+    }
+
+    @GetMapping("/menu/schedule/showFormForAddMovieToSchedule")
+    public String showFormForAddMovieToSchedule(Model model){
+        model.addAttribute("movieToSchedule",new ScheduleOfMovies());
+        model.addAttribute("availableHalls",hallService.findAll());
+        model.addAttribute("avaliableMovies",movieService.findAll());
+        return "administration/schedule/showAddMovieToScheduleForm";
+    }
+
+    @PostMapping("/menu/schedule/saveMovieToSchedule")
+    public String saveMovieToSchedule(@ModelAttribute("movieToSchedule") ScheduleOfMovies scheduleOfMovies) {
+        System.out.println(scheduleOfMovies.getHall_id());
+        scheduleOfMoviesService.save(scheduleOfMovies);
+        return "redirect:/administration/menu/schedule";
+    }
+
+    @GetMapping("/menu/schedule/showFormForUpdateMovieToSchedule")
+    public String showFormForUpdateMovieToSchedule(@RequestParam("movieToScheduleId") int movieToScheduleId, Model model){
+        ScheduleOfMovies movieToSchedule = scheduleOfMoviesService.findById(movieToScheduleId);
+        model.addAttribute("movieToSchedule",movieToSchedule);
+        return "administration/schedule/showFormForUpdateMovieToSchedule";
+    }
+
+    @GetMapping("/menu/schedule/deleteMovieToSchedule")
+    public String deleteMovieToSchedule(@RequestParam("movieToScheduleId") int movieToScheduleId){
+        scheduleOfMoviesService.deleteById(movieToScheduleId);
+        return "redirect:/administration/menu/schedule";
     }
 }

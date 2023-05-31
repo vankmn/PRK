@@ -11,7 +11,7 @@ import java.util.Optional;
 @Service
 public class HallServiceImpl implements HallService {
 
-	private HallDao hallDao;
+	private final HallDao hallDao;
 
 	@Autowired
 	public HallServiceImpl(HallDao hallDao) {
