@@ -25,7 +25,6 @@
     <tr>
       <th>Number</th>
       <th>Row</th>
-      <th>Is occupied</th>
       <th>Hall</th>
     </tr>
     </thead>
@@ -35,7 +34,6 @@
 
       <td th:text="${tempSeat.number}" >
       <td th:text="${tempSeat.row}" >
-      <td th:text="${tempSeat.occupied}" >
       <td th:text="${tempSeat.hallId}" >
       <td>
         <a th:href="@{/administration/menu/seats/showFormForUpdateSeat(seatId=${tempSeat.id})}"

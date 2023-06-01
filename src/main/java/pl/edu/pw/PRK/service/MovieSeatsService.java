@@ -19,5 +19,7 @@ public interface MovieSeatsService {
 
 	void deleteBunchOfSeatsForNewMovie(ScheduleOfMovie scheduleOfMovie);
 
+	List<MovieSeats> findNotOccupiedSeats(ScheduleOfMovie scheduleOfMovie);
+
 
 }

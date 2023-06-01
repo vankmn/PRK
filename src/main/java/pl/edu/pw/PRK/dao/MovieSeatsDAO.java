@@ -11,4 +11,7 @@ public interface MovieSeatsDAO extends JpaRepository<MovieSeats,Integer>{
 
     @Query("SELECT s FROM MovieSeats s WHERE s.scheduleOfMovieId = ?1")
     List<MovieSeats> findSeatAssignedToScheduledMovie(ScheduleOfMovie ScheduledMovieId);
+
+    @Query("SELECT s FROM MovieSeats s WHERE s.isOccupied = false AND s.scheduleOfMovieId=?1")
+    List<MovieSeats> findNotOccupiedSeats(ScheduleOfMovie ScheduledMovieId);
 }

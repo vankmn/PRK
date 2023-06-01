@@ -13,6 +13,9 @@ public class MovieSeats {
 	@Column(name="id")
 	private int id;
 
+	@Column(name = "is_occupied")
+	private boolean isOccupied;
+
 	@OneToOne(cascade = CascadeType.MERGE)
 	@JoinColumn(name="schedule_of_movie_id")
 	private ScheduleOfMovie scheduleOfMovieId;
@@ -25,12 +28,13 @@ public class MovieSeats {
 	// define constructors
 
 	public MovieSeats() {
-
+		this.isOccupied=false;
 	}
 
 	public MovieSeats(ScheduleOfMovie scheduleOfMovieId, Seat seatId) {
 		this.scheduleOfMovieId = scheduleOfMovieId;
 		this.seatId = seatId;
+		this.isOccupied=false;
 	}
 
 	// define getter/setter
@@ -57,6 +61,14 @@ public class MovieSeats {
 
 	public void setSeatId(Seat seatId) {
 		this.seatId = seatId;
+	}
+
+	public boolean isOccupied() {
+		return isOccupied;
+	}
+
+	public void setOccupied(boolean occupied) {
+		isOccupied = occupied;
 	}
 }
 
