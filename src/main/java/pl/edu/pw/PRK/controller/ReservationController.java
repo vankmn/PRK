@@ -66,6 +66,7 @@ public class ReservationController {
         //save soldTicket
         soldTicketsService.save(soldTicket);
 
+
         //set occupation to movieSeat
         MovieSeats movieSeats = movieSeatsService.findById(soldTicket.getMovieSeat().getId());
         movieSeats.setOccupied(true);
