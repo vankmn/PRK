@@ -4,8 +4,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pl.edu.pw.PRK.dao.MovieSeatsDAO;
 import pl.edu.pw.PRK.dao.ScheduleOfMoviesDAO;
+import pl.edu.pw.PRK.dao.SeatDao;
+import pl.edu.pw.PRK.entity.Hall;
 import pl.edu.pw.PRK.entity.MovieSeats;
 import pl.edu.pw.PRK.entity.ScheduleOfMovie;
+import pl.edu.pw.PRK.entity.Seat;
 
 import java.util.List;
 import java.util.Optional;
@@ -14,10 +17,12 @@ import java.util.Optional;
 public class MovieSeatsServiceImp implements MovieSeatsService {
 
 	private final MovieSeatsDAO movieSeatsDAO;
+	private final SeatDao seatDao;
 
 	@Autowired
-	public MovieSeatsServiceImp(MovieSeatsDAO movieSeatsDAO) {
+	public MovieSeatsServiceImp(MovieSeatsDAO movieSeatsDAO, SeatDao seatDao) {
 		this.movieSeatsDAO = movieSeatsDAO;
+		this.seatDao=seatDao;
 	}
 
 	@Override
@@ -52,6 +57,17 @@ public class MovieSeatsServiceImp implements MovieSeatsService {
 	public void deleteById(int theId) {
 		movieSeatsDAO.deleteById(theId);
 	}
+
+	@Override
+	public void createBunchOfSeatsForNewMovie(ScheduleOfMovie scheduleOfMovie, int hallId) {
+		List<Seat> seatList = seatDao.findSeatAssignedToHall(hallId);
+		for(int i=0;i<seatList.size();i++){
+			MovieSeats movieSeats = new MovieSeats(scheduleOfMovie,seatList.get(i));
+			movieSeatsDAO.save(movieSeats);
+		}
+
+	}
+
 
 }
 

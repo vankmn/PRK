@@ -21,11 +21,11 @@ public class ScheduleOfMovie {
 
 	@OneToOne(cascade = CascadeType.MERGE)
 	@JoinColumn(name="movie_id")
-	private Movie movie_id;
+	private Movie movie;
 
 	@OneToOne(cascade = CascadeType.MERGE)
 	@JoinColumn(name="hall_ID")
-	private Hall hall_id;
+	private Hall hall;
 
 
 	// define constructors
@@ -65,27 +65,27 @@ public class ScheduleOfMovie {
 		this.time = time;
 	}
 
-	public Movie getMovie_id() {
-		return movie_id;
+	public Movie getMovie() {
+		return movie;
 	}
 
 	public String getMovieName(){
-		return movie_id.getName();
+		return movie.getName();
 	}
 
 	public int getHallNumber(){
-		return hall_id.getNumber();
+		return hall.getNumber();
 	}
-	public void setMovie_id(Movie movie_id) {
-		this.movie_id = movie_id;
-	}
-
-	public Hall getHall_id() {
-		return hall_id;
+	public void setMovie(Movie movie_id) {
+		this.movie = movie_id;
 	}
 
-	public void setHall_id(Hall hall_id) {
-		this.hall_id = hall_id;
+	public Hall getHall() {
+		return hall;
+	}
+
+	public void setHall(Hall hall_id) {
+		this.hall = hall_id;
 	}
 		
 }

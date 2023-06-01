@@ -1,6 +1,8 @@
 package pl.edu.pw.PRK.service;
 
+import pl.edu.pw.PRK.entity.Hall;
 import pl.edu.pw.PRK.entity.MovieSeats;
+import pl.edu.pw.PRK.entity.ScheduleOfMovie;
 
 import java.util.List;
 
@@ -13,6 +15,8 @@ public interface MovieSeatsService {
 	void save(MovieSeats scheduleOfMovie);
 
 	void deleteById(int theId);
+
+	void createBunchOfSeatsForNewMovie(ScheduleOfMovie scheduleOfMovieID, int hallId);
 
 
 }

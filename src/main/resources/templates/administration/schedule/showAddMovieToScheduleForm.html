@@ -22,10 +22,10 @@
         <input type="hidden" th:field="*{id}">
         <input type="text" th:field="*{time}" placeholder="Name" class="form-control mb-4 w-25">
         <input type="date"  th:field="*{date}" placeholder="Description" class="form-control mb-4 w-25">
-        <select th:field="*{hall_id}">
+        <select th:field="*{hall}">
         <option th:each="hall : ${availableHalls}" th:value="${hall.getId()}" th:text="${hall.getNumber()}"></option>
         </select>
-        <select th:field="*{movie_id}">
+        <select th:field="*{movie}">
             <option th:each="movie : ${availableMovies}" th:value="${movie.getId()}" th:text="${movie.getName()}"></option>
         </select>
 

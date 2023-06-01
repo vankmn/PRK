@@ -180,6 +180,7 @@ public class AdministrationController {
     @PostMapping("/menu/schedule/saveMovieToSchedule")
     public String saveMovieToSchedule(@ModelAttribute("movieToSchedule") ScheduleOfMovie scheduleOfMovie) {
         scheduleOfMoviesService.save(scheduleOfMovie);
+        movieSeatsService.createBunchOfSeatsForNewMovie(scheduleOfMovie,scheduleOfMovie.getHall().getId());
         return "redirect:/administration/menu/schedule";
     }
 
