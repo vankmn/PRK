@@ -45,6 +45,7 @@
             <th>Time</th>
             <th>Movie name</th>
             <th>Hall number</th>
+            <th>Action</th>
         </tr>
         </thead>
 
@@ -55,17 +56,11 @@
             <td th:text="${tempMovie.time}" />
             <td th:text="${tempMovie.getMovieName()}"/>
             <td th:text="${tempMovie.getHallNumber()}"/>
-<!--            <td>-->
-<!--                <a th:href="@{/administration/menu/movies/showFormForUpdateMovie(movieId=${tempMovie.id})}"-->
-<!--                   class="btn btn-primary btn-sm mb-3">-->
-<!--                    Update-->
-<!--                </a>-->
-<!--                <a th:href="@{/administration/menu/movies/deleteMovie(movieId=${tempMovie.id})}"-->
-<!--                   class="btn btn-danger btn-sm" onclick="if (!(confirm('Are you sure?'))) return false">-->
-<!--                    Delete-->
-<!--                </a>-->
-<!--            </td>-->
-
+            <td>
+                <a th:href="@{/reservation/prepareReservation(selectedMovie=${tempMovie.id})}"
+                   class="btn btn-primary btn-sm mb-3">
+                    Reserve
+                </a>
         </tr>
         </tbody>
     </table>

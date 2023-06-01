@@ -76,6 +76,11 @@ public class MovieSeatsServiceImp implements MovieSeatsService {
 		}
 	}
 
+	@Override
+	public List<MovieSeats> findNotOccupiedSeats(ScheduleOfMovie scheduleOfMovie) {
+		return movieSeatsDAO.findNotOccupiedSeats(scheduleOfMovie);
+	}
+
 
 }
 

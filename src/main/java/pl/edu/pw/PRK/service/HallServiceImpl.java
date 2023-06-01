@@ -2,7 +2,7 @@ package pl.edu.pw.PRK.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import pl.edu.pw.PRK.dao.HallDao;
+import pl.edu.pw.PRK.dao.HallDAO;
 import pl.edu.pw.PRK.entity.Hall;
 
 import java.util.List;
@@ -11,10 +11,10 @@ import java.util.Optional;
 @Service
 public class HallServiceImpl implements HallService {
 
-	private final HallDao hallDao;
+	private final HallDAO hallDao;
 
 	@Autowired
-	public HallServiceImpl(HallDao hallDao) {
+	public HallServiceImpl(HallDAO hallDao) {
 		this.hallDao = hallDao;
 	}
 	
