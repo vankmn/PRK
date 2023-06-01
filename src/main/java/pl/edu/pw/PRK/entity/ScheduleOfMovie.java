@@ -7,7 +7,7 @@ import java.sql.Time;
 
 @Entity
 @Table(name="schedule_of_movies")
-public class ScheduleOfMovies {
+public class ScheduleOfMovie {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="id")
@@ -30,11 +30,11 @@ public class ScheduleOfMovies {
 
 	// define constructors
 
-	public ScheduleOfMovies() {
+	public ScheduleOfMovie() {
 
 	}
 
-	public ScheduleOfMovies(Date date, Time time) {
+	public ScheduleOfMovie(Date date, Time time) {
 		this.date = date;
 		this.time = time;
 	}

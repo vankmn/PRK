@@ -1,16 +1,16 @@
 package pl.edu.pw.PRK.service;
 
-import pl.edu.pw.PRK.entity.ScheduleOfMovies;
+import pl.edu.pw.PRK.entity.ScheduleOfMovie;
 
 import java.util.List;
 
 public interface ScheduleOfMoviesService {
 
-	List<ScheduleOfMovies> findAll();
+	List<ScheduleOfMovie> findAll();
 
-	ScheduleOfMovies findById(int theId);
+	ScheduleOfMovie findById(int theId);
 
-	void save(ScheduleOfMovies scheduleOfMovies);
+	void save(ScheduleOfMovie scheduleOfMovie);
 
 	void deleteById(int theId);
 

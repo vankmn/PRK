@@ -16,15 +16,17 @@ public class AdministrationController {
     private final TicketService ticketService;
     private final SeatService seatService;
     private final ScheduleOfMoviesService scheduleOfMoviesService;
+    private final MovieSeatsService movieSeatsService;
 
     @Autowired
     public AdministrationController(MovieService movieService, HallService hallService, TicketService ticketService, SeatService seatService,
-                                    ScheduleOfMoviesService scheduleOfMoviesService) {
+                                    ScheduleOfMoviesService scheduleOfMoviesService, MovieSeatsService movieSeatsService) {
         this.movieService = movieService;
         this.hallService = hallService;
         this.ticketService = ticketService;
         this.seatService = seatService;
         this.scheduleOfMoviesService = scheduleOfMoviesService;
+        this.movieSeatsService = movieSeatsService;
     }
     //-------------menu
     @GetMapping("/menu")
@@ -169,22 +171,21 @@ public class AdministrationController {
 
     @GetMapping("/menu/schedule/showFormForAddMovieToSchedule")
     public String showFormForAddMovieToSchedule(Model model){
-        model.addAttribute("movieToSchedule",new ScheduleOfMovies());
+        model.addAttribute("movieToSchedule",new ScheduleOfMovie());
         model.addAttribute("availableHalls",hallService.findAll());
         model.addAttribute("availableMovies",movieService.findAll());
         return "administration/schedule/showAddMovieToScheduleForm";
     }
 
     @PostMapping("/menu/schedule/saveMovieToSchedule")
-    public String saveMovieToSchedule(@ModelAttribute("movieToSchedule") ScheduleOfMovies scheduleOfMovies) {
-        System.out.println(scheduleOfMovies.getHall_id());
-        scheduleOfMoviesService.save(scheduleOfMovies);
+    public String saveMovieToSchedule(@ModelAttribute("movieToSchedule") ScheduleOfMovie scheduleOfMovie) {
+        scheduleOfMoviesService.save(scheduleOfMovie);
         return "redirect:/administration/menu/schedule";
     }
 
     @GetMapping("/menu/schedule/showFormForUpdateMovieToSchedule")
     public String showFormForUpdateMovieToSchedule(@RequestParam("movieToScheduleId") int movieToScheduleId, Model model){
-        ScheduleOfMovies movieToSchedule = scheduleOfMoviesService.findById(movieToScheduleId);
+        ScheduleOfMovie movieToSchedule = scheduleOfMoviesService.findById(movieToScheduleId);
         model.addAttribute("movieToSchedule",movieToSchedule);
         model.addAttribute("availableHalls",hallService.findAll());
         model.addAttribute("availableMovies",movieService.findAll());

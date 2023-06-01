@@ -3,7 +3,7 @@ package pl.edu.pw.PRK.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pl.edu.pw.PRK.dao.ScheduleOfMoviesDAO;
-import pl.edu.pw.PRK.entity.ScheduleOfMovies;
+import pl.edu.pw.PRK.entity.ScheduleOfMovie;
 
 import java.util.List;
 import java.util.Optional;
@@ -19,18 +19,18 @@ public class ScheduleOfMoviesServiceImp implements ScheduleOfMoviesService {
 	}
 
 	@Override
-	public List<ScheduleOfMovies> findAll() {
+	public List<ScheduleOfMovie> findAll() {
 		return scheduleOfMoviesDAO.findAll();
 	}
 
 	@Override
-	public ScheduleOfMovies findById(int theId) {
-		Optional<ScheduleOfMovies> result = scheduleOfMoviesDAO.findById(theId);
+	public ScheduleOfMovie findById(int theId) {
+		Optional<ScheduleOfMovie> result = scheduleOfMoviesDAO.findById(theId);
 
-		ScheduleOfMovies scheduleOfMovies = null;
+		ScheduleOfMovie scheduleOfMovie = null;
 
 		if (result.isPresent()) {
-			scheduleOfMovies = result.get();
+			scheduleOfMovie = result.get();
 
 		}
 		else {
@@ -38,12 +38,12 @@ public class ScheduleOfMoviesServiceImp implements ScheduleOfMoviesService {
 			throw new RuntimeException("Did not find movie id - " + theId);
 		}
 
-		return scheduleOfMovies;
+		return scheduleOfMovie;
 	}
 
 	@Override
-	public void save(ScheduleOfMovies scheduleOfMovies) {
-		scheduleOfMoviesDAO.save(scheduleOfMovies);
+	public void save(ScheduleOfMovie scheduleOfMovie) {
+		scheduleOfMoviesDAO.save(scheduleOfMovie);
 	}
 
 	@Override
