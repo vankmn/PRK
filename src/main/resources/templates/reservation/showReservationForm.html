@@ -1,0 +1,41 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+
+    <title>Reservation</title>
+</head>
+
+<body>
+
+<div class="container">
+    <p class="h4 mb-4">Reservation form</p>
+
+    <form action="#" th:action="@{/reservation/addSoldTicket}" th:object="${soldTicket}" method="post">
+
+        <input type="hidden" th:field="*{id}">
+        <select th:field="*{movieSeat}">
+        <option th:each="seat : ${listOfSeats}" th:value="${seat.getId()}" th:text="${seat.getSeatId().getNumber()}"></option>
+        </select>
+        <select th:field="*{ticket}">
+            <option th:each="ticket : ${listOfTickets}" th:value="${ticket.id}" th:text="${ticket.getName()}"></option>
+        </select>
+
+        <button type="submit" class="btn btn-info col-2">Make reservation</button>
+    </form>
+    <hr>
+    <a th:href="@{/home}">Back to home</a>
+</div>
+
+
+</body>
+</html>
+
+
+
