@@ -7,7 +7,6 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import pl.edu.pw.PRK.service.MovieService;
 import pl.edu.pw.PRK.service.ScheduleOfMoviesService;
 
 @Controller
@@ -22,9 +21,10 @@ public class HomeController {
 
     @GetMapping("/home")
     public String showHome(Model model){
+
+        //send authorities to main page
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         model.addAttribute("userName", authentication.getName());
-
         if(authentication.getName().equals("anonymousUser")){
             model.addAttribute("userAuthorities","none");
         }else {
@@ -32,6 +32,7 @@ public class HomeController {
             model.addAttribute("userAuthorities", userDetails.getAuthorities());
         }
 
+        //show all scheduled movies
         model.addAttribute("scheduledMovies", scheduleOfMoviesService.findAll());
 
         return "home";

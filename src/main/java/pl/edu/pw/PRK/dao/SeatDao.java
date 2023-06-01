@@ -13,4 +13,5 @@ public interface SeatDao extends JpaRepository<Seat, Integer> {
 	@Query("SELECT s FROM Seat s WHERE s.hallId = ?1")
 	List<Seat> findSeatAssignedToHall(int hallId);
 
+
 }

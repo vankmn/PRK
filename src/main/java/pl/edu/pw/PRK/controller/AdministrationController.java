@@ -30,6 +30,7 @@ public class AdministrationController {
     }
     //-------------menu
     @GetMapping("/menu")
+    //main administration paige
     public String showMenu(){
         return "administration/administrationMenu";
     }
@@ -179,7 +180,9 @@ public class AdministrationController {
 
     @PostMapping("/menu/schedule/saveMovieToSchedule")
     public String saveMovieToSchedule(@ModelAttribute("movieToSchedule") ScheduleOfMovie scheduleOfMovie) {
+        //add movie to schedule
         scheduleOfMoviesService.save(scheduleOfMovie);
+        //creating a bunch of corresponding seats for added movie
         movieSeatsService.createBunchOfSeatsForNewMovie(scheduleOfMovie,scheduleOfMovie.getHall().getId());
         return "redirect:/administration/menu/schedule";
     }
@@ -188,6 +191,7 @@ public class AdministrationController {
     public String showFormForUpdateMovieToSchedule(@RequestParam("movieToScheduleId") int movieToScheduleId, Model model){
         ScheduleOfMovie movieToSchedule = scheduleOfMoviesService.findById(movieToScheduleId);
         model.addAttribute("movieToSchedule",movieToSchedule);
+        // passing available halls and moves used in drop down lists
         model.addAttribute("availableHalls",hallService.findAll());
         model.addAttribute("availableMovies",movieService.findAll());
         return "administration/schedule/showFormForUpdateMovieToSchedule";
@@ -195,6 +199,9 @@ public class AdministrationController {
 
     @GetMapping("/menu/schedule/deleteMovieToSchedule")
     public String deleteMovieToSchedule(@RequestParam("movieToScheduleId") int movieToScheduleId){
+        //deleting a bunch of corresponding seats for added movie
+        movieSeatsService.deleteBunchOfSeatsForNewMovie(scheduleOfMoviesService.findById(movieToScheduleId));
+        //deleting movie
         scheduleOfMoviesService.deleteById(movieToScheduleId);
         return "redirect:/administration/menu/schedule";
     }

@@ -3,9 +3,7 @@ package pl.edu.pw.PRK.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pl.edu.pw.PRK.dao.MovieSeatsDAO;
-import pl.edu.pw.PRK.dao.ScheduleOfMoviesDAO;
 import pl.edu.pw.PRK.dao.SeatDao;
-import pl.edu.pw.PRK.entity.Hall;
 import pl.edu.pw.PRK.entity.MovieSeats;
 import pl.edu.pw.PRK.entity.ScheduleOfMovie;
 import pl.edu.pw.PRK.entity.Seat;
@@ -60,12 +58,22 @@ public class MovieSeatsServiceImp implements MovieSeatsService {
 
 	@Override
 	public void createBunchOfSeatsForNewMovie(ScheduleOfMovie scheduleOfMovie, int hallId) {
+
+		deleteBunchOfSeatsForNewMovie(scheduleOfMovie);
+
 		List<Seat> seatList = seatDao.findSeatAssignedToHall(hallId);
-		for(int i=0;i<seatList.size();i++){
-			MovieSeats movieSeats = new MovieSeats(scheduleOfMovie,seatList.get(i));
+		for (Seat seat : seatList) {
+			MovieSeats movieSeats = new MovieSeats(scheduleOfMovie, seat);
 			movieSeatsDAO.save(movieSeats);
 		}
+	}
 
+	@Override
+	public void deleteBunchOfSeatsForNewMovie(ScheduleOfMovie scheduleOfMovie) {
+		List<MovieSeats> movieSeatsList = movieSeatsDAO.findSeatAssignedToScheduledMovie(scheduleOfMovie);
+		for (MovieSeats movieSeats : movieSeatsList) {
+			movieSeatsDAO.deleteById(movieSeats.getId());
+		}
 	}
 
 
