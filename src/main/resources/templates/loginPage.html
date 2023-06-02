@@ -8,49 +8,47 @@
 
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
 
-    <title>Login page</title>
+    <title>Login Page</title>
 
-<!--  error style  -->
-    <style>
-        .fail{
-            color:red;
-        }
-    </style>
 </head>
 
-<body>
+<body style="background-color: black">
+
 <div class="container">
 
 <!--Login title-->
-<h1 class="ml-3 mt-3 mb-3">Login page</h1>
+<h1 class="ml-3 mt-3 mb-3" style="color: goldenrod">Login Page</h1>
 
-<hr/>
+<hr style="color: goldenrod"/>
 
 <form class="ml-3 col-5" action="#" th:action="@{/authenticateTheUser}" method="post">
 
     <!-- show error -->
     <div class="mb-3" th:if="${param.error}">
-        <i class="fail"> Wrong username/password.</i>
+        <i style="color: red"> Wrong username or password.</i>
     </div>
 
     <!-- logout info -->
     <div class="mb-3" th:if="${param.logout}">
-        <i> You have been logout.</i>
+        <i style="color: white"> You have been logged out.</i>
     </div>
 
-    <div class="mb-3">
+    <div class="mb-3" style="color: goldenrod">
+        <i class="bi bi-person-circle"></i>
         <label for="username" class="form-label">Username</label>
-        <input name="username" type="text" class="form-control" id="username" aria-describedby="usernameHelp">
+        <input name="username" type="text" class="form-control" style="border-color: goldenrod; background-color: black; color: white" id="username" aria-describedby="usernameHelp">
         <div id="usernameHelp" class="form-text">Please enter your username.</div>
     </div>
-    <div class="mb-3">
+    <div class="mb-3" style="color: goldenrod">
+        <i class="bi bi-file-lock2-fill"></i>
         <label for="password" class="form-label">Password</label>
-        <input name="password" type="password" class="form-control" id="password" aria-describedby="passwordHelp">
+        <input name="password" type="password" class="form-control" style="border-color: goldenrod; background-color: black; color: white" id="password" aria-describedby="passwordHelp">
         <div id="passwordHelp" class="form-text">Please enter your password.</div>
     </div>
-    <button type="submit" class="btn btn-success" value="Login">Submit</button>
-    <button name="cancel" type="reset" class="btn btn-secondary ml-3">Cancel</button>
+    <button type="submit" class="btn" style="background-color: goldenrod" value="Login">Login</button>
+    <button name="cancel" type="reset" class="btn btn-secondary ml-3" style="color: black">Cancel</button>
 </form>
 
 <!--<form class="ml-3 col-5" action="#" th:action="@{/authenticateTheUser}" method="post">-->
@@ -95,10 +93,15 @@
 
 <!--</form>-->
 <div class="mt-5">
-    <a th:href="@{/register/showRegistrationForm}" class="btn btn-primary"
-       aria-pressed="true">Register New User</a>
+    <a th:href="@{/register/showRegistrationForm}" class="btn" style="background-color: goldenrod" aria-pressed="true">
+        <i class="bi bi-person-add"></i>
+        Register New User
+    </a>
     <!--Back to home page-->
-    <a class="btn btn-secondary" th:href="@{/home}">Back to home page</a>
+    <a class="btn btn-secondary ml-5" style="color: black" th:href="@{/home}">
+        <i class="bi bi-back"></i>
+        Back to the Home Page
+    </a>
 </div>
 </div>
 </body>
