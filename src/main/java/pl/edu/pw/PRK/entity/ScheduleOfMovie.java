@@ -27,7 +27,6 @@ public class ScheduleOfMovie {
 	@JoinColumn(name="hall_ID")
 	private Hall hall;
 
-
 	// define constructors
 
 	public ScheduleOfMovie() {
@@ -87,7 +86,7 @@ public class ScheduleOfMovie {
 	public void setHall(Hall hall_id) {
 		this.hall = hall_id;
 	}
-		
+
 }
 
 

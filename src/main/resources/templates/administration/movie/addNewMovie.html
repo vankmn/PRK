@@ -20,9 +20,9 @@
     <form action="#" th:action="@{/administration/menu/movies/saveMovie}" th:object="${movie}" method="post">
 
         <input type="hidden" th:field="*{id}">
-        <input type="text" th:field="*{name}" placeholder="Name" class="form-control mb-4 w-25">
-        <input type="text" th:field="*{description}" placeholder="Description" class="form-control mb-4 w-25">
-        <input type="number" th:field="*{duration}" placeholder="Duration" class="form-control mb-4 w-25">
+        <input type="text" th:field="*{name}" placeholder="Name of movie" class="form-control mb-4 w-25">
+        <input type="text" th:field="*{description}" placeholder="Description of movie" class="form-control mb-4 w-25">
+        <input type="number" th:field="*{duration}" placeholder="Duration (min)" class="form-control mb-4 w-25">
 
         <button type="submit" class="btn btn-info col-2">Save</button>
     </form>

@@ -7,6 +7,9 @@ import org.springframework.web.bind.annotation.*;
 import pl.edu.pw.PRK.entity.*;
 import pl.edu.pw.PRK.service.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Controller
 @RequestMapping("/administration")
 public class AdministrationController {
@@ -175,8 +178,10 @@ public class AdministrationController {
         model.addAttribute("movieToSchedule",new ScheduleOfMovie());
         model.addAttribute("availableHalls",hallService.findAll());
         model.addAttribute("availableMovies",movieService.findAll());
+
         return "administration/schedule/showAddMovieToScheduleForm";
     }
+
 
     @PostMapping("/menu/schedule/saveMovieToSchedule")
     public String saveMovieToSchedule(@ModelAttribute("movieToSchedule") ScheduleOfMovie scheduleOfMovie) {
