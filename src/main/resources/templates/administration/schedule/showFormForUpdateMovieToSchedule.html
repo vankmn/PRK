@@ -17,14 +17,18 @@
 <div class="container">
     <h3>Update Movie</h3>
     <hr>
-    <form action="#" th:action="@{/administration/menu/schedule/saveMovieToSchedule}" th:object="${movieToSchedule}" method="post">
+    <form action="#" th:action="@{/administration/menu/schedule/saveMovieToSchedule}" th:object="${movieToSchedule}" method="post" onsubmit="return checkConsistency()">
 
         <input type="hidden" th:field="*{id}">
-        <input type="text" th:field="*{time}" placeholder="Time" class="form-control mb-4 w-25">
-        <input type="date" th:field="*{date}" placeholder="Date" class="form-control mb-4 w-25">
+        <label>Time</label>
+        <input type="text" th:field="*{time}" id="time" placeholder="HH:MM:SS" class="form-control mb-4 w-25" pattern="^([01]?\d|2[0-3]):([0-5]?\d):([0-5]?\d)$">
+        <label>Date</label>
+        <input type="date"  th:field="*{date}" id="date" placeholder="Date" class="form-control mb-4 w-25" pattern="\d{2,4}\-\d{1,2}\-\d{1,2}/">
+        <label>Hall</label>
         <select th:field="*{hall}">
             <option th:each="hall : ${availableHalls}" th:value="${hall.getId()}" th:text="${hall.getNumber()}"></option>
         </select>
+        <label>Movie</label>
         <select th:field="*{movie}">
             <option th:each="movie : ${availableMovies}" th:value="${movie.getId()}" th:text="${movie.getName()}"></option>
         </select>
@@ -34,7 +38,16 @@
     <hr>
     <a th:href="@{/administration/menu/schedule}">Back to movies list</a>
 </div>
-
+<script  th:inline="javascript">
+    function checkConsistency() {
+        return validateTime(document.getElementById('time').value) && validateDate(document.getElementById('date').value);}
+    function validateTime(time){
+        const re = /^([01]?\d|2[0-3]):([0-5]?\d):([0-5]?\d)$/;
+        return re.test(time);}
+    function validateDate(date){
+        const re=/\d{2,4}-\d{1,2}-\d{1,2}/;
+        return re.test(date);}
+</script>
 </body>
 </html>
 

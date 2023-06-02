@@ -1,5 +1,5 @@
 possible to add empty entries despite in mySQL notnull selected
 placeholders aren't displayed for numbers (difficult to identify input field)
-add dropdown list for foreign keys
 add internationalization
-modification time input to match with java.sql.time variable
+shouldn't be able to add hall with the same number
+implement exception catching

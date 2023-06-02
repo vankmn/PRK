@@ -17,18 +17,34 @@
 <div class="container">
     <h3>Update Hall</h3>
     <hr>
-    <form action="#" th:action="@{/administration/menu/cinemaHalls/saveHall}" th:object="${hall}" method="post">
+    <form action="#" th:action="@{/administration/menu/cinemaHalls/saveHall}" th:object="${hall}" method="post" onsubmit="return checkConsistency()">
 
         <input type="hidden" th:field="*{id}">
-        <input type="number" th:field="*{number}" placeholder="Number" class="form-control mb-4 w-25">
-        <input type="number" th:field="*{capacity}" placeholder="Capacity" class="form-control mb-4 w-25">
+        <label>Hall number</label>
+        <input type="number" th:field="*{number}" id="number" placeholder="Number" required="required" pattern="[0-9]{1,4}" class="form-control mb-4 w-25">
+        <label>Hall capacity</label>
+        <input type="number" th:field="*{capacity}" id="capacity" placeholder="Capacity" required="required" pattern="[0-9]{1,4}" class="form-control mb-4 w-25">
 
         <button type="submit" class="btn btn-info col-2">Save</button>
     </form>
     <hr>
     <a th:href="@{/administration/menu/movies}">Back to halls list</a>
 </div>
-
+<script  th:inline="javascript">
+    function checkConsistency() {
+        return validateNumber(document.getElementById('number').value) && validateCapacity(document.getElementById('capacity').value);}
+    function validateNumber(number){
+        return number > 0 && number < 1000;
+    }
+    function validateCapacity(capacity){
+        if(capacity>0 && capacity<1000){
+            return true;
+        }else {
+            alert("Capacity must be greater than 0.")
+            return false;
+        }
+    }
+</script>
 </body>
 </html>
 

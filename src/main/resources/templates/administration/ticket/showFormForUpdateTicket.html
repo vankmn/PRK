@@ -17,18 +17,31 @@
 <div class="container">
     <h3>Update Ticket</h3>
     <hr>
-    <form action="#" th:action="@{/administration/menu/tickets/saveTicket}" th:object="${ticket}" method="post">
+    <form action="#" th:action="@{/administration/menu/tickets/saveTicket}" th:object="${ticket}" method="post" onsubmit="return checkConsistency()">
 
         <input type="hidden" th:field="*{id}">
-        <input type="text" th:field="*{name}" placeholder="Name" class="form-control mb-4 w-25">
-        <input type="number" th:field="*{price}" placeholder="Price" class="form-control mb-4 w-25">
+        <label>Ticket name</label>
+        <input type="text" th:field="*{name}" required="required" placeholder="Name" class="form-control mb-4 w-25">
+        <label>Price</label>
+        <input type="text" th:field="*{price}" id="price" required="required" placeholder="Price" class="form-control mb-4 w-25">
 
         <button type="submit" class="btn btn-info col-2">Save</button>
     </form>
     <hr>
     <a th:href="@{/administration/menu/tickets}">Back to ticket list</a>
 </div>
-
+<script  th:inline="javascript">
+    function checkConsistency() {
+        return checkPrice(document.getElementById('price').value);}
+    function checkPrice(price){
+        if(price>0 && price<1000){
+            return true;
+        }else {
+            alert("Price must be greater than 0.")
+            return false;
+        }
+    }
+</script>
 </body>
 </html>
 

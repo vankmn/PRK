@@ -7,9 +7,6 @@ import org.springframework.web.bind.annotation.*;
 import pl.edu.pw.PRK.entity.*;
 import pl.edu.pw.PRK.service.*;
 
-import java.util.ArrayList;
-import java.util.List;
-
 @Controller
 @RequestMapping("/administration")
 public class AdministrationController {
@@ -144,6 +141,7 @@ public class AdministrationController {
     @GetMapping("/menu/seats/showFormForAddSeat")
     public String showFormForAddSeat(Model model){
         model.addAttribute("seat",new Seat());
+        model.addAttribute("availableHalls",hallService.findAll());
         return "administration/seat/addNewSeat";
     }
 
@@ -157,6 +155,7 @@ public class AdministrationController {
     public String showFormForUpdateSeat(@RequestParam("seatId") int seatId, Model model){
         Seat seat = seatService.findById(seatId);
         model.addAttribute("seat",seat);
+        model.addAttribute("availableHalls",hallService.findAll());
         return "administration/seat/showFormForUpdateSeat";
     }
 
@@ -187,6 +186,7 @@ public class AdministrationController {
     public String saveMovieToSchedule(@ModelAttribute("movieToSchedule") ScheduleOfMovie scheduleOfMovie) {
         //add movie to schedule
         scheduleOfMoviesService.save(scheduleOfMovie);
+        System.out.println(scheduleOfMovie.getTime().toString());
         //creating a bunch of corresponding seats for added movie
         movieSeatsService.createBunchOfSeatsForNewMovie(scheduleOfMovie,scheduleOfMovie.getHall().getId());
         return "redirect:/administration/menu/schedule";

@@ -17,19 +17,42 @@
 <div class="container">
     <p class="h4 mb-4">Add Seat</p>
 
-    <form action="#" th:action="@{/administration/menu/seats/saveSeat}" th:object="${seat}" method="post">
+    <form action="#" th:action="@{/administration/menu/seats/saveSeat}" th:object="${seat}" method="post" onsubmit="return checkConsistency()">
 
         <input type="hidden" th:field="*{id}">
-        <input type="number" th:field="*{number}" placeholder="Number" class="form-control mb-4 w-25">
-        <input type="number" th:field="*{row}" placeholder="Row" class="form-control mb-4 w-25">
-        <input type="number" th:field="*{hallId}" placeholder="Hall" class="form-control mb-4 w-25">
-
+        <label>Column number</label>
+        <input type="number" th:field="*{number}" id="column" required="required" placeholder="Number" class="form-control mb-4 w-25">
+        <label>Row number</label>
+        <input type="number" th:field="*{row}" id="row" required="required" placeholder="Row" class="form-control mb-4 w-25">
+        <label>Hall number</label>
+        <select th:field="*{hallId}">
+            <option th:each="hall : ${availableHalls}" th:value="${hall.getId()}" th:text="${hall.getNumber()}"></option>
+        </select>
         <button type="submit" class="btn btn-info col-2">Save</button>
     </form>
     <hr>
     <a th:href="@{/administration/menu/seats}">Back to seats list</a>
 </div>
-
+<script  th:inline="javascript">
+    function checkConsistency() {
+        return validateColumn(document.getElementById('column').value) && validateRow(document.getElementById('row').value);}
+    function validateColumn(column){
+        if(column>0 && column<100){
+            return true;
+        }else {
+            alert("Column must be greater than 0.")
+            return false;
+        }
+    }
+    function validateRow(row){
+        if(row>0 && row<100){
+            return true;
+        }else {
+            alert("Row must be greater than 0.")
+            return false;
+        }
+    }
+</script>
 </body>
 </html>
 

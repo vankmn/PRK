@@ -17,19 +17,27 @@
 <div class="container">
     <h3>Update Movie</h3>
     <hr>
-    <form action="#" th:action="@{/administration/menu/movies/saveMovie}" th:object="${movie}" method="post">
+    <form action="#" th:action="@{/administration/menu/movies/saveMovie}" th:object="${movie}" method="post" onsubmit="return checkConsistency()">
 
         <input type="hidden" th:field="*{id}">
-        <input type="text" th:field="*{name}" placeholder="Name of movie" class="form-control mb-4 w-25">
-        <input type="text" th:field="*{description}" placeholder="Description of movie" class="form-control mb-4 w-25">
-        <input type="number" th:field="*{duration}" placeholder="Duration (min)" class="form-control mb-4 w-25">
-
+        <label>Name of movie</label>
+        <input type="text" th:field="*{name}" required="required" pattern="[A-Za-z0-9]{1,20}" placeholder="Name of movie" class="form-control mb-4 w-25">
+        <label>Description</label>
+        <input type="text" th:field="*{description}" required="required" pattern="[A-Za-z0-9]{1,500}" placeholder="Description of movie" class="form-control mb-4 w-25">
+        <label>Duration</label>
+        <input type="number" th:field="*{duration}" id="time" required="required" pattern="[0-9]{1,4}" placeholder="Duration (min)" class="form-control mb-4 w-25">
         <button type="submit" class="btn btn-info col-2">Save</button>
     </form>
     <hr>
     <a th:href="@{/administration/menu/movies}">Back to movies list</a>
 </div>
-
+<script  th:inline="javascript">
+    function checkConsistency() {
+        return !!validateDuration(document.getElementById('time').value);}
+    function validateDuration(time){
+        return time > 0 && time < 10000;
+    }
+</script>
 </body>
 </html>
 
