@@ -2,7 +2,6 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head>
-
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
@@ -11,17 +10,14 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
 
     <title>Login Page</title>
-
 </head>
 
 <body style="background-color: black">
 
-<div class="container">
+<div class="container card col-6 position-absolute top-50 start-50 translate-middle" style="background-color: black; border-color: goldenrod; align-items: center">
 
 <!--Login title-->
-<h1 class="ml-3 mt-3 mb-3" style="color: goldenrod">Login Page</h1>
-
-<hr style="color: goldenrod"/>
+<h2 class="ml-3 mt-3 mb-5" style="color: goldenrod">Login Page</h2>
 
 <form class="ml-3 col-5" action="#" th:action="@{/authenticateTheUser}" method="post">
 
@@ -47,83 +43,23 @@
         <input name="password" type="password" class="form-control" style="border-color: goldenrod; background-color: black; color: white" id="password" aria-describedby="passwordHelp">
         <div id="passwordHelp" class="form-text">Please enter your password.</div>
     </div>
-    <button type="submit" class="btn" style="background-color: goldenrod" value="Login">Login</button>
-    <button name="cancel" type="reset" class="btn btn-secondary ml-3" style="color: black">Cancel</button>
+    <div class="col-12" style="text-align: center">
+        <button type="submit" class="btn col-12 mt-2" style="background-color: goldenrod" value="Login">Login</button>
+    </div>
 </form>
 
-<!--<form class="ml-3 col-5" action="#" th:action="@{/authenticateTheUser}" method="post">-->
-<!--    &lt;!&ndash; show error &ndash;&gt;-->
-<!--    <div th:if="${param.error}">-->
-<!--        <i class="fail"> Wrong username/password.</i>-->
-<!--    </div>-->
-<!--    &lt;!&ndash; logout info &ndash;&gt;-->
-<!--    <div th:if="${param.logout}">-->
-<!--        <i> You have been logout.</i>-->
-<!--    </div>-->
-<!--    &lt;!&ndash; username input field &ndash;&gt;-->
-<!--    <div class="mb-3">-->
-<!--        <label for="username" class="form-label">User name</label>-->
-<!--        <input name="username" type="text" class="form-control" id="username" placeholder="name@example.com">-->
-<!--    </div>-->
-<!--    <div class="mb-3">-->
-<!--        <label for="password" class="form-label">Password</label>-->
-<!--        <input name="password" type="password" class="form-control" id="password">-->
-<!--    </div>-->
-
-<!--    <p>-->
-<!--        <label>-->
-<!--        User name:-->
-<!--        <input type="text" name="username"/>-->
-<!--    </label>-->
-<!--    </p>-->
-<!--    &lt;!&ndash; password input field &ndash;&gt;-->
-<!--    <p>-->
-<!--        <label>-->
-<!--            Password:-->
-<!--            <input type="password" name="password"/>-->
-<!--        </label>-->
-<!--    </p>-->
-    <!-- login button -->
-<!--    <input type="submit" value="Login"/>-->
-<!--    <button name="ok" type="submit" value="Login" class="btn btn-primary">OK</button>-->
-<!--    <button name="cancel" type="reset" class="btn btn-secondary ml-3">Cancel</button>-->
-
-<!--    <br/>-->
-
-
 <!--</form>-->
-<div class="mt-5">
-    <a th:href="@{/register/showRegistrationForm}" class="btn" style="background-color: goldenrod" aria-pressed="true">
+<div class="mt-5 mb-5">
+    <a th:href="@{/register/showRegistrationForm}" class="btn position-absolute bottom-0 start-0" style="background-color: goldenrod" aria-pressed="true">
         <i class="bi bi-person-add"></i>
-        Register New User
+        Create your account
     </a>
     <!--Back to home page-->
-    <a class="btn btn-secondary ml-5" style="color: black" th:href="@{/home}">
-        <i class="bi bi-back"></i>
-        Back to the Home Page
+    <a class="btn position-absolute bottom-0 end-0" style="background-color: goldenrod" th:href="@{/home}">
+        <i class="bi bi-house-door-fill"></i>
+        Home Page
     </a>
 </div>
 </div>
 </body>
 </html>
-
-<!--<body>-->
-
-<!--<h1 class="ml-3 mt-3 mb-3">Login page</h1>-->
-
-<!--<hr/>-->
-
-<!--<form class="col-5" action="${pageContext.request.contextPath}/login-servlet" method="post">-->
-<!--    <div class="mb-3">-->
-<!--        <label for="name" class="form-label">Email address</label>-->
-<!--        <input name="name" type="text" class="form-control" id="name" placeholder="name@example.com" value="${user.name}">-->
-<!--    </div>-->
-<!--    <div class="mb-3">-->
-<!--        <label for="pwd" class="form-label">Password</label>-->
-<!--        <input name="pwd" type="password" class="form-control" id="pwd" value="${user.pwd}">-->
-<!--    </div>-->
-<!--    <button name="ok" type="submit" class="btn btn-primary">OK</button>-->
-<!--    <button name="cancel" type="reset" class="btn btn-secondary ml-3">Cancel</button>-->
-<!--</form>-->
-
-<!--</body>-->

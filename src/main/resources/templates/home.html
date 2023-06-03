@@ -27,9 +27,6 @@
             <img src="/images/Java_logo_icon.png" alt="Logo" width="50" height="24" class="d-inline-block align-text-top">
             Cinema
         </a>
-<!--        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll" aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">-->
-<!--            <span class="navbar-toggler-icon"></span>-->
-<!--        </button>-->
         <div class="collapse navbar-collapse" id="navbarScroll">
             <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px;">
                 <li class="nav-item">
@@ -37,12 +34,11 @@
                 </li>
                 <form action="#" th:action="@{/logout}" method="post">
                 <li class="nav-item">
-<!--                    <a class="nav-link" href="/loginPage">Logout</a>-->
                     <button class="nav-link" type="submit" style="background-color: goldenrod; border: goldenrod">Logout</button>
                 </li>
                 </form>
                 <li class="nav-item">
-                    <a class="ui-icon-person nav-link" th:text="'User name: ' +${userName}"/>
+                    <a class="bi bi-person-circle nav-link active" th:text="'   ' + ${userName}"/>
                 </li>
             </ul>
             <form th:action="@{/home/search}" class="d-flex" role="search">
@@ -56,22 +52,9 @@
     </div>
 </nav>
 
-<!--<br/>-->
-<!--&lt;!&ndash;login button&ndash;&gt;-->
-<!--<a th:href="@{/loginPage}">Login</a>-->
-<!--<br/>-->
-<!--&lt;!&ndash;logout button&ndash;&gt;-->
-<!--<form action="#" th:action="@{/logout}" method="post">-->
-<!--    <input type="submit" value="Logout"/>-->
-<!--</form>-->
-<!--<br/>-->
-
 <!--administration page-->
 <!--<a th:href="@{/administration/menu}">Administration menu</a>-->
 
-<!--display username and role-->
-<!--<div  th:text="'User name: ' +${userName}"/>-->
-<!--<div  th:text="'User authorities: ' +${userAuthorities}"/>-->
 <br/>
 
 <div class="container">
@@ -81,7 +64,6 @@
     <div class="table-responsive">
     <table class="table table-bordered table-striped mt-3" style="border: goldenrod">
         <thead class="table-dark" style="border: goldenrod">
-
         <tr>
             <th>Date</th>
             <th>Time</th>
@@ -90,10 +72,8 @@
             <th>Action</th>
         </tr>
         </thead>
-
         <tbody>
         <tr th:each="tempMovie : ${scheduledMovies}">
-
             <td th:text="${tempMovie.date}" style="color: white" />
             <td th:text="${tempMovie.time}" style="color: white" />
             <td th:text="${tempMovie.getMovieName()}" style="color: white" />
@@ -104,17 +84,6 @@
                     Reserve
                 </a>
             </td>
-<!--            <td>-->
-<!--                <a th:href="@{/administration/menu/movies/showFormForUpdateMovie(movieId=${tempMovie.id})}"-->
-<!--                   class="btn btn-primary btn-sm mb-3">-->
-<!--                    Update-->
-<!--                </a>-->
-<!--                <a th:href="@{/administration/menu/movies/deleteMovie(movieId=${tempMovie.id})}"-->
-<!--                   class="btn btn-danger btn-sm" onclick="if (!(confirm('Are you sure?'))) return false">-->
-<!--                    Delete-->
-<!--                </a>-->
-<!--            </td>-->
-
         </tr>
         </tbody>
     </table>
