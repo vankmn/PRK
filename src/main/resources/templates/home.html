@@ -62,14 +62,14 @@
     <h3 style="color: goldenrod">Movie Schedule</h3>
 
     <div class="table-responsive">
-    <table class="table table-bordered table-striped mt-3" style="border: goldenrod">
-        <thead class="table-dark" style="border: goldenrod">
+    <table class="table mt-3" style="border: goldenrod">
+        <thead style="border: goldenrod; color: goldenrod">
         <tr>
             <th>Date</th>
             <th>Time</th>
             <th>Movie name</th>
             <th>Hall number</th>
-            <th>Action</th>
+            <th></th>
         </tr>
         </thead>
         <tbody>
@@ -80,7 +80,7 @@
             <td th:text="${tempMovie.getHallNumber()}" style="color: white" />
             <td>
                 <a th:href="@{/reservation/prepareReservation(selectedMovie=${tempMovie.id})}"
-                   class="btn" style="background-color: goldenrod;">
+                   class="btn" style="border-color: goldenrod; color: goldenrod">
                     Reserve
                 </a>
             </td>
