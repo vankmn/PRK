@@ -7,26 +7,25 @@
   <!-- Bootstrap CSS -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
 
-  <title>Movies</title>
+  <title th:text="#{moviesDirectory}"></title>
 </head>
 <body>
 <div class="container">
 
-  <h3>Movies Directory</h3>
+  <h3 th:text="#{moviesDirectory}"></h3>
   <hr>
   <!-- button -->
   <a th:href="@{/administration/menu/movies/showFormForAddMovie}"
-     class="btn btn-primary btn-sm mb-3">
-    Add Movie
+     class="btn btn-primary btn-sm mb-3" th:text="#{addMovie}">
   </a>
 
   <table class="table table-bordered table-striped">
     <thead class="table-dark">
     <tr>
-      <th>Name</th>
-      <th>Description</th>
-      <th>Duration</th>
-      <th>Action</th>
+      <th th:text="#{nameOfMovie}"></th>
+      <th th:text="#{description}"></th>
+      <th th:text="#{duration}"></th>
+      <th th:text="#{action}"></th>
     </tr>
     </thead>
 
@@ -38,12 +37,10 @@
       <td th:text="${tempMovie.duration}" />
       <td>
         <a th:href="@{/administration/menu/movies/showFormForUpdateMovie(movieId=${tempMovie.id})}"
-           class="btn btn-primary btn-sm mb-3">
-          Update
+           class="btn btn-primary btn-sm mb-3" th:text="#{update}">
         </a>
         <a th:href="@{/administration/menu/movies/deleteMovie(movieId=${tempMovie.id})}"
-           class="btn btn-danger btn-sm" onclick="if (!(confirm('Are you sure?'))) return false">
-          Delete
+           class="btn btn-danger btn-sm" onclick="if (!(confirm('Are you sure?'))) return false" th:text="#{delete}">
         </a>
       </td>
 
@@ -52,8 +49,7 @@
   </table>
   <!-- back to menu -->
   <a th:href="@{/administration/menu}"
-     class="btn btn-primary btn-sm mb-3">
-    Back to menu
+     class="btn btn-primary btn-sm mb-3" th:text="#{backToMenu}">
   </a>
 </div>
 </body>

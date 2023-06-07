@@ -1,27 +1,27 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Administration menu</title>
+    <title th:text="#{administrationMenu}"></title>
 </head>
 <body>
 <!--show movies-->
-<a th:href="@{/administration/menu/movies}">Movies</a>
+<a th:href="@{/administration/menu/movies}" th:text="#{movies}">Movies</a>
 <br/>
 <!--show movies-->
-<a th:href="@{/administration/menu/cinemaHalls}">Cinema halls</a>
+<a th:href="@{/administration/menu/cinemaHalls}" th:text="#{cinemaHalls}"></a>
 <br/>
 <!--show tickets-->
-<a th:href="@{/administration/menu/tickets}">Tickets</a>
+<a th:href="@{/administration/menu/tickets}" th:text="#{tickets}"></a>
 <br/>
 <!--show seats-->
-<a th:href="@{/administration/menu/seats}">Seats</a>
+<a th:href="@{/administration/menu/seats}" th:text="#{seats}"></a>
 <br/>
 <!--show schedule-->
-<a th:href="@{/administration/menu/schedule}">Schedule</a>
+<a th:href="@{/administration/menu/schedule}" th:text="#{schedule}"></a>
 <br/>
 <!--back to home page-->
-<a th:href="@{/home}">Back to home</a>
+<a th:href="@{/home}" th:text="#{backToHomePage}"></a>
 <br/>
 </body>
 </html>

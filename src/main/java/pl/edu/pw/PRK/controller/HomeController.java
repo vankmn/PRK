@@ -38,4 +38,9 @@ public class HomeController {
         return "home";
     }
 
+    @GetMapping("/chooseLanguage")
+    public String chooseLanguage(){
+        return "chooseLanguage";
+    }
+
 }

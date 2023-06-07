@@ -1,17 +1,17 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>User menu</title>
+    <title th:text="#{userMenu}"></title>
 </head>
 <body>
 <!--user data-->
-<a th:href="@{/user/data}">User data</a>
+<a th:href="@{/user/data}" th:text="#{userData}"></a>
 <br/>
 <!--user reservations-->
-<a th:href="@{/user/reservations}">User reservation</a>
+<a th:href="@{/user/reservations}" th:text="#{userReservations}"></a>
 <br/>
 <!--back to home page-->
-<a th:href="@{/home}">Back to home</a>
+<a th:href="@{/home}" th:text="#{backToHomePage}"></a>
 </body>
 </html>

@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Login Page</title>
+    <title th:text="#{loginPage}"></title>
 
 <!--  error style  -->
     <style>
@@ -15,31 +15,29 @@
 
 <body>
 <!--Login title-->
-<h3>Login page</h3>
+<h3 th:text="#{loginPage}"></h3>
 
 
 <form action="#" th:action="@{/authenticateTheUser}" method="post">
     <!-- show error -->
     <div th:if="${param.error}">
-        <i class="fail"> Wrong username/password.</i>
+        <i class="fail" th:text="#{wrongUsername}"></i>
     </div>
     <!-- logout info -->
     <div th:if="${param.logout}">
-        <i> You have been logout.</i>
+        <i th:text="#{youHaveBeenLogout}"></i>
     </div>
     <!-- username input field -->
     <p>
-        <label>
-        User name:
+        <label th:text="#{userName}"></label>
         <input type="text" name="username"/>
-    </label>
+
     </p>
     <!-- password input field -->
     <p>
-        <label>
-            Password:
+        <label th:text="#{password}"></label>
             <input type="password" name="password"/>
-        </label>
+
     </p>
     <!-- login button -->
     <input type="submit" value="Login"/>
@@ -47,13 +45,13 @@
     <br/>
 
     <!--Back to home page-->
-    <a th:href="@{/home}">Back to home page</a>
+    <a th:href="@{/home}" th:text="#{backToHomePage}"></a>
 </form>
 <div>
     <a th:href="@{/register/showRegistrationForm}"
        class="btn btn-primary mt-3"
        role="button"
-       aria-pressed="true">Register New User</a>
+       aria-pressed="true" th:text="#{registerNewUser}"></a>
 </div>
 </body>
 </html>

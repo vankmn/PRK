@@ -9,27 +9,28 @@
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
 
-    <title>Update Movie</title>
+    <title th:text="#{updateMovie}"></title>
 </head>
 
 <body>
 
 <div class="container">
-    <h3>Update Movie</h3>
+    <h3 th:text="#{updateMovie}"></h3>
     <hr>
-    <form action="#" th:action="@{/administration/menu/movies/saveMovie}" th:object="${movie}" method="post" onsubmit="return checkConsistency()">
+    <form action="#" th:action="@{/administration/menu/movies/saveMovie}" th:object="${movie}"
+          method="post" onsubmit="return checkConsistency()">
 
         <input type="hidden" th:field="*{id}">
-        <label>Name of movie</label>
+        <label th:text="#{nameOfMovie}"></label>
         <input type="text" th:field="*{name}" required="required" pattern="[A-Za-z0-9]{1,20}" placeholder="Name of movie" class="form-control mb-4 w-25">
-        <label>Description</label>
+        <label th:text="#{description}"></label>
         <input type="text" th:field="*{description}" required="required" pattern="[A-Za-z0-9]{1,500}" placeholder="Description of movie" class="form-control mb-4 w-25">
-        <label>Duration</label>
+        <label th:text="#{duration}"></label>
         <input type="number" th:field="*{duration}" id="time" required="required" pattern="[0-9]{1,4}" placeholder="Duration (min)" class="form-control mb-4 w-25">
-        <button type="submit" class="btn btn-info col-2">Save</button>
+        <button type="submit" class="btn btn-info col-2" th:text="#{save}"></button>
     </form>
     <hr>
-    <a th:href="@{/administration/menu/movies}">Back to movies list</a>
+    <a th:href="@{/administration/menu/movies}" th:text="#{backToMovieList}"></a>
 </div>
 <script  th:inline="javascript">
     function checkConsistency() {

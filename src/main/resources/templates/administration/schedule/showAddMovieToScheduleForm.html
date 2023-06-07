@@ -9,36 +9,37 @@
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
 
-    <title>Add movie to schedule</title>
+    <title th:text="#{addNewMovieToSchedule}"></title>
 </head>
 
 <body>
 
 <div class="container">
-    <p class="h4 mb-4">Add Movie to schedule</p>
+    <p class="h4 mb-4" th:text="#{addNewMovieToSchedule}"></p>
 
-    <form action="#" th:action="@{/administration/menu/schedule/saveMovieToSchedule}" th:object="${movieToSchedule}" method="post" onsubmit="return checkConsistency()">
+    <form action="#" th:action="@{/administration/menu/schedule/saveMovieToSchedule}" th:object="${movieToSchedule}"
+          method="post" onsubmit="return checkConsistency()">
         <input type="hidden" th:field="*{id}">
-        <label for="time">Time</label>
-        <input type="text"th:field="*{time}" id="time" placeholder="HH:MM:SS" class="form-control mb-4 w-25" pattern="^([01]?\d|2[0-3]):([0-5]?\d):([0-5]?\d)$">
-        <label for="date">Date</label>
+        <label for="time" th:text="#{time}"></label>
+        <input type="text" th:field="*{time}" id="time" placeholder="HH:MM:SS" class="form-control mb-4 w-25" pattern="^([01]?\d|2[0-3]):([0-5]?\d):([0-5]?\d)$">
+        <label for="date" th:text="#{date}"></label>
         <input type="date"  th:field="*{date}" id="date" placeholder="Date" class="form-control mb-4 w-25" pattern="\d{2,4}\-\d{1,2}\-\d{1,2}/">
-        <label>Hall
+        <label th:text="#{hall}">Hall</label>
             <select th:field="*{hall}">
             <option th:each="hall : ${availableHalls}" th:value="${hall.getId()}" th:text="${hall.getNumber()}"></option>
             </select>
-        </label>
-        <label> Movie
+
+        <label th:text="#{movie}"></label>
             <select th:field="*{movie}">
                 <option th:each="movie : ${availableMovies}" th:value="${movie.getId()}" th:text="${movie.getName()}"></option>
             </select>
-        </label>
 
-        <button type="submit" class="btn btn-info col-2">Save</button>
+
+        <button type="submit" class="btn btn-info col-2" th:text="#{save}"></button>
     </form>
 
     <hr>
-    <a th:href="@{/administration/menu/schedule}">Back to schedule</a>
+    <a th:href="@{/administration/menu/schedule}" th:text="#{backToSchedule}"></a>
 </div>
 
 <script  th:inline="javascript">

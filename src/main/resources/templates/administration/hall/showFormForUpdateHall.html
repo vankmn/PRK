@@ -9,29 +9,30 @@
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
 
-    <title>Update Hall</title>
+    <title th:text="#{updateHall}"></title>
 </head>
 
 <body>
 
 <div class="container">
-    <h3>Update Hall</h3>
+    <h3 th:text="#{updateHall}"></h3>
     <hr>
     <div th:if="${numberOfHallAlreadyExist}">
-        <i> Hall number already exist</i>
+        <i th:text="#{hallNumberAlreadyExist}"></i>
     </div>
-    <form action="#" th:action="@{/administration/menu/cinemaHalls/saveHall}" th:object="${hall}" method="post" onsubmit="return checkConsistency()">
+    <form action="#" th:action="@{/administration/menu/cinemaHalls/saveHall}" th:object="${hall}"
+          method="post" onsubmit="return checkConsistency()">
 
         <input type="hidden" th:field="*{id}">
-        <label>Hall number</label>
+        <label th:text="#{hallNumber}"></label>
         <input type="number" th:field="*{number}" id="number" placeholder="Number" required="required" pattern="[0-9]{1,4}" class="form-control mb-4 w-25">
-        <label>Hall capacity</label>
+        <label th:text="#{hallCapacity}"></label>
         <input type="number" th:field="*{capacity}" id="capacity" placeholder="Capacity" required="required" pattern="[0-9]{1,4}" class="form-control mb-4 w-25">
 
-        <button type="submit" class="btn btn-info col-2">Save</button>
+        <button type="submit" class="btn btn-info col-2" th:text="#{save}"></button>
     </form>
     <hr>
-    <a th:href="@{/administration/menu/movies}">Back to halls list</a>
+    <a th:href="@{/administration/menu/movies}" th:text="#{backToTheHallList}"></a>
 </div>
 <script  th:inline="javascript">
     function checkConsistency() {

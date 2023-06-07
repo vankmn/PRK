@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -7,25 +7,24 @@
   <!-- Bootstrap CSS -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
 
-  <title>Tickets</title>
+  <title th:text="#{ticketsDirectory}"></title>
 </head>
 <body>
 <div class="container">
 
-  <h3>Tickets Directory</h3>
+  <h3 th:text="#{ticketsDirectory}"></h3>
   <hr>
   <!-- button -->
   <a th:href="@{/administration/menu/tickets/showFormForAddTicket}"
-     class="btn btn-primary btn-sm mb-3">
-    Add Ticket
+     class="btn btn-primary btn-sm mb-3" th:text="#{addTicket}">
   </a>
 
   <table class="table table-bordered table-striped">
     <thead class="table-dark">
     <tr>
-      <th>Name</th>
-      <th>Price</th>
-      <th>Action</th>
+      <th th:text="#{ticketName}"></th>
+      <th th:text="#{ticketPrice}">Price</th>
+      <th th:text="#{action}"></th>
     </tr>
     </thead>
 
@@ -36,12 +35,10 @@
       <td th:text="${tempTicket.price}" />
       <td>
         <a th:href="@{/administration/menu/tickets/showFormForUpdateTicket(ticketId=${tempTicket.id})}"
-           class="btn btn-primary btn-sm mb-3">
-          Update
+           class="btn btn-primary btn-sm mb-3" th:text="#{update}">
         </a>
         <a th:href="@{/administration/menu/tickets/deleteTicket(ticketId=${tempTicket.id})}"
-           class="btn btn-danger btn-sm" onclick="if (!(confirm('Are you sure?'))) return false">
-          Delete
+           class="btn btn-danger btn-sm" onclick="if (!(confirm('Are you sure?'))) return false" th:text="#{delete}">
         </a>
       </td>
 
@@ -50,8 +47,7 @@
   </table>
   <!-- back to menu -->
   <a th:href="@{/administration/menu}"
-     class="btn btn-primary btn-sm mb-3">
-    Back to menu
+     class="btn btn-primary btn-sm mb-3" th:text="#{backToMenu}">
   </a>
 </div>
 </body>

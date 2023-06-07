@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head>
-    <title>Registration Form</title>
+    <title th:text="#{registrationForm}"></title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
@@ -18,11 +18,10 @@
 
         <div class="card border-info">
 
-            <div class="card-header bg-info">
-                New User Registration
+            <div class="card-header bg-info" th:text="#{newUserRegistration}">
             </div>
             <!-- user already exist -->
-            <div th:if="${userAlreadyExist}">
+            <div th:if="${userAlreadyExist}" th:text="#{userAlreadyExist}">
                 <i> User already exist!</i>
             </div>
 
@@ -117,7 +116,7 @@
                         <!-- Registration Button -->
                         <div style="margin-top: 10px" class="form-group">
                             <div class="col-sm-6 controls">
-                                <button type="submit" class="btn btn-primary">Register</button>
+                                <button type="submit" class="btn btn-primary" th:text="#{register}"></button>
                             </div>
                         </div>
 
