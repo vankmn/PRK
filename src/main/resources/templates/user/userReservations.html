@@ -21,6 +21,8 @@
             <th>Date</th>
             <th>Time</th>
             <th>Hall number</th>
+            <th>Column</th>
+            <th>Row</th>
             <th>Ticket type</th>
             <th>Action</th>
         </tr>
@@ -34,6 +36,8 @@
             <td th:text="${ticket.movieSeat.scheduleOfMovieId.date}" />
             <td th:text="${ticket.movieSeat.scheduleOfMovieId.time}" />
             <td th:text="${ticket.movieSeat.scheduleOfMovieId.hall.number}" />
+            <td th:text="${ticket.movieSeat.seatId.row}" />
+            <td th:text="${ticket.movieSeat.seatId.number}" />
             <td th:text="${ticket.ticket.name}" />
             <td>
                 <a th:href="@{/user/deleteReservation(ticketId=${ticket.id})}"

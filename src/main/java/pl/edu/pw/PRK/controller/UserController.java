@@ -45,7 +45,15 @@ public class UserController {
 
     @GetMapping("/deleteReservation")
     public String userDeleteReservation(@RequestParam("ticketId") int ticketID){
+        soldTicketsService.findById(ticketID).getMovieSeat().setOccupied(false);
         soldTicketsService.deleteById(ticketID);
-        return "user/userReservations";
+        return "redirect:/user/reservations";
+    }
+
+    @GetMapping("/updateData")
+    public String updateUserData(Model model){
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        model.addAttribute("user",userService.findByUserName(authentication.getName()));
+        return "register/updateForm";
     }
 }

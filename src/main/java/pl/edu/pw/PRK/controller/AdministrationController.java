@@ -188,7 +188,7 @@ public class AdministrationController {
         scheduleOfMoviesService.save(scheduleOfMovie);
         System.out.println(scheduleOfMovie.getTime().toString());
         //creating a bunch of corresponding seats for added movie
-        movieSeatsService.createBunchOfSeatsForNewMovie(scheduleOfMovie,scheduleOfMovie.getHall().getId());
+        movieSeatsService.createBunchOfSeatsForNewMovie(scheduleOfMovie,scheduleOfMovie.getHall());
         return "redirect:/administration/menu/schedule";
     }
 

@@ -42,5 +42,4 @@ public class UserDaoImpl implements UserDao {
 		entityManager.merge(theUser);
 	}
 
-
 }

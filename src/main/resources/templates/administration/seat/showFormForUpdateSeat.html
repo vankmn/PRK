@@ -25,7 +25,7 @@
         <label>Row number</label>
         <input type="number" th:field="*{row}" id="row" required="required" placeholder="Row" class="form-control mb-4 w-25">
         <label>Hall number</label>
-        <select th:field="*{hallId}">
+        <select th:field="*{hall}">
             <option th:each="hall : ${availableHalls}" th:value="${hall.getId()}" th:text="${hall.getNumber()}"></option>
         </select>
         <button type="submit" class="btn btn-info col-2">Save</button>

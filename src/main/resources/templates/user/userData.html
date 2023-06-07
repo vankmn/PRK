@@ -18,7 +18,16 @@
 <p th:text="${user.getFirstName()}"></p>
 <label>Last Name</label>
 <p th:text="${user.getLastName()}"></p>
+<!-- button change data -->
+<a th:href="@{/user/updateData}"
+   class="btn btn-primary btn-sm mb-3">
+    Update data
+</a>
+<br/>
+
 <!--user Menu-->
 <a th:href="@{/user/menu}">User menu</a>
+
+
 </body>
 </html>

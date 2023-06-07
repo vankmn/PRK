@@ -10,4 +10,6 @@ public interface UserService extends UserDetailsService {
 
 	void save(WebUser webUser);
 
+	void updateData(User user);
+
 }
