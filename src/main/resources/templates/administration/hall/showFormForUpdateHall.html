@@ -17,6 +17,9 @@
 <div class="container">
     <h3>Update Hall</h3>
     <hr>
+    <div th:if="${numberOfHallAlreadyExist}">
+        <i> Hall number already exist</i>
+    </div>
     <form action="#" th:action="@{/administration/menu/cinemaHalls/saveHall}" th:object="${hall}" method="post" onsubmit="return checkConsistency()">
 
         <input type="hidden" th:field="*{id}">

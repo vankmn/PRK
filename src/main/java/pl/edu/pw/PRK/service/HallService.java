@@ -15,5 +15,7 @@ public interface HallService {
 	void save(Hall hall);
 	
 	void deleteById(int theId);
+
+	boolean checkIsNumberAlreadyExist(int number);
 	
 }

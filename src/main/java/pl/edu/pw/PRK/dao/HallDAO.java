@@ -8,4 +8,6 @@ import java.util.List;
 public interface HallDAO extends JpaRepository<Hall,Integer> {
 
     List<Hall> findAllByOrderByNumberAsc();
+
+    Hall findByNumber(int number);
 }

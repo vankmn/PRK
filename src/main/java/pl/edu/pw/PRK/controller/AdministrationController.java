@@ -81,9 +81,16 @@ public class AdministrationController {
     }
 
     @PostMapping("/menu/cinemaHalls/saveHall")
-    public String saveCinemaHall(@ModelAttribute("hall") Hall hall){
-        hallService.save(hall);
-        return "redirect:/administration/menu/cinemaHalls";
+    public String saveCinemaHall(@ModelAttribute("hall") Hall hall,Model model){
+        if(hallService.checkIsNumberAlreadyExist(hall.getNumber())) {
+            model.addAttribute("numberOfHallAlreadyExist",true);
+            return "administration/hall/showFormForUpdateHall";
+        }
+        else {
+            hallService.save(hall);
+//            model.addAttribute("numberOfHallAlreadyExist",false);
+            return "redirect:/administration/menu/cinemaHalls";
+        }
     }
 
     @GetMapping("/menu/cinemaHalls/showFormForUpdateHall")

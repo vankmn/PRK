@@ -41,7 +41,7 @@
             <td th:text="${ticket.ticket.name}" />
             <td>
                 <a th:href="@{/user/deleteReservation(ticketId=${ticket.id})}"
-                   class="btn btn-danger btn-sm" onclick="if (!(confirm('Are you sure?'))) return false">
+                   class="btn btn-danger btn-sm" onclick="if (!(confirm('Are you sure?'))) return false" >
                     Cancel
                 </a>
             </td>

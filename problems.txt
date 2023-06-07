@@ -1,7 +1,2 @@
-placeholders aren't displayed for numbers (difficult to identify input field)
 add internationalization
-shouldn't be able to add hall with the same number
-implement exception catching
-user menu
-at the end analize security anc access to pages again
-try to change data in userData
+cancel ticket possible only when date is not extended

@@ -34,6 +34,8 @@ public class SecurityConfig {
                         .requestMatchers("/home").permitAll()
                         .requestMatchers("/register/**").permitAll()
                         .requestMatchers(HttpMethod.GET,"/administration/**").hasRole("ADMIN")
+                        .requestMatchers("/user/**").hasRole("USER")
+                        .requestMatchers("/reservation/**").hasRole("USER")
                         .anyRequest().authenticated())
                 .formLogin(form -> form.loginPage("/loginPage")
                         .loginProcessingUrl("/authenticateTheUser").permitAll()

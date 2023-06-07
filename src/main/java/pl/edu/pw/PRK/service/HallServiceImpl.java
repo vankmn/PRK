@@ -56,6 +56,11 @@ public class HallServiceImpl implements HallService {
 		hallDao.deleteById(theId);
 	}
 
+	@Override
+	public boolean checkIsNumberAlreadyExist(int number) {
+		return hallDao.findByNumber(number) != null;
+	}
+
 }
 
 
