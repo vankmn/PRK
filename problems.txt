@@ -1,5 +1,7 @@
-possible to add empty entries despite in mySQL notnull selected
 placeholders aren't displayed for numbers (difficult to identify input field)
 add internationalization
 shouldn't be able to add hall with the same number
 implement exception catching
+user menu
+at the end analize security anc access to pages again
+try to change data in userData

@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pl.edu.pw.PRK.dao.SoldTicketsDAO;
 import pl.edu.pw.PRK.entity.SoldTicket;
+import pl.edu.pw.PRK.entity.User;
 
 import java.util.List;
 import java.util.Optional;
@@ -49,6 +50,11 @@ public class SoldTicketsServiceImp implements SoldTicketsService {
 	@Override
 	public void deleteById(int theId) {
 		soldTicketsDAO.deleteById(theId);
+	}
+
+	@Override
+	public List<SoldTicket> findTicketListForTheUser(User user) {
+		return soldTicketsDAO.findTicketListForTheUser(user);
 	}
 
 }
