@@ -30,6 +30,9 @@
         <div class="collapse navbar-collapse" id="navbarScroll">
             <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px;">
                 <li class="nav-item">
+                    <a class="bi bi-person-circle nav-link active" th:text="'   ' + ${userName}"/>
+                </li>
+                <li class="nav-item">
                     <a class="nav-link active" aria-current="page" href="/loginPage">Login</a>
                 </li>
                 <form action="#" th:action="@{/logout}" method="post">
@@ -38,7 +41,7 @@
                 </li>
                 </form>
                 <li class="nav-item">
-                    <a class="bi bi-person-circle nav-link active" th:text="'   ' + ${userName}"/>
+                    <a class="nav-link active" aria-current="page" href="/administration/menu">Administration Menu</a>
                 </li>
             </ul>
             <form th:action="@{/home/search}" class="d-flex" role="search">
@@ -51,9 +54,6 @@
         </div>
     </div>
 </nav>
-
-<!--administration page-->
-<!--<a th:href="@{/administration/menu}">Administration menu</a>-->
 
 <div class="container mt-3">
 

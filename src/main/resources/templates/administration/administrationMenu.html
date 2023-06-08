@@ -47,6 +47,9 @@
         <div class="collapse navbar-collapse" id="navbarScroll">
             <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px;">
                 <li class="nav-item">
+                    <a class="bi bi-person-circle nav-link active" th:text="'   ' + ${userName}"/>
+                </li>
+                <li class="nav-item">
                     <a class="nav-link active" aria-current="page" href="/loginPage">Login</a>
                 </li>
                 <form action="#" th:action="@{/logout}" method="post">
@@ -54,9 +57,6 @@
                         <button class="nav-link" type="submit" style="background-color: goldenrod; border: goldenrod">Logout</button>
                     </li>
                 </form>
-                <li class="nav-item">
-                    <a class="bi bi-person-circle nav-link active" th:text="'   ' + ${userName}"/>
-                </li>
             </ul>
         </div>
     </div>
@@ -130,6 +130,20 @@
                         Schedule of movies
                     </h5>
                     <p class="card-text">View, edit or update a schedule of movies in the Java Cinema</p>
+                </div>
+            </a>
+        </div>
+    </div>
+    <div class="col">
+        <div class="card h-100" style="background-color: goldenrod; color: black">
+            <a href="/home">
+                <div class="card-header link">Home</div>
+                <div class="card-body link">
+                    <h5 class="card-title">
+                        <i class="bi bi-house-door-fill"></i>
+                        Home Page
+                    </h5>
+                    <p class="card-text">Back to the Home Page</p>
                 </div>
             </a>
         </div>
