@@ -2,9 +2,10 @@ package pl.edu.pw.PRK.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import pl.edu.pw.PRK.dao.MovieDAO2;
 import pl.edu.pw.PRK.dao.MovieDao;
 import pl.edu.pw.PRK.entity.Movie;
-
 import java.util.List;
 import java.util.Optional;
 
@@ -12,10 +13,12 @@ import java.util.Optional;
 public class MovieServiceImpl implements MovieService {
 
 	private final MovieDao movieDao;
+	private final MovieDAO2 movieDAO2;
 	
 	@Autowired
-	public MovieServiceImpl(MovieDao movieDao) {
+	public MovieServiceImpl(MovieDao movieDao, MovieDAO2 movieDAO2) {
 		this.movieDao = movieDao;
+		this.movieDAO2 = movieDAO2;
 	}
 	
 	@Override
@@ -56,6 +59,11 @@ public class MovieServiceImpl implements MovieService {
 		movieDao.deleteById(theId);
 	}
 
+	@Override
+	@Transactional
+	public List <Movie> searchBy(String theName) {
+		return movieDAO2.searchBy(theName);
+	}
 }
 
 

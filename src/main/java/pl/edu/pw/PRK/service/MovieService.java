@@ -15,5 +15,6 @@ public interface MovieService {
 	void save(Movie movie);
 	
 	void deleteById(int theId);
-	
+
+	List <Movie> searchBy (String theName);
 }

@@ -4,8 +4,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 import pl.edu.pw.PRK.entity.*;
 import pl.edu.pw.PRK.service.*;
+
+import java.util.List;
 
 @Controller
 @RequestMapping("/administration")
@@ -65,6 +68,20 @@ public class AdministrationController {
     public String deleteMovie(@RequestParam("movieId") int movieId){
         movieService.deleteById(movieId);
         return "redirect:/administration/menu/movies";
+    }
+
+    @GetMapping("/menu/searchMovies")
+    public ModelAndView searchMovie (@RequestParam("movieName") String theName, Model theModel) {
+
+        List <Movie> movies = movieService.searchBy(theName);
+
+        theModel.addAttribute("movies", movies);
+
+        ModelAndView modelAndView = new ModelAndView();
+
+        modelAndView.setViewName("administration/movie/movies");
+
+        return modelAndView;
     }
 
     //----------------cinema halls
