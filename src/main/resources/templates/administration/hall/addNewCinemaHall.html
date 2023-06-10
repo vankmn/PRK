@@ -8,25 +8,71 @@
 
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
 
-    <title>Add hall</title>
+    <!-- Font Awesome CSS -->
+    <link href="/css/fontawesome/css/fontawesome.css" rel="stylesheet">
+    <link href="/css/fontawesome/css/solid.css" rel="stylesheet">
+
+    <title>Add new cinema hall</title>
 </head>
 
-<body>
+<body style="background-color: black">
 
-<div class="container">
-    <p class="h4 mb-4">Add Hall</p>
+<div class="container col-3 position-absolute top-50 start-50 translate-middle">
+    <div class="mt-5">
+        <div class="card" style="border-color: goldenrod">
+            <div class="card-header" style="background-color: goldenrod">
+                Add new cinema hall
+            </div>
 
-    <form action="#" th:action="@{/administration/menu/cinemaHalls/saveHall}" th:object="${hall}" method="post">
+            <div class="card-body" style="background-color: black">
+                <div class="card-text">
+                    <form action="#" th:action="@{/administration/menu/cinemaHalls/saveHall}"
+                          th:object="${hall}" method="POST">
 
-        <input type="hidden" th:field="*{id}">
-        <input type="number" th:field="*{number}" placeholder="Name" class="form-control mb-4 w-25">
-        <input type="number" th:field="*{capacity}" placeholder="Description" class="form-control mb-4 w-25">
+                        <input type="hidden" th:field="*{id}">
 
-        <button type="submit" class="btn btn-info col-2">Save</button>
-    </form>
-    <hr>
-    <a th:href="@{/administration/menu/cinemaHalls}">Back to movies list</a>
+                        <div class="mb-3" style="color: goldenrod">
+                            <i class="bi bi-camera-reels-fill"></i>
+                            <label for="hallNumber" class="form-label">Cinema hall number</label>
+                            <input id="hallNumber" type="number" th:field="*{number}" class="form-control" style="border-color: goldenrod; background-color: black; color: white" aria-describedby="hallNumberHelp"/>
+                            <div id="hallNumberHelp" class="form-text">Please enter a number of the cinema hall.</div>
+                        </div>
+
+                        <!--                        <div th:if="${#fields.hasErrors('hallNumber')}" class="mb-3 text-danger">-->
+                        <!--                            <ul>-->
+                        <!--                                <li th:each="err : ${#fields.errors('hallNumber')}" th:text="'Cinema hall number ' + ${err}" />-->
+                        <!--                            </ul>-->
+                        <!--                        </div>-->
+
+                        <div class="mb-3" style="color: goldenrod">
+                            <i class="fa-solid fa-users"></i>
+                            <label for="hallCapacity" class="form-label">Cinema hall capacity</label>
+                            <input id="hallCapacity" type="number" th:field="*{capacity}" class="form-control" style="border-color: goldenrod; background-color: black; color: white" aria-describedby="hallCapacityHelp"/>
+                            <div id="hallCapacityHelp" class="form-text">Please enter a capacity of the cinema hall.</div>
+                        </div>
+
+                        <!--                        <div th:if="${#fields.hasErrors('hallCapacity')}" class="mb-3 text-danger">-->
+                        <!--                            <ul>-->
+                        <!--                                <li th:each="err : ${#fields.errors('hallCapacity')}" th:text="'Cinema hall capacity ' + ${err}" />-->
+                        <!--                            </ul>-->
+                        <!--                        </div>-->
+
+                        <div class="col-12 d-flex justify-content-between" style="text-align: center">
+                            <button type="submit" class="btn" style="background-color: goldenrod">
+                                <i class="bi bi-save"></i>
+                                Save
+                            </button>
+                            <a class="btn btn-secondary ml-5" style="color: black" href="/administration/menu/cinemaHalls">
+                                Back
+                            </a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 
 </body>

@@ -1,7 +1,6 @@
 package pl.edu.pw.PRK.service;
 
 import pl.edu.pw.PRK.entity.Hall;
-
 import java.util.List;
 
 public interface HallService {
@@ -15,5 +14,6 @@ public interface HallService {
 	void save(Hall hall);
 	
 	void deleteById(int theId);
-	
+
+	List <Hall> searchBy (String number);
 }

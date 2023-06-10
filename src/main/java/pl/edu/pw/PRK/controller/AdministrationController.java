@@ -116,6 +116,20 @@ public class AdministrationController {
         return "redirect:/administration/menu/cinemaHalls";
     }
 
+    @GetMapping("/menu/searchCinemaHalls")
+    public ModelAndView searchHall (@RequestParam("hallNumber") String number, Model theModel) {
+
+        List <Hall> halls = hallService.searchBy(number);
+
+        theModel.addAttribute("halls", halls);
+
+        ModelAndView modelAndView = new ModelAndView();
+
+        modelAndView.setViewName("administration/hall/cinemaHalls");
+
+        return modelAndView;
+    }
+
     //----------------tickets
     @GetMapping("/menu/tickets")
     public String showTickets(Model model){

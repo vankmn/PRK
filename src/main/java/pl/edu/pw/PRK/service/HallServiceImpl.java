@@ -2,9 +2,10 @@ package pl.edu.pw.PRK.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import pl.edu.pw.PRK.dao.HallDAO;
+import pl.edu.pw.PRK.dao.HallDAO2;
 import pl.edu.pw.PRK.entity.Hall;
-
 import java.util.List;
 import java.util.Optional;
 
@@ -12,10 +13,12 @@ import java.util.Optional;
 public class HallServiceImpl implements HallService {
 
 	private final HallDAO hallDao;
+	private final HallDAO2 hallDAO2;
 
 	@Autowired
-	public HallServiceImpl(HallDAO hallDao) {
+	public HallServiceImpl(HallDAO hallDao, HallDAO2 hallDAO2) {
 		this.hallDao = hallDao;
+		this.hallDAO2 = hallDAO2;
 	}
 	
 	@Override
@@ -32,7 +35,7 @@ public class HallServiceImpl implements HallService {
 	public Hall findById(int theId) {
 		Optional<Hall> result = hallDao.findById(theId);
 
-		Hall hall = null;
+		Hall hall;
 		
 		if (result.isPresent()) {
 			hall = result.get();
@@ -54,6 +57,12 @@ public class HallServiceImpl implements HallService {
 	@Override
 	public void deleteById(int theId) {
 		hallDao.deleteById(theId);
+	}
+
+	@Override
+	@Transactional
+	public List<Hall> searchBy(String number) {
+		return hallDAO2.searchBy(number);
 	}
 
 }
