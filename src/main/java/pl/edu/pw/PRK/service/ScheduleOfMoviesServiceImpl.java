@@ -11,24 +11,27 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class ScheduleOfMoviesServiceImp implements ScheduleOfMoviesService {
+public class ScheduleOfMoviesServiceImpl implements ScheduleOfMoviesService {
 
 	private final ScheduleOfMoviesDAO scheduleOfMoviesDAO;
 	private final ScheduleOfMoviesDAO2 scheduleOfMoviesDAO2;
 
 	@Autowired
-	public ScheduleOfMoviesServiceImp(ScheduleOfMoviesDAO scheduleOfMoviesDAO, ScheduleOfMoviesDAO2 scheduleOfMoviesDAO2) {
+	public ScheduleOfMoviesServiceImpl(ScheduleOfMoviesDAO scheduleOfMoviesDAO, ScheduleOfMoviesDAO2 scheduleOfMoviesDAO2) {
 		this.scheduleOfMoviesDAO = scheduleOfMoviesDAO;
 		this.scheduleOfMoviesDAO2 = scheduleOfMoviesDAO2;
 	}
 
 	@Override
+	@Transactional
 	public List<ScheduleOfMovie> findAll() {
 		return scheduleOfMoviesDAO.findAll();
 	}
 
 	@Override
+	@Transactional
 	public ScheduleOfMovie findById(int theId) {
+
 		Optional<ScheduleOfMovie> result = scheduleOfMoviesDAO.findById(theId);
 
 		ScheduleOfMovie scheduleOfMovie;
@@ -46,11 +49,13 @@ public class ScheduleOfMoviesServiceImp implements ScheduleOfMoviesService {
 	}
 
 	@Override
+	@Transactional
 	public void save(ScheduleOfMovie scheduleOfMovie) {
 		scheduleOfMoviesDAO.save(scheduleOfMovie);
 	}
 
 	@Override
+	@Transactional
 	public void deleteById(int theId) {
 		scheduleOfMoviesDAO.deleteById(theId);
 	}

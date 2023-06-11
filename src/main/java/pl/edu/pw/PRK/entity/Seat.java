@@ -16,18 +16,18 @@ public class Seat {
 	@Column(name="row_nr")
 	private int row;
 
-	@Column(name = "hall_id")
-	private int hallId;
+	@OneToOne(cascade = CascadeType.MERGE)
+	@JoinColumn(name="hall_id")
+	private Hall hall;
 
 	// define constructors
 
 	public Seat() {
 	}
 
-	public Seat(int number, int row, int hallId) {
+	public Seat(int number, int row) {
 		this.number = number;
 		this.row = row;
-		this.hallId=hallId;
 	}
 
 	// define getter/setter
@@ -56,17 +56,17 @@ public class Seat {
 		this.row = row;
 	}
 
-	public int getHallId() {
-		return hallId;
+	public Hall getHall() {
+		return hall;
 	}
 
-	public void setHallId(int hallId) {
-		this.hallId = hallId;
+	public void setHall(Hall hall_id) {
+		this.hall = hall_id;
 	}
 
 	@Override
 	public String toString() {
-		return "Seat [id=" + id + ", number=" + number + ", row=" + row +", hallId="+hallId+"]";
+		return "Seat [id=" + id + ", number=" + number + ", row=" + row +", hallId="+hall.getNumber()+"]";
 	}
 
 }

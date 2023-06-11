@@ -2,6 +2,7 @@ package pl.edu.pw.PRK.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import pl.edu.pw.PRK.dao.SoldTicketsDAO;
 import pl.edu.pw.PRK.entity.SoldTicket;
 
@@ -9,25 +10,28 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class SoldTicketsServiceImp implements SoldTicketsService {
+public class SoldTicketsServiceImpl implements SoldTicketsService {
 
 	private final SoldTicketsDAO soldTicketsDAO;
 
 	@Autowired
-	public SoldTicketsServiceImp(SoldTicketsDAO soldTicketsDAO) {
+	public SoldTicketsServiceImpl(SoldTicketsDAO soldTicketsDAO) {
 		this.soldTicketsDAO = soldTicketsDAO;
 	}
 	
 	@Override
+	@Transactional
 	public List<SoldTicket> findAll() {
 		return soldTicketsDAO.findAll();
 	}
 
 	@Override
+	@Transactional
 	public SoldTicket findById(int theId) {
+
 		Optional<SoldTicket> result = soldTicketsDAO.findById(theId);
 
-		SoldTicket soldTicket = null;
+		SoldTicket soldTicket;
 		
 		if (result.isPresent()) {
 			soldTicket = result.get();
@@ -42,15 +46,16 @@ public class SoldTicketsServiceImp implements SoldTicketsService {
 	}
 
 	@Override
+	@Transactional
 	public void save(SoldTicket soldTicket) {
 		soldTicketsDAO.save(soldTicket);
 	}
 
 	@Override
+	@Transactional
 	public void deleteById(int theId) {
 		soldTicketsDAO.deleteById(theId);
 	}
-
 }
 
 

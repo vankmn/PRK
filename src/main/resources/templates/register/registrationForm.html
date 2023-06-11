@@ -5,14 +5,19 @@
     <title>Registration Form</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
-          integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+
+    <!-- Font Awesome CSS -->
+    <link href="/css/fontawesome/css/fontawesome.css" rel="stylesheet">
+    <link href="/css/fontawesome/css/solid.css" rel="stylesheet">
 </head>
 
 <body style="background-color: black">
 
-<div class="container col-3">
+<div class="container col-3 position-absolute top-50 start-50 translate-middle">
     <div class="mt-5">
         <div class="card" style="border-color: goldenrod">
             <div class="card-header" style="background-color: goldenrod">
@@ -43,7 +48,7 @@
                         <div class="mb-3" style="color: goldenrod">
                             <i class="bi bi-person-circle"></i>
                             <label for="userName" class="form-label">Username</label>
-                            <input id="userName" type="text" th:field="*{userName}" class="form-control" style="border-color: goldenrod; background-color: black; color: white" aria-describedby="usernameHelp"/>
+                            <input id="userName" required type="text" th:field="*{userName}" class="form-control" style="border-color: goldenrod; background-color: black; color: white" aria-describedby="usernameHelp"/>
                             <div id="usernameHelp" class="form-text">Please enter your username.</div>
                         </div>
 
@@ -57,7 +62,7 @@
                         <div class="mb-3" style="color: goldenrod">
                             <i class="bi bi-file-lock2-fill"></i>
                             <label for="password" class="form-label">Password</label>
-                            <input id="password" type="password" th:field="*{password}" class="form-control" style="border-color: goldenrod; background-color: black; color: white" aria-describedby="passwordHelp" />
+                            <input id="password" required type="password" th:field="*{password}" class="form-control" style="border-color: goldenrod; background-color: black; color: white" aria-describedby="passwordHelp" />
                             <div id="passwordHelp" class="form-text">Please enter your password.</div>
                         </div>
 
@@ -71,7 +76,7 @@
                         <div class="mb-3" style="color: goldenrod">
                             <i class="bi bi-person-vcard-fill"></i>
                             <label for="firstName" class="form-label">First name</label>
-                            <input id="firstName" type="text" th:field="*{firstName}" class="form-control" style="border-color: goldenrod; background-color: black; color: white" aria-describedby="firstNameHelp"/>
+                            <input id="firstName" required type="text" th:field="*{firstName}" class="form-control" style="border-color: goldenrod; background-color: black; color: white" aria-describedby="firstNameHelp"/>
                             <div id="firstNameHelp" class="form-text">Please enter your first name.</div>
                         </div>
 
@@ -85,7 +90,7 @@
                         <div class="mb-3" style="color: goldenrod">
                             <i class="bi bi-person-vcard-fill"></i>
                             <label for="lastName" class="form-label">Last name</label>
-                            <input id="lastName" type="text" th:field="*{lastName}" class="form-control" style="border-color: goldenrod; background-color: black; color: white" aria-describedby="lastNameHelp"/>
+                            <input id="lastName" required type="text" th:field="*{lastName}" class="form-control" style="border-color: goldenrod; background-color: black; color: white" aria-describedby="lastNameHelp"/>
                             <div id="lastNameHelp" class="form-text">Please enter your last name.</div>
                         </div>
 
@@ -99,7 +104,7 @@
                         <div class="mb-3" style="color: goldenrod">
                             <i class="bi bi-envelope-at-fill"></i>
                             <label for="email" class="form-label">Email</label>
-                            <input id="email" type="email" th:field="*{email}" class="form-control" style="border-color: goldenrod; background-color: black; color: white" aria-describedby="emailHelp"/>
+                            <input id="email" required type="email" th:field="*{email}" class="form-control" style="border-color: goldenrod; background-color: black; color: white" aria-describedby="emailHelp"/>
                             <div id="emailHelp" class="form-text">Please enter your email.</div>
                         </div>
 

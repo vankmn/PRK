@@ -22,20 +22,23 @@ public class MovieServiceImpl implements MovieService {
 	}
 	
 	@Override
+	@Transactional
 	public List<Movie> findAll() {
 		return movieDao.findAll();
 	}
 
 	@Override
+	@Transactional
 	public List<Movie> findAllSortedByNameAsc() {
 		return movieDao.findAllByOrderByNameAsc();
 	}
 
 	@Override
+	@Transactional
 	public Movie findById(int theId) {
 		Optional<Movie> result = movieDao.findById(theId);
 
-		Movie theEmployee = null;
+		Movie theEmployee;
 		
 		if (result.isPresent()) {
 			theEmployee = result.get();
@@ -50,11 +53,13 @@ public class MovieServiceImpl implements MovieService {
 	}
 
 	@Override
+	@Transactional
 	public void save(Movie theEmployee) {
 		movieDao.save(theEmployee);
 	}
 
 	@Override
+	@Transactional
 	public void deleteById(int theId) {
 		movieDao.deleteById(theId);
 	}

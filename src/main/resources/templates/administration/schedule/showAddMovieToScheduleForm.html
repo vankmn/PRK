@@ -8,33 +8,102 @@
 
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+
+    <!-- Font Awesome CSS -->
+    <link href="/css/fontawesome/css/fontawesome.css" rel="stylesheet">
+    <link href="/css/fontawesome/css/solid.css" rel="stylesheet">
 
     <title>Add movie to schedule</title>
 </head>
 
-<body>
+<body style="background-color: black">
 
-<div class="container">
-    <p class="h4 mb-4">Add Movie to schedule</p>
+<div class="container col-3 position-absolute top-50 start-50 translate-middle">
+    <div class="mt-5">
+        <div class="card" style="border-color: goldenrod">
+            <div class="card-header" style="background-color: goldenrod">
+                Add movie to schedule
+            </div>
 
-    <form action="#" th:action="@{/administration/menu/schedule/saveMovieToSchedule}" th:object="${movieToSchedule}" method="post">
+            <div class="card-body" style="background-color: black">
+                <div class="card-text">
+                    <form action="#" th:action="@{/administration/menu/schedule/saveMovieToSchedule}"
+                          th:object="${movieToSchedule}" method="POST">
 
-        <input type="hidden" th:field="*{id}">
-        <input type="text" th:field="*{time}" placeholder="Name" class="form-control mb-4 w-25">
-        <input type="date"  th:field="*{date}" placeholder="Description" class="form-control mb-4 w-25">
-        <select th:field="*{hall}">
-        <option th:each="hall : ${availableHalls}" th:value="${hall.getId()}" th:text="${hall.getNumber()}"></option>
-        </select>
-        <select th:field="*{movie}">
-            <option th:each="movie : ${availableMovies}" th:value="${movie.getId()}" th:text="${movie.getName()}"></option>
-        </select>
+                        <input type="hidden" th:field="*{id}">
 
-        <button type="submit" class="btn btn-info col-2">Save</button>
-    </form>
-    <hr>
-    <a th:href="@{/administration/menu/schedule}">Back to schedule</a>
+                        <div class="mb-3" style="color: goldenrod">
+                            <i class="bi bi-clock"></i>
+                            <label for="movieTime" class="form-label">Time of movie</label>
+                            <input id="movieTime" type="time" step="2" required th:field="*{time}" class="form-control" style="border-color: goldenrod; background-color: black; color: white" aria-describedby="movieTimeHelp"/>
+                            <div id="movieTimeHelp" class="form-text">Please enter a time of the movie.</div>
+                        </div>
+
+                        <!--                        <div th:if="${#fields.hasErrors('movieTime')}" class="mb-3 text-danger">-->
+                        <!--                            <ul>-->
+                        <!--                                <li th:each="err : ${#fields.errors('movieTime')}" th:text="'Movie time ' + ${err}" />-->
+                        <!--                            </ul>-->
+                        <!--                        </div>-->
+
+                        <div class="mb-3" style="color: goldenrod">
+                            <i class="bi bi-calendar-date"></i>
+                            <label for="movieDate" class="form-label">Date of movie</label>
+                            <input id="movieDate" type="date" required th:field="*{date}" class="form-control" style="border-color: goldenrod; background-color: black; color: white" aria-describedby="movieDateHelp"/>
+                            <div id="movieDateHelp" class="form-text">Please enter a date of the movie.</div>
+                        </div>
+
+                        <!--                        <div th:if="${#fields.hasErrors('movieDate')}" class="mb-3 text-danger">-->
+                        <!--                            <ul>-->
+                        <!--                                <li th:each="err : ${#fields.errors('movieDate')}" th:text="'Movie date ' + ${err}" />-->
+                        <!--                            </ul>-->
+                        <!--                        </div>-->
+
+                        <div class="mb-3" style="color: goldenrod">
+                            <i class="bi bi-camera-reels-fill"></i>
+                            <label for="cinemaHall" class="form-label">Cinema hall</label>
+                            <select id="cinemaHall" th:field="*{hall}" class="form-control" style="border-color: goldenrod; background-color: black; color: white" aria-describedby="cinemaHallHelp">
+                                <option th:each="hall : ${availableHalls}" th:value="${hall.getId()}" th:text="${hall.getNumber()}"></option>
+                            </select>
+                            <div id="cinemaHallHelp" class="form-text">Please choose a cinema hall.</div>
+                        </div>
+
+                        <!--                        <div th:if="${#fields.hasErrors('cinemaHall')}" class="mb-3 text-danger">-->
+                        <!--                            <ul>-->
+                        <!--                                <li th:each="err : ${#fields.errors('cinemaHall')}" th:text="'Cinema hall ' + ${err}" />-->
+                        <!--                            </ul>-->
+                        <!--                        </div>-->
+
+                        <div class="mb-3" style="color: goldenrod">
+                            <i class="bi bi-film"></i>
+                            <label for="movie" class="form-label">Movie</label>
+                            <select id="movie" th:field="*{movie}" class="form-control" style="border-color: goldenrod; background-color: black; color: white" aria-describedby="movieHelp">
+                                <option th:each="movie : ${availableMovies}" th:value="${movie.getId()}" th:text="${movie.getName()}"></option>
+                            </select>
+                            <div id="movieHelp" class="form-text">Please choose a movie.</div>
+                        </div>
+
+                        <!--                        <div th:if="${#fields.hasErrors('movie')}" class="mb-3 text-danger">-->
+                        <!--                            <ul>-->
+                        <!--                                <li th:each="err : ${#fields.errors('movie')}" th:text="'Movie ' + ${err}" />-->
+                        <!--                            </ul>-->
+                        <!--                        </div>-->
+
+                        <div class="col-12 d-flex justify-content-between" style="text-align: center">
+                            <button type="submit" class="btn" style="background-color: goldenrod">
+                                <i class="bi bi-save"></i>
+                                Save
+                            </button>
+                            <a class="btn btn-secondary ml-5" style="color: black" href="/administration/menu/schedule">
+                                Back
+                            </a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
-
 
 </body>
 </html>

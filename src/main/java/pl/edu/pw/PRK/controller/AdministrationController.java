@@ -133,7 +133,7 @@ public class AdministrationController {
     //----------------tickets
     @GetMapping("/menu/tickets")
     public String showTickets(Model model){
-        model.addAttribute("tickets", ticketService.findAllSortedByNumberAsc());
+        model.addAttribute("tickets", ticketService.findAllSortedByPriceDesc());
         return "administration/ticket/tickets";
     }
 
@@ -162,6 +162,20 @@ public class AdministrationController {
         return "redirect:/administration/menu/tickets";
     }
 
+    @GetMapping("/menu/searchTickets")
+    public ModelAndView searchTicket (@RequestParam("ticketName") String theName, Model theModel) {
+
+        List <Ticket> tickets = ticketService.searchBy(theName);
+
+        theModel.addAttribute("tickets", tickets);
+
+        ModelAndView modelAndView = new ModelAndView();
+
+        modelAndView.setViewName("administration/ticket/tickets");
+
+        return modelAndView;
+    }
+
     //----------------seats
     @GetMapping("/menu/seats")
     public String showSeats(Model model){
@@ -172,6 +186,7 @@ public class AdministrationController {
     @GetMapping("/menu/seats/showFormForAddSeat")
     public String showFormForAddSeat(Model model){
         model.addAttribute("seat",new Seat());
+        model.addAttribute("availableHalls",hallService.findAll());
         return "administration/seat/addNewSeat";
     }
 
@@ -185,6 +200,7 @@ public class AdministrationController {
     public String showFormForUpdateSeat(@RequestParam("seatId") int seatId, Model model){
         Seat seat = seatService.findById(seatId);
         model.addAttribute("seat",seat);
+        model.addAttribute("availableHalls",hallService.findAll());
         return "administration/seat/showFormForUpdateSeat";
     }
 
@@ -192,6 +208,20 @@ public class AdministrationController {
     public String deleteSeat(@RequestParam("seatId") int seatId){
         seatService.deleteById(seatId);
         return "redirect:/administration/menu/seats";
+    }
+
+    @GetMapping("/menu/searchSeats")
+    public ModelAndView searchSeat (@RequestParam("hallNumber") String hallNumber, Model theModel) {
+
+        List <Seat> seats = seatService.searchBy(hallNumber);
+
+        theModel.addAttribute("seats", seats);
+
+        ModelAndView modelAndView = new ModelAndView();
+
+        modelAndView.setViewName("administration/seat/seats");
+
+        return modelAndView;
     }
 
     //----------------schedule
@@ -235,5 +265,19 @@ public class AdministrationController {
         //deleting movie
         scheduleOfMoviesService.deleteById(movieToScheduleId);
         return "redirect:/administration/menu/schedule";
+    }
+
+    @GetMapping("/menu/searchMovieSchedule")
+    public ModelAndView searchMovieSchedule (@RequestParam("movieName") String theName, Model theModel) {
+
+        List <ScheduleOfMovie> scheduleOfMoviesFound = scheduleOfMoviesService.searchBy(theName);
+
+        theModel.addAttribute("scheduleMovies", scheduleOfMoviesFound);
+
+        ModelAndView modelAndView = new ModelAndView();
+
+        modelAndView.setViewName("administration/schedule/schedule");
+
+        return modelAndView;
     }
 }

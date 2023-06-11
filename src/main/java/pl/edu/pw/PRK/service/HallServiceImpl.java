@@ -22,16 +22,19 @@ public class HallServiceImpl implements HallService {
 	}
 	
 	@Override
+	@Transactional
 	public List<Hall> findAll() {
 		return hallDao.findAll();
 	}
 
 	@Override
+	@Transactional
 	public List<Hall> findAllSortedByNumberAsc() {
 		return hallDao.findAllByOrderByNumberAsc();
 	}
 
 	@Override
+	@Transactional
 	public Hall findById(int theId) {
 		Optional<Hall> result = hallDao.findById(theId);
 
@@ -50,11 +53,13 @@ public class HallServiceImpl implements HallService {
 	}
 
 	@Override
+	@Transactional
 	public void save(Hall hall) {
 		hallDao.save(hall);
 	}
 
 	@Override
+	@Transactional
 	public void deleteById(int theId) {
 		hallDao.deleteById(theId);
 	}

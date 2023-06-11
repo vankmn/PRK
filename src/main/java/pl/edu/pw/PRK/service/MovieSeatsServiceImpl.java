@@ -2,6 +2,7 @@ package pl.edu.pw.PRK.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import pl.edu.pw.PRK.dao.MovieSeatsDAO;
 import pl.edu.pw.PRK.dao.SeatDao;
 import pl.edu.pw.PRK.entity.MovieSeats;
@@ -12,27 +13,29 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class MovieSeatsServiceImp implements MovieSeatsService {
+public class MovieSeatsServiceImpl implements MovieSeatsService {
 
 	private final MovieSeatsDAO movieSeatsDAO;
 	private final SeatDao seatDao;
 
 	@Autowired
-	public MovieSeatsServiceImp(MovieSeatsDAO movieSeatsDAO, SeatDao seatDao) {
+	public MovieSeatsServiceImpl(MovieSeatsDAO movieSeatsDAO, SeatDao seatDao) {
 		this.movieSeatsDAO = movieSeatsDAO;
 		this.seatDao=seatDao;
 	}
 
 	@Override
+	@Transactional
 	public List<MovieSeats> findAll() {
 		return movieSeatsDAO.findAll();
 	}
 
 	@Override
+	@Transactional
 	public MovieSeats findById(int theId) {
 		Optional<MovieSeats> result = movieSeatsDAO.findById(theId);
 
-		MovieSeats movieSeats = null;
+		MovieSeats movieSeats;
 
 		if (result.isPresent()) {
 			movieSeats = result.get();
@@ -47,16 +50,19 @@ public class MovieSeatsServiceImp implements MovieSeatsService {
 	}
 
 	@Override
+	@Transactional
 	public void save(MovieSeats movieSeats) {
 		movieSeatsDAO.save(movieSeats);
 	}
 
 	@Override
+	@Transactional
 	public void deleteById(int theId) {
 		movieSeatsDAO.deleteById(theId);
 	}
 
 	@Override
+	@Transactional
 	public void createBunchOfSeatsForNewMovie(ScheduleOfMovie scheduleOfMovie, int hallId) {
 
 		deleteBunchOfSeatsForNewMovie(scheduleOfMovie);
@@ -69,6 +75,7 @@ public class MovieSeatsServiceImp implements MovieSeatsService {
 	}
 
 	@Override
+	@Transactional
 	public void deleteBunchOfSeatsForNewMovie(ScheduleOfMovie scheduleOfMovie) {
 		List<MovieSeats> movieSeatsList = movieSeatsDAO.findSeatAssignedToScheduledMovie(scheduleOfMovie);
 		for (MovieSeats movieSeats : movieSeatsList) {
@@ -77,6 +84,7 @@ public class MovieSeatsServiceImp implements MovieSeatsService {
 	}
 
 	@Override
+	@Transactional
 	public List<MovieSeats> findNotOccupiedSeats(ScheduleOfMovie scheduleOfMovie) {
 		return movieSeatsDAO.findNotOccupiedSeats(scheduleOfMovie);
 	}

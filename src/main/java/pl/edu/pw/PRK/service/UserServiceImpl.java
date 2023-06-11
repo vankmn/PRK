@@ -1,29 +1,29 @@
 package pl.edu.pw.PRK.service;
 
-import pl.edu.pw.PRK.dao.RoleDao;
-import pl.edu.pw.PRK.dao.UserDao;
-import pl.edu.pw.PRK.entity.Role;
-import pl.edu.pw.PRK.entity.User;
-import pl.edu.pw.PRK.entity.WebUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
-
+import org.springframework.transaction.annotation.Transactional;
+import pl.edu.pw.PRK.dao.RoleDao;
+import pl.edu.pw.PRK.dao.UserDao;
+import pl.edu.pw.PRK.entity.Role;
+import pl.edu.pw.PRK.entity.User;
+import pl.edu.pw.PRK.entity.WebUser;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collection;
+import java.util.Collections;
 
 @Service
 public class UserServiceImpl implements UserService {
 
-	private UserDao userDao;
+	private final UserDao userDao;
 
-	private RoleDao roleDao;
+	private final RoleDao roleDao;
 
-	private BCryptPasswordEncoder passwordEncoder;
+	private final BCryptPasswordEncoder passwordEncoder;
 
 	@Autowired
 	public UserServiceImpl(UserDao userDao, RoleDao roleDao, BCryptPasswordEncoder passwordEncoder) {
@@ -33,12 +33,14 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
+	@Transactional
 	public User findByUserName(String userName) {
 		// check the database if the user already exists
 		return userDao.findByUserName(userName);
 	}
 
 	@Override
+	@Transactional
 	public void save(WebUser webUser) {
 		User user = new User();
 
@@ -50,7 +52,7 @@ public class UserServiceImpl implements UserService {
 		user.setEmail(webUser.getEmail());
 
 		// give user default role of "employee"
-		user.setRoles(Arrays.asList(roleDao.findRoleByName("ROLE_USER")));
+		user.setRoles(Collections.singletonList(roleDao.findRoleByName("ROLE_USER")));
 
 		// save user in the database
 		userDao.save(user);

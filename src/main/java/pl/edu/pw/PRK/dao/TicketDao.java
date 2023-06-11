@@ -7,6 +7,6 @@ import java.util.List;
 
 public interface TicketDao extends JpaRepository<Ticket, Integer> {
 
-	List<Ticket> findAllByOrderByNameAsc();
+	List<Ticket> findAllByOrderByPriceDesc();
 	
 }

@@ -36,7 +36,7 @@
                         <div class="mb-3" style="color: goldenrod">
                             <i class="bi bi-film"></i>
                             <label for="movieName" class="form-label">Movie name</label>
-                            <input id="movieName" type="text" th:field="*{name}" class="form-control" style="border-color: goldenrod; background-color: black; color: white" aria-describedby="movieNameHelp"/>
+                            <input id="movieName" type="text" required th:field="*{name}" class="form-control" style="border-color: goldenrod; background-color: black; color: white" aria-describedby="movieNameHelp"/>
                             <div id="movieNameHelp" class="form-text">Please enter a name of the movie.</div>
                         </div>
 
@@ -49,7 +49,7 @@
                         <div class="mb-3" style="color: goldenrod">
                             <i class="fa-solid fa-clapperboard"></i>
                             <label for="movieDescription" class="form-label">Description</label>
-                            <textarea id="movieDescription" th:field="*{description}" class="form-control" rows="5" style="border-color: goldenrod; background-color: black; color: white" aria-describedby="movieDescriptionHelp"></textarea>
+                            <textarea id="movieDescription" required th:field="*{description}" class="form-control" rows="5" style="border-color: goldenrod; background-color: black; color: white" aria-describedby="movieDescriptionHelp"></textarea>
                             <div id="movieDescriptionHelp" class="form-text">Please enter a description of the movie.</div>
                         </div>
 
@@ -62,7 +62,7 @@
                         <div class="mb-3" style="color: goldenrod">
                             <i class="fa-solid fa-clock"></i>
                             <label for="movieDuration" class="form-label">Duration (in minutes)</label>
-                            <input id="movieDuration" type="number" th:field="*{duration}" class="form-control" style="border-color: goldenrod; background-color: black; color: white" aria-describedby="movieDurationHelp"/>
+                            <input id="movieDuration" type="number" required th:field="*{duration}" class="form-control" style="border-color: goldenrod; background-color: black; color: white" aria-describedby="movieDurationHelp"/>
                             <div id="movieDurationHelp" class="form-text">Please enter a duration of the movie.</div>
                         </div>
 

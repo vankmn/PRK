@@ -15,5 +15,6 @@ public interface SeatService {
 	void save(Seat seat);
 	
 	void deleteById(int theId);
-	
+
+	List <Seat> searchBy (String hallNumber);
 }
