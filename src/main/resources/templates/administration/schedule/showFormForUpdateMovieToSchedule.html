@@ -29,14 +29,14 @@
             <div class="card-body" style="background-color: black">
                 <div class="card-text">
                     <form action="#" th:action="@{/administration/menu/schedule/saveMovieToSchedule}"
-                          th:object="${movieToSchedule}" method="POST">
+                          th:object="${movieToSchedule}" method="POST" onsubmit="return checkConsistency()">
 
                         <input type="hidden" th:field="*{id}">
 
                         <div class="mb-3" style="color: goldenrod">
                             <i class="bi bi-clock"></i>
                             <label for="movieTime" class="form-label">Time of movie</label>
-                            <input id="movieTime" type="time" step="2" required th:field="*{time}" class="form-control" style="border-color: goldenrod; background-color: black; color: white" aria-describedby="movieTimeHelp"/>
+                            <input id="movieTime" type="time" step="2" required pattern="^([01]?\d|2[0-3]):([0-5]?\d):([0-5]?\d)$" th:field="*{time}" class="form-control" style="border-color: goldenrod; background-color: black; color: white" aria-describedby="movieTimeHelp"/>
                             <div id="movieTimeHelp" class="form-text">Update a time of the movie.</div>
                         </div>
 
@@ -49,7 +49,7 @@
                         <div class="mb-3" style="color: goldenrod">
                             <i class="bi bi-calendar-date"></i>
                             <label for="movieDate" class="form-label">Date of movie</label>
-                            <input id="movieDate" type="date" required th:field="*{date}" class="form-control" style="border-color: goldenrod; background-color: black; color: white" aria-describedby="movieDateHelp"/>
+                            <input id="movieDate" type="date" required pattern="\d{2,4}\-\d{1,2}\-\d{1,2}/" th:field="*{date}" class="form-control" style="border-color: goldenrod; background-color: black; color: white" aria-describedby="movieDateHelp"/>
                             <div id="movieDateHelp" class="form-text">Update a date of the movie.</div>
                         </div>
 
@@ -105,31 +105,19 @@
     </div>
 </div>
 
+<script  th:inline="javascript">
+    function checkConsistency() {
+        return validateTime(document.getElementById('time').value) && validateDate(document.getElementById('date').value);}
+    function validateTime(time){
+        const re = /^([01]?\d|2[0-3]):([0-5]?\d):([0-5]?\d)$/;
+        return re.test(time);}
+    function validateDate(date){
+        const re=/\d{2,4}-\d{1,2}-\d{1,2}/;
+        return re.test(date);}
+</script>
 
-
-<!--<div class="container">-->
-<!--    <h3>Update Movie</h3>-->
-<!--    <hr>-->
-<!--    <form action="#" th:action="@{/administration/menu/schedule/saveMovieToSchedule}" th:object="${movieToSchedule}" method="post">-->
-
-<!--        <input type="hidden" th:field="*{id}">-->
-<!--        <input type="text" th:field="*{time}" placeholder="Time" class="form-control mb-4 w-25">-->
-<!--        <input type="date" th:field="*{date}" placeholder="Date" class="form-control mb-4 w-25">-->
-<!--        <select th:field="*{hall}">-->
-<!--            <option th:each="hall : ${availableHalls}" th:value="${hall.getId()}" th:text="${hall.getNumber()}"></option>-->
-<!--        </select>-->
-<!--        <select th:field="*{movie}">-->
-<!--            <option th:each="movie : ${availableMovies}" th:value="${movie.getId()}" th:text="${movie.getName()}"></option>-->
-<!--        </select>-->
-
-<!--        <button type="submit" class="btn btn-info col-2">Save</button>-->
-<!--    </form>-->
-<!--    <hr>-->
-<!--    <a th:href="@{/administration/menu/schedule}">Back to movies list</a>-->
-<!--</div>-->
-
-<!--</body>-->
-<!--</html>-->
+</body>
+</html>
 
 
 

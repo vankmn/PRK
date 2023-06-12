@@ -31,9 +31,12 @@ public class SecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity httpSecurity) throws Exception{
         httpSecurity
                 .authorizeHttpRequests(configurer -> configurer
-                        .requestMatchers("/home").permitAll()
+                        .requestMatchers("/home/**").permitAll()
+//                        .requestMatchers("/chooseLanguage").permitAll()
                         .requestMatchers("/register/**").permitAll()
                         .requestMatchers(HttpMethod.GET,"/administration/**").hasRole("ADMIN")
+                        .requestMatchers("/user/**").hasRole("USER")
+                        .requestMatchers("/reservation/**").hasRole("USER")
                         .anyRequest().authenticated())
                 .formLogin(form -> form.loginPage("/loginPage")
                         .loginProcessingUrl("/authenticateTheUser").permitAll()

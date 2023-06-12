@@ -1,5 +1,2 @@
-possible to add empty entries despite in mySQL notnull selected
-placeholders aren't displayed for numbers (difficult to identify input field)
-add dropdown list for foreign keys
-add internationalization
-modification time input to match with java.sql.time variable
+???add internationalization???
+cancel ticket possible only when date is not extended

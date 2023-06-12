@@ -102,6 +102,16 @@ public class AdministrationController {
         hallService.save(hall);
         return "redirect:/administration/menu/cinemaHalls";
     }
+//    public String saveCinemaHall(@ModelAttribute("hall") Hall hall,Model model){
+//        if(hallService.checkIsNumberAlreadyExist(hall.getNumber())) {
+//            model.addAttribute("numberOfHallAlreadyExist",true);
+//            return "administration/hall/showFormForUpdateHall";
+//        }
+//        else {
+//            hallService.save(hall);
+////            model.addAttribute("numberOfHallAlreadyExist",false);
+//            return "redirect:/administration/menu/cinemaHalls";
+//        }
 
     @GetMapping("/menu/cinemaHalls/showFormForUpdateHall")
     public String showFormForUpdateHall(@RequestParam("hallId") int hallId, Model model){
@@ -244,7 +254,7 @@ public class AdministrationController {
         //add movie to schedule
         scheduleOfMoviesService.save(scheduleOfMovie);
         //creating a bunch of corresponding seats for added movie
-        movieSeatsService.createBunchOfSeatsForNewMovie(scheduleOfMovie,scheduleOfMovie.getHall().getId());
+        movieSeatsService.createBunchOfSeatsForNewMovie(scheduleOfMovie,scheduleOfMovie.getHall());
         return "redirect:/administration/menu/schedule";
     }
 

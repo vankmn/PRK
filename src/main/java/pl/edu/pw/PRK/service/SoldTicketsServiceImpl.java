@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import pl.edu.pw.PRK.dao.SoldTicketsDAO;
 import pl.edu.pw.PRK.entity.SoldTicket;
+import pl.edu.pw.PRK.entity.User;
 
 import java.util.List;
 import java.util.Optional;
@@ -55,6 +56,12 @@ public class SoldTicketsServiceImpl implements SoldTicketsService {
 	@Transactional
 	public void deleteById(int theId) {
 		soldTicketsDAO.deleteById(theId);
+	}
+
+	@Override
+	@Transactional
+	public List <SoldTicket> findTicketListForTheUser(User user) {
+		return soldTicketsDAO.findTicketListForTheUser(user);
 	}
 }
 

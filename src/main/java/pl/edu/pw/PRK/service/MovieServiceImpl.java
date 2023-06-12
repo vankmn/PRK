@@ -36,20 +36,20 @@ public class MovieServiceImpl implements MovieService {
 	@Override
 	@Transactional
 	public Movie findById(int theId) {
+
 		Optional<Movie> result = movieDao.findById(theId);
 
-		Movie theEmployee;
+		Movie movie;
 		
 		if (result.isPresent()) {
-			theEmployee = result.get();
-
+			movie = result.get();
 		}
 		else {
 			// we didn't find the employee
 			throw new RuntimeException("Did not find movie id - " + theId);
 		}
 		
-		return theEmployee;
+		return movie;
 	}
 
 	@Override

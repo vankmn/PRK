@@ -56,4 +56,9 @@ public class HomeController {
 
         return modelAndView;
     }
+
+//    @GetMapping("/chooseLanguage")
+//    public String chooseLanguage(){
+//        return "chooseLanguage";
+//    }
 }

@@ -32,11 +32,12 @@
                     <form action="#" th:action="@{/reservation/addSoldTicket}" th:object="${soldTicket}" method="post" class="form-horizontal">
 
                         <input type="hidden" th:field="*{id}">
+
                         <div class="mb-3" style="color: goldenrod">
                             <i class="fa-solid fa-couch"></i>
                             <label for="movieSeat" class="form-label">Seat</label>
                             <select id="movieSeat" th:field="*{movieSeat}" class="form-control" style="border-color: goldenrod; background-color: black; color: white" aria-describedby="movieSeatHelp">
-                                <option th:each="seat : ${listOfSeats}" th:value="${seat.getId()}" th:text="${seat.getSeatId().getNumber()}"></option>
+                                <option th:each="seat : ${listOfSeats}" th:value="${seat.id}" th:text="${seat.seatId.toString()}"></option>
                             </select>
                             <div id="movieSeatHelp" class="form-text">Please select a seat you want to reserve.</div>
                         </div>

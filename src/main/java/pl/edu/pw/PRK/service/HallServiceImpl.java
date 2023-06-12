@@ -66,6 +66,12 @@ public class HallServiceImpl implements HallService {
 
 	@Override
 	@Transactional
+	public boolean checkIsNumberAlreadyExist(int number) {
+		return hallDao.findByNumber(number) != null;
+	}
+
+	@Override
+	@Transactional
 	public List<Hall> searchBy(String number) {
 		return hallDAO2.searchBy(number);
 	}

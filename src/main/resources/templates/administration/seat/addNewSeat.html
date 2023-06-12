@@ -29,7 +29,7 @@
             <div class="card-body" style="background-color: black">
                 <div class="card-text">
                     <form action="#" th:action="@{/administration/menu/seats/saveSeat}"
-                          th:object="${seat}" method="POST">
+                          th:object="${seat}" method="POST" onsubmit="return checkConsistency()">
 
                         <input type="hidden" th:field="*{id}">
 
@@ -89,6 +89,27 @@
         </div>
     </div>
 </div>
+
+<script th:inline="javascript">
+    function checkConsistency() {
+        return validateColumn(document.getElementById('column').value) && validateRow(document.getElementById('row').value);}
+    function validateColumn(column){
+        if(column>0 && column<100){
+            return true;
+        }else {
+            alert("Column must be greater than 0.")
+            return false;
+        }
+    }
+    function validateRow(row){
+        if(row>0 && row<100){
+            return true;
+        }else {
+            alert("Row must be greater than 0.")
+            return false;
+        }
+    }
+</script>
 
 </body>
 </html>

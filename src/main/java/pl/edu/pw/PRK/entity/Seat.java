@@ -25,9 +25,10 @@ public class Seat {
 	public Seat() {
 	}
 
-	public Seat(int number, int row) {
+	public Seat(int number, int row, Hall hall) {
 		this.number = number;
 		this.row = row;
+		this.hall = hall;
 	}
 
 	// define getter/setter
@@ -60,15 +61,14 @@ public class Seat {
 		return hall;
 	}
 
-	public void setHall(Hall hall_id) {
-		this.hall = hall_id;
+	public void setHall(Hall hall) {
+		this.hall = hall;
 	}
 
 	@Override
 	public String toString() {
-		return "Seat [id=" + id + ", number=" + number + ", row=" + row +", hallId="+hall.getNumber()+"]";
+		return "Row: " + row + ", Column: " + number;
 	}
-
 }
 
 

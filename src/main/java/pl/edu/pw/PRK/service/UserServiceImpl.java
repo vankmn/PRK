@@ -13,6 +13,7 @@ import pl.edu.pw.PRK.entity.Role;
 import pl.edu.pw.PRK.entity.User;
 import pl.edu.pw.PRK.entity.WebUser;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 
@@ -51,7 +52,7 @@ public class UserServiceImpl implements UserService {
 		user.setLastName(webUser.getLastName());
 		user.setEmail(webUser.getEmail());
 
-		// give user default role of "employee"
+		// give user default role of "user"
 		user.setRoles(Collections.singletonList(roleDao.findRoleByName("ROLE_USER")));
 
 		// save user in the database
@@ -59,6 +60,16 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
+	@Transactional
+	public void updateData(User user) {
+		user.setRoles(Collections.singletonList(roleDao.findRoleByName("ROLE_USER")));
+		if(user.getUserName().equals("kamil")||user.getUserName().equals("szymon"))
+			user.setRoles(Arrays.asList(roleDao.findRoleByName("ROLE_ADMIN"),roleDao.findRoleByName("ROLE_USER")));
+		userDao.save(user);
+	}
+
+	@Override
+	@Transactional
 	public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException {
 		User user = userDao.findByUserName(userName);
 

@@ -24,6 +24,11 @@
                 Registration Form
             </div>
 
+            <!-- user already exists -->
+            <div th:if="${userAlreadyExist}">
+                <i> User already exists!</i>
+            </div>
+
             <div class="card-body" style="background-color: black">
                 <div class="card-text">
                     <!-- Registration Form -->

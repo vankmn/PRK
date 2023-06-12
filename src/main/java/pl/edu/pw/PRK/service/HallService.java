@@ -15,5 +15,7 @@ public interface HallService {
 	
 	void deleteById(int theId);
 
+	boolean checkIsNumberAlreadyExist(int number);
+
 	List <Hall> searchBy (String number);
 }

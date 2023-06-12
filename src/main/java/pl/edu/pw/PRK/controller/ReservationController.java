@@ -5,19 +5,15 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import pl.edu.pw.PRK.entity.MovieSeats;
-import pl.edu.pw.PRK.entity.ScheduleOfMovie;
 import pl.edu.pw.PRK.entity.SoldTicket;
 import pl.edu.pw.PRK.entity.Ticket;
 import pl.edu.pw.PRK.service.*;
-
 import java.util.List;
 
 @Controller
+@RequestMapping("/reservation")
 public class ReservationController {
 
     private final MovieSeatsService movieSeatsService;
@@ -36,7 +32,7 @@ public class ReservationController {
         this.userService=userService;
     }
 
-    @GetMapping("/reservation/prepareReservation")
+    @GetMapping("/prepareReservation")
     public String prepareReservation(@RequestParam("selectedMovie") int selectedMovie, Model model){
 
         //pass list of unoccupied seats
@@ -56,7 +52,7 @@ public class ReservationController {
         return "reservation/showReservationForm";
     }
 
-    @PostMapping("reservation/addSoldTicket")
+    @PostMapping("/addSoldTicket")
     public String addSoldTicket(@ModelAttribute("soldTicket") SoldTicket soldTicket){
 
         //add user
@@ -65,7 +61,6 @@ public class ReservationController {
 
         //save soldTicket
         soldTicketsService.save(soldTicket);
-
 
         //set occupation to movieSeat
         MovieSeats movieSeats = movieSeatsService.findById(soldTicket.getMovieSeat().getId());

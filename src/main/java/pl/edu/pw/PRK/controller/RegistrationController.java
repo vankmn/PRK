@@ -19,9 +19,9 @@ import java.util.logging.Logger;
 @RequestMapping("/register")
 public class RegistrationController {
 
-	private Logger logger = Logger.getLogger(getClass().getName());
+	private final Logger logger = Logger.getLogger(getClass().getName());
 
-    private UserService userService;
+    private final UserService userService;
 
 	@Autowired
 	public RegistrationController(UserService userService) {
@@ -63,9 +63,8 @@ public class RegistrationController {
 		 User existing = userService.findByUserName(userName);
         if (existing != null){
         	theModel.addAttribute("webUser", new WebUser());
-			theModel.addAttribute("registrationError", "User name already exists.");
+			theModel.addAttribute("userAlreadyExist", true);
 
-			logger.warning("User name already exists.");
         	return "register/registrationForm";
         }
         
@@ -76,7 +75,16 @@ public class RegistrationController {
 
 		// place user in the web http session for later use
 		session.setAttribute("user", webUser);
-
+		theModel.addAttribute("userAlreadyExist", false);
         return "register/registrationConfirmation";
+	}
+
+	@PostMapping("/updateUser")
+	public String updateUser(@Valid @ModelAttribute("user") User user) {
+
+		// create user account and store in the database
+		userService.updateData(user);
+
+		return "user/userData";
 	}
 }
