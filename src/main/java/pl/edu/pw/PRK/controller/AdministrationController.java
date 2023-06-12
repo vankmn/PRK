@@ -4,8 +4,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 import pl.edu.pw.PRK.entity.*;
 import pl.edu.pw.PRK.service.*;
+
+import java.util.List;
 
 @Controller
 @RequestMapping("/administration")
@@ -67,6 +70,20 @@ public class AdministrationController {
         return "redirect:/administration/menu/movies";
     }
 
+    @GetMapping("/menu/searchMovies")
+    public ModelAndView searchMovie (@RequestParam("movieName") String theName, Model theModel) {
+
+        List <Movie> movies = movieService.searchBy(theName);
+
+        theModel.addAttribute("movies", movies);
+
+        ModelAndView modelAndView = new ModelAndView();
+
+        modelAndView.setViewName("administration/movie/movies");
+
+        return modelAndView;
+    }
+
     //----------------cinema halls
     @GetMapping("/menu/cinemaHalls")
     public String showCinemaHalls(Model model){
@@ -85,6 +102,16 @@ public class AdministrationController {
         hallService.save(hall);
         return "redirect:/administration/menu/cinemaHalls";
     }
+//    public String saveCinemaHall(@ModelAttribute("hall") Hall hall,Model model){
+//        if(hallService.checkIsNumberAlreadyExist(hall.getNumber())) {
+//            model.addAttribute("numberOfHallAlreadyExist",true);
+//            return "administration/hall/showFormForUpdateHall";
+//        }
+//        else {
+//            hallService.save(hall);
+////            model.addAttribute("numberOfHallAlreadyExist",false);
+//            return "redirect:/administration/menu/cinemaHalls";
+//        }
 
     @GetMapping("/menu/cinemaHalls/showFormForUpdateHall")
     public String showFormForUpdateHall(@RequestParam("hallId") int hallId, Model model){
@@ -99,10 +126,24 @@ public class AdministrationController {
         return "redirect:/administration/menu/cinemaHalls";
     }
 
+    @GetMapping("/menu/searchCinemaHalls")
+    public ModelAndView searchHall (@RequestParam("hallNumber") String number, Model theModel) {
+
+        List <Hall> halls = hallService.searchBy(number);
+
+        theModel.addAttribute("halls", halls);
+
+        ModelAndView modelAndView = new ModelAndView();
+
+        modelAndView.setViewName("administration/hall/cinemaHalls");
+
+        return modelAndView;
+    }
+
     //----------------tickets
     @GetMapping("/menu/tickets")
     public String showTickets(Model model){
-        model.addAttribute("tickets", ticketService.findAllSortedByNumberAsc());
+        model.addAttribute("tickets", ticketService.findAllSortedByPriceDesc());
         return "administration/ticket/tickets";
     }
 
@@ -131,6 +172,20 @@ public class AdministrationController {
         return "redirect:/administration/menu/tickets";
     }
 
+    @GetMapping("/menu/searchTickets")
+    public ModelAndView searchTicket (@RequestParam("ticketName") String theName, Model theModel) {
+
+        List <Ticket> tickets = ticketService.searchBy(theName);
+
+        theModel.addAttribute("tickets", tickets);
+
+        ModelAndView modelAndView = new ModelAndView();
+
+        modelAndView.setViewName("administration/ticket/tickets");
+
+        return modelAndView;
+    }
+
     //----------------seats
     @GetMapping("/menu/seats")
     public String showSeats(Model model){
@@ -141,6 +196,7 @@ public class AdministrationController {
     @GetMapping("/menu/seats/showFormForAddSeat")
     public String showFormForAddSeat(Model model){
         model.addAttribute("seat",new Seat());
+        model.addAttribute("availableHalls",hallService.findAll());
         return "administration/seat/addNewSeat";
     }
 
@@ -154,6 +210,7 @@ public class AdministrationController {
     public String showFormForUpdateSeat(@RequestParam("seatId") int seatId, Model model){
         Seat seat = seatService.findById(seatId);
         model.addAttribute("seat",seat);
+        model.addAttribute("availableHalls",hallService.findAll());
         return "administration/seat/showFormForUpdateSeat";
     }
 
@@ -161,6 +218,20 @@ public class AdministrationController {
     public String deleteSeat(@RequestParam("seatId") int seatId){
         seatService.deleteById(seatId);
         return "redirect:/administration/menu/seats";
+    }
+
+    @GetMapping("/menu/searchSeats")
+    public ModelAndView searchSeat (@RequestParam("hallNumber") String hallNumber, Model theModel) {
+
+        List <Seat> seats = seatService.searchBy(hallNumber);
+
+        theModel.addAttribute("seats", seats);
+
+        ModelAndView modelAndView = new ModelAndView();
+
+        modelAndView.setViewName("administration/seat/seats");
+
+        return modelAndView;
     }
 
     //----------------schedule
@@ -183,7 +254,7 @@ public class AdministrationController {
         //add movie to schedule
         scheduleOfMoviesService.save(scheduleOfMovie);
         //creating a bunch of corresponding seats for added movie
-        movieSeatsService.createBunchOfSeatsForNewMovie(scheduleOfMovie,scheduleOfMovie.getHall().getId());
+        movieSeatsService.createBunchOfSeatsForNewMovie(scheduleOfMovie,scheduleOfMovie.getHall());
         return "redirect:/administration/menu/schedule";
     }
 
@@ -204,5 +275,19 @@ public class AdministrationController {
         //deleting movie
         scheduleOfMoviesService.deleteById(movieToScheduleId);
         return "redirect:/administration/menu/schedule";
+    }
+
+    @GetMapping("/menu/searchMovieSchedule")
+    public ModelAndView searchMovieSchedule (@RequestParam("movieName") String theName, Model theModel) {
+
+        List <ScheduleOfMovie> scheduleOfMoviesFound = scheduleOfMoviesService.searchBy(theName);
+
+        theModel.addAttribute("scheduleMovies", scheduleOfMoviesFound);
+
+        ModelAndView modelAndView = new ModelAndView();
+
+        modelAndView.setViewName("administration/schedule/schedule");
+
+        return modelAndView;
     }
 }

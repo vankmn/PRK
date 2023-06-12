@@ -1,7 +1,5 @@
 <!DOCTYPE html>
-<html lang="en"
-      xmlns:th="http://www.thymeleaf.org">
-
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <meta charset="utf-8">
@@ -9,61 +7,88 @@
 
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+
+    <style>
+        ::placeholder {
+            color: white;
+        }
+    </style>
 
     <title>Home page</title>
 </head>
 
 
-<body>
-<br/>
-<!--login button-->
-<a th:href="@{/loginPage}">Login</a>
-<br/>
-<!--logout button-->
-<form action="#" th:action="@{/logout}" method="post">
-    <input type="submit" value="Logout"/>
-</form>
-<br/>
+<body style="background-color: black">
 
-<!--administration page-->
-<a th:href="@{/administration/menu}">Administration menu</a>
+<nav class="navbar navbar-expand-lg bg-body-tertiary" style="background-color: goldenrod;">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="/home">
+            <img src="/images/Java_logo_icon.png" alt="Logo" width="50" height="24" class="d-inline-block align-text-top">
+            Cinema
+        </a>
+        <div class="collapse navbar-collapse" id="navbarScroll">
+            <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px;">
+                <li class="nav-item">
+                    <a class="bi bi-person-circle nav-link active" href="/user/menu" th:text="'   ' + ${userName}"/>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="/loginPage">Login</a>
+                </li>
+                <form action="#" th:action="@{/logout}" method="post">
+                <li class="nav-item">
+                    <button class="nav-link" type="submit" style="background-color: goldenrod; border: goldenrod">Logout</button>
+                </li>
+                </form>
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="/administration/menu">Administration Menu</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="/user/menu">User Menu</a>
+                </li>
+            </ul>
+            <form th:action="@{/home/search}" class="d-flex" role="search">
+                <a th:href="@{/home}" class="btn col-3 me-2" style="opacity: 70%;">
+                    Reset filter
+                </a>
+                <input class="form-control me-2" style="border-color: black; background-color: black; color: white" type="search" name="movieName" placeholder="Search by movie name" aria-label="Search">
+                <button class="btn" style="border-color: black" type="submit">Search</button>
+            </form>
+        </div>
+    </div>
+</nav>
 
-<!--display username and role-->
-<div  th:text="'User name: ' +${userName}"/>
-<div  th:text="'User authorities: ' +${userAuthorities}"/>
-<br/>
+<div class="container mt-3">
 
-<div class="container">
+    <h3 style="color: goldenrod">Movie Schedule</h3>
 
-    <h3>Movies Directory</h3>
-    <hr>
-
-    <table class="table table-bordered table-striped">
-        <thead class="table-dark">
+    <div class="table-responsive">
+    <table class="table mt-3" style="border: goldenrod">
+        <thead style="border: goldenrod; color: goldenrod">
         <tr>
             <th>Date</th>
             <th>Time</th>
             <th>Movie name</th>
             <th>Hall number</th>
-            <th>Action</th>
+            <th></th>
         </tr>
         </thead>
-
         <tbody>
         <tr th:each="tempMovie : ${scheduledMovies}">
-
-            <td th:text="${tempMovie.date}" />
-            <td th:text="${tempMovie.time}" />
-            <td th:text="${tempMovie.getMovieName()}"/>
-            <td th:text="${tempMovie.getHallNumber()}"/>
+            <td th:text="${tempMovie.date}" style="color: white" />
+            <td th:text="${tempMovie.time}" style="color: white" />
+            <td th:text="${tempMovie.getMovieName()}" style="color: white" />
+            <td th:text="${tempMovie.getHallNumber()}" style="color: white" />
             <td>
                 <a th:href="@{/reservation/prepareReservation(selectedMovie=${tempMovie.id})}"
-                   class="btn btn-primary btn-sm mb-3">
+                   class="btn" style="border-color: goldenrod; color: goldenrod">
                     Reserve
                 </a>
+            </td>
         </tr>
         </tbody>
     </table>
+    </div>
 </div>
 
 </body>

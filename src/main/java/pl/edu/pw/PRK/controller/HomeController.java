@@ -7,12 +7,17 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
+import pl.edu.pw.PRK.entity.ScheduleOfMovie;
 import pl.edu.pw.PRK.service.ScheduleOfMoviesService;
+
+import java.util.List;
 
 @Controller
 public class HomeController {
 
-    private ScheduleOfMoviesService scheduleOfMoviesService;
+    private final ScheduleOfMoviesService scheduleOfMoviesService;
 
     @Autowired
     public HomeController(ScheduleOfMoviesService scheduleOfMoviesService) {
@@ -38,4 +43,22 @@ public class HomeController {
         return "home";
     }
 
+    @GetMapping("/home/search")
+    public ModelAndView searchMovie (@RequestParam("movieName") String theName, Model theModel) {
+
+        List <ScheduleOfMovie> scheduleOfMoviesFound = scheduleOfMoviesService.searchBy(theName);
+
+        theModel.addAttribute("scheduledMovies", scheduleOfMoviesFound);
+
+        ModelAndView modelAndView = new ModelAndView();
+
+        modelAndView.setViewName("home");
+
+        return modelAndView;
+    }
+
+//    @GetMapping("/chooseLanguage")
+//    public String chooseLanguage(){
+//        return "chooseLanguage";
+//    }
 }

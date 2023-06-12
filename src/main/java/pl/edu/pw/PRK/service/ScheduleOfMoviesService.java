@@ -14,5 +14,5 @@ public interface ScheduleOfMoviesService {
 
 	void deleteById(int theId);
 
-
+	List <ScheduleOfMovie> searchBy (String theName);
 }

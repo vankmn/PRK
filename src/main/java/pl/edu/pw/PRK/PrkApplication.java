@@ -1,24 +1,31 @@
 package pl.edu.pw.PRK;
 
-import org.springframework.boot.CommandLineRunner;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.annotation.Bean;
-import pl.edu.pw.PRK.dao.ScheduleOfMoviesDAO;
+import org.springframework.context.support.ResourceBundleMessageSource;
+import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
 
 @SpringBootApplication
-public class PrkApplication {
-	public static void main(String[] args) {
-		SpringApplication.run(PrkApplication.class, args);
+public class PrkApplication implements WebMvcConfigurer {
+	private final LocaleChangeInterceptor localeChangeInterceptor;
+
+	@Autowired
+	public PrkApplication(LocaleChangeInterceptor localeChangeInterceptor) {
+		this.localeChangeInterceptor = localeChangeInterceptor;
 	}
 
-//	@Bean
-//	public CommandLineRunner commandLineRunner (ScheduleOfMoviesDAO scheduleOfMoviesDAO){
-//		return runner -> {
-//			createScheduleOfMovies(scheduleOfMoviesDAO);
-//		};
-//	}
-//
-//	private void createScheduleOfMovies(ScheduleOfMoviesDAO scheduleOfMoviesDAO) {
-//	}
+	@Override
+	public void addInterceptors(InterceptorRegistry interceptorRegistry) {
+		interceptorRegistry.addInterceptor(localeChangeInterceptor);
+	}
+
+	public static void main(String[] args) {
+		ResourceBundleMessageSource messageSource = new ResourceBundleMessageSource();
+		messageSource.setBasename("lang/messages");
+		messageSource.setDefaultEncoding("UTF-8");
+		SpringApplication.run(PrkApplication.class, args);
+	}
 }
