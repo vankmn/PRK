@@ -33,7 +33,13 @@
 
                         <input type="hidden" th:field="*{id}">
 
-                        <div class="mb-3" style="color: goldenrod">
+                        <!-- no empty seats -->
+                        <div style="color: goldenrod; background-color: black; text-align: center" class="mb-3" th:if="${listOfSeats.size() == 0}">
+                            <i class="bi bi-exclamation-triangle-fill"></i>
+                            Unfortunately, all seats for this movie have been reserved. Please choose a different movie.
+                        </div>
+
+                        <div class="mb-3" style="color: goldenrod" th:if="${listOfSeats.size() > 0}">
                             <i class="fa-solid fa-couch"></i>
                             <label for="movieSeat" class="form-label">Seat</label>
                             <select id="movieSeat" th:field="*{movieSeat}" class="form-control" style="border-color: goldenrod; background-color: black; color: white" aria-describedby="movieSeatHelp">
@@ -42,7 +48,7 @@
                             <div id="movieSeatHelp" class="form-text">Please select a seat you want to reserve.</div>
                         </div>
 
-                        <div class="mb-3" style="color: goldenrod">
+                        <div class="mb-3" style="color: goldenrod" th:if="${listOfSeats.size() > 0}">
                             <i class="bi bi-ticket-detailed"></i>
                             <label for="ticket" class="form-label">Ticket type</label>
                             <select id="ticket" th:field="*{ticket}" class="form-control" style="border-color: goldenrod; background-color: black; color: white" aria-describedby="ticketHelp">
@@ -53,10 +59,12 @@
 
                         <!-- Reservation Button -->
                         <div class="col-12 d-flex justify-content-between" style="text-align: center">
+                            <div th:if="${listOfSeats.size() > 0}">
                             <button type="submit" class="btn" style="background-color: goldenrod">
                                 <i class="bi bi-calendar2-check-fill"></i>
                                 Reserve
                             </button>
+                            </div>
                             <a class="btn btn-secondary ml-5" style="color: black" th:href="@{/home}">
                                 Back
                             </a>
