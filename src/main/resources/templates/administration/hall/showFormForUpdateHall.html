@@ -28,26 +28,11 @@
 
             <div class="card-body" style="background-color: black">
                 <div class="card-text">
-                    <div style="color: goldenrod" th:if="${numberOfHallAlreadyExist}">
-                        Cinema hall number already exists!
-                    </div>
-                    <form action="#" th:action="@{/administration/menu/cinemaHalls/saveHall}"
+                    <form action="#" th:action="@{/administration/menu/cinemaHalls/updateHall}"
                           th:object="${hall}" method="POST" onsubmit="return checkConsistency()">
 
                         <input type="hidden" th:field="*{id}">
-
-                        <div class="mb-3" style="color: goldenrod">
-                            <i class="bi bi-camera-reels-fill"></i>
-                            <label for="hallNumber" class="form-label">Cinema hall number</label>
-                            <input id="hallNumber" type="number" required pattern="[0-9]{1,4}" th:field="*{number}" class="form-control" style="border-color: goldenrod; background-color: black; color: white" aria-describedby="hallNumberHelp"/>
-                            <div id="hallNumberHelp" class="form-text">Update a number of the cinema hall.</div>
-                        </div>
-
-                        <!--                        <div th:if="${#fields.hasErrors('hallNumber')}" class="mb-3 text-danger">-->
-                        <!--                            <ul>-->
-                        <!--                                <li th:each="err : ${#fields.errors('hallNumber')}" th:text="'Cinema hall number ' + ${err}" />-->
-                        <!--                            </ul>-->
-                        <!--                        </div>-->
+                        <input type="hidden" th:field="*{number}">
 
                         <div class="mb-3" style="color: goldenrod">
                             <i class="fa-solid fa-users"></i>

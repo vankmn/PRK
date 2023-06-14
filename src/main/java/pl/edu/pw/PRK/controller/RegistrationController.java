@@ -82,6 +82,12 @@ public class RegistrationController {
 	@PostMapping("/updateUser")
 	public String updateUser(@Valid @ModelAttribute("user") User user) {
 
+		User currentUser = userService.findByUserName(user.getUserName());
+
+		if (user.getPassword() == null) {
+			user.setPassword(currentUser.getPassword());
+		}
+
 		// create user account and store in the database
 		userService.updateData(user);
 

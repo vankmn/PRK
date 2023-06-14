@@ -1,6 +1,9 @@
 package pl.edu.pw.PRK.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -34,7 +37,15 @@ public class AdministrationController {
     //-------------menu
     @GetMapping("/menu")
     //main administration paige
-    public String showMenu(){
+    public String showMenu(Model model) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        model.addAttribute("userName", authentication.getName());
+        if(authentication.getName().equals("anonymousUser")){
+            model.addAttribute("userAuthorities","none");
+        }else {
+            UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+            model.addAttribute("userAuthorities", userDetails.getAuthorities());
+        }
         return "administration/administrationMenu";
     }
 
@@ -97,21 +108,24 @@ public class AdministrationController {
         return "administration/hall/addNewCinemaHall";
     }
 
-    @PostMapping("/menu/cinemaHalls/saveHall")
+
+    @PostMapping("/menu/cinemaHalls/updateHall")
     public String saveCinemaHall(@ModelAttribute("hall") Hall hall){
         hallService.save(hall);
         return "redirect:/administration/menu/cinemaHalls";
     }
-//    public String saveCinemaHall(@ModelAttribute("hall") Hall hall,Model model){
-//        if(hallService.checkIsNumberAlreadyExist(hall.getNumber())) {
-//            model.addAttribute("numberOfHallAlreadyExist",true);
-//            return "administration/hall/showFormForUpdateHall";
-//        }
-//        else {
-//            hallService.save(hall);
-////            model.addAttribute("numberOfHallAlreadyExist",false);
-//            return "redirect:/administration/menu/cinemaHalls";
-//        }
+
+    @PostMapping("/menu/cinemaHalls/saveHall")
+    public String saveCinemaHall(@ModelAttribute("hall") Hall hall,Model model) {
+        if (hallService.checkIsNumberAlreadyExist(hall.getNumber())) {
+            model.addAttribute("numberOfHallAlreadyExist", true);
+            return "administration/hall/showFormForUpdateHall";
+        } else {
+            hallService.save(hall);
+            model.addAttribute("numberOfHallAlreadyExist", false);
+            return "redirect:/administration/menu/cinemaHalls";
+        }
+    }
 
     @GetMapping("/menu/cinemaHalls/showFormForUpdateHall")
     public String showFormForUpdateHall(@RequestParam("hallId") int hallId, Model model){
@@ -258,15 +272,15 @@ public class AdministrationController {
         return "redirect:/administration/menu/schedule";
     }
 
-    @GetMapping("/menu/schedule/showFormForUpdateMovieToSchedule")
-    public String showFormForUpdateMovieToSchedule(@RequestParam("movieToScheduleId") int movieToScheduleId, Model model){
-        ScheduleOfMovie movieToSchedule = scheduleOfMoviesService.findById(movieToScheduleId);
-        model.addAttribute("movieToSchedule",movieToSchedule);
-        // passing available halls and moves used in drop down lists
-        model.addAttribute("availableHalls",hallService.findAll());
-        model.addAttribute("availableMovies",movieService.findAll());
-        return "administration/schedule/showFormForUpdateMovieToSchedule";
-    }
+//    @GetMapping("/menu/schedule/showFormForUpdateMovieToSchedule")
+//    public String showFormForUpdateMovieToSchedule(@RequestParam("movieToScheduleId") int movieToScheduleId, Model model){
+//        ScheduleOfMovie movieToSchedule = scheduleOfMoviesService.findById(movieToScheduleId);
+//        model.addAttribute("movieToSchedule",movieToSchedule);
+//        // passing available halls and moves used in drop down lists
+//        model.addAttribute("availableHalls",hallService.findAll());
+//        model.addAttribute("availableMovies",movieService.findAll());
+//        return "administration/schedule/showFormForUpdateMovieToSchedule";
+//    }
 
     @GetMapping("/menu/schedule/deleteMovieToSchedule")
     public String deleteMovieToSchedule(@RequestParam("movieToScheduleId") int movieToScheduleId){

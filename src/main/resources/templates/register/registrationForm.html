@@ -24,11 +24,6 @@
                 Registration Form
             </div>
 
-            <!-- user already exists -->
-            <div th:if="${userAlreadyExist}">
-                <i> User already exists!</i>
-            </div>
-
             <div class="card-body" style="background-color: black">
                 <div class="card-text">
                     <!-- Registration Form -->
@@ -49,6 +44,11 @@
                             </div>
                         </div>
 
+                        <!-- user already exists -->
+                        <div style="color: red; background-color: black" class="mb-3" th:if="${userAlreadyExist}">
+                            <i>This username already exists, please enter a different one.</i>
+                        </div>
+
                         <!-- Username -->
                         <div class="mb-3" style="color: goldenrod">
                             <i class="bi bi-person-circle"></i>
@@ -57,11 +57,11 @@
                             <div id="usernameHelp" class="form-text">Please enter your username.</div>
                         </div>
 
-                        <div th:if="${#fields.hasErrors('userName')}" class="mb-3 text-danger">
-                            <ul>
-                                <li th:each="err : ${#fields.errors('userName')}" th:text="'Username ' + ${err}" />
-                            </ul>
-                        </div>
+<!--                        <div th:if="${#fields.hasErrors('userName')}" class="mb-3 text-danger">-->
+<!--                            <ul>-->
+<!--                                <li th:each="err : ${#fields.errors('userName')}" th:text="'Username ' + ${err}" />-->
+<!--                            </ul>-->
+<!--                        </div>-->
 
                         <!-- Password -->
                         <div class="mb-3" style="color: goldenrod">
@@ -71,11 +71,11 @@
                             <div id="passwordHelp" class="form-text">Please enter your password.</div>
                         </div>
 
-                        <div th:if="${#fields.hasErrors('password')}" class="mb-3 text-danger">
-                            <ul>
-                                <li th:each="err : ${#fields.errors('password')}" th:text="'Password ' + ${err}" />
-                            </ul>
-                        </div>
+<!--                        <div th:if="${#fields.hasErrors('password')}" class="mb-3 text-danger">-->
+<!--                            <ul>-->
+<!--                                <li th:each="err : ${#fields.errors('password')}" th:text="'Password ' + ${err}" />-->
+<!--                            </ul>-->
+<!--                        </div>-->
 
                         <!-- First Name -->
                         <div class="mb-3" style="color: goldenrod">
@@ -85,11 +85,11 @@
                             <div id="firstNameHelp" class="form-text">Please enter your first name.</div>
                         </div>
 
-                        <div th:if="${#fields.hasErrors('firstName')}" class="mb-3 text-danger">
-                            <ul>
-                                <li th:each="err : ${#fields.errors('firstName')}" th:text="'First name ' + ${err}" />
-                            </ul>
-                        </div>
+<!--                        <div th:if="${#fields.hasErrors('firstName')}" class="mb-3 text-danger">-->
+<!--                            <ul>-->
+<!--                                <li th:each="err : ${#fields.errors('firstName')}" th:text="'First name ' + ${err}" />-->
+<!--                            </ul>-->
+<!--                        </div>-->
 
                         <!-- Last Name -->
                         <div class="mb-3" style="color: goldenrod">
@@ -99,11 +99,11 @@
                             <div id="lastNameHelp" class="form-text">Please enter your last name.</div>
                         </div>
 
-                        <div th:if="${#fields.hasErrors('lastName')}" class="mb-3 text-danger">
-                            <ul>
-                                <li th:each="err : ${#fields.errors('lastName')}" th:text="'Last name ' + ${err}" />
-                            </ul>
-                        </div>
+<!--                        <div th:if="${#fields.hasErrors('lastName')}" class="mb-3 text-danger">-->
+<!--                            <ul>-->
+<!--                                <li th:each="err : ${#fields.errors('lastName')}" th:text="'Last name ' + ${err}" />-->
+<!--                            </ul>-->
+<!--                        </div>-->
 
                         <!-- Email -->
                         <div class="mb-3" style="color: goldenrod">
@@ -113,11 +113,11 @@
                             <div id="emailHelp" class="form-text">Please enter your email.</div>
                         </div>
 
-                        <div th:if="${#fields.hasErrors('email')}" class="mb-3 text-danger">
-                            <ul>
-                                <li th:each="err : ${#fields.errors('email')}" th:text="'Email ' + ${err}" />
-                            </ul>
-                        </div>
+<!--                        <div th:if="${#fields.hasErrors('email')}" class="mb-3 text-danger">-->
+<!--                            <ul>-->
+<!--                                <li th:each="err : ${#fields.errors('email')}" th:text="'Email ' + ${err}" />-->
+<!--                            </ul>-->
+<!--                        </div>-->
 
                         <!-- Registration Button -->
                         <div class="col-12 d-flex justify-content-between" style="text-align: center">
