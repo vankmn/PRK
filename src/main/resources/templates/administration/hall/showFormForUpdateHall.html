@@ -41,12 +41,6 @@
                             <div id="hallCapacityHelp" class="form-text">Update a capacity of the cinema hall.</div>
                         </div>
 
-                        <!--                        <div th:if="${#fields.hasErrors('hallCapacity')}" class="mb-3 text-danger">-->
-                        <!--                            <ul>-->
-                        <!--                                <li th:each="err : ${#fields.errors('hallCapacity')}" th:text="'Cinema hall capacity ' + ${err}" />-->
-                        <!--                            </ul>-->
-                        <!--                        </div>-->
-
                         <div class="col-12 d-flex justify-content-between" style="text-align: center">
                             <button type="submit" class="btn" style="background-color: goldenrod">
                                 <i class="bi bi-save-fill"></i>
@@ -63,17 +57,15 @@
     </div>
 </div>
 
-<script  th:inline="javascript">
+<script th:inline="javascript">
     function checkConsistency() {
-        return validateNumber(document.getElementById('hallNumber').value) && validateCapacity(document.getElementById('hallCapacity').value);}
-    function validateNumber(number){
-        return number > 0 && number < 1000;
+        return validateCapacity(document.getElementById('hallCapacity').value);
     }
-    function validateCapacity(capacity){
-        if(capacity>0 && capacity<1000){
+    function validateCapacity(capacity) {
+        if (capacity > 0 && capacity < 1000) {
             return true;
-        }else {
-            alert("Capacity must be greater than 0.")
+        } else {
+            alert("Cinema hall capacity must be greater than 0 and smaller than 1000.")
             return false;
         }
     }

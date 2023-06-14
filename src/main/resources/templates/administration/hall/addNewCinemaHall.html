@@ -28,8 +28,8 @@
 
             <div class="card-body" style="background-color: black">
                 <div class="card-text">
-                    <div style="color: goldenrod" th:if="${numberOfHallAlreadyExist}">
-                        Cinema hall number already exists!
+                    <div class="mb-3" style="color: red" th:if="${numberOfHallAlreadyExist}">
+                        <i>This cinema hall number already exists!</i>
                     </div>
                     <form action="#" th:action="@{/administration/menu/cinemaHalls/saveHall}"
                           th:object="${hall}" method="POST" onsubmit="return checkConsistency()">
@@ -43,24 +43,12 @@
                             <div id="hallNumberHelp" class="form-text">Please enter a number of the cinema hall.</div>
                         </div>
 
-                        <!--                        <div th:if="${#fields.hasErrors('hallNumber')}" class="mb-3 text-danger">-->
-                        <!--                            <ul>-->
-                        <!--                                <li th:each="err : ${#fields.errors('hallNumber')}" th:text="'Cinema hall number ' + ${err}" />-->
-                        <!--                            </ul>-->
-                        <!--                        </div>-->
-
                         <div class="mb-3" style="color: goldenrod">
                             <i class="fa-solid fa-users"></i>
                             <label for="hallCapacity" class="form-label">Cinema hall capacity</label>
                             <input id="hallCapacity" type="number" required pattern="[0-9]{1,4}" th:field="*{capacity}" class="form-control" style="border-color: goldenrod; background-color: black; color: white" aria-describedby="hallCapacityHelp"/>
                             <div id="hallCapacityHelp" class="form-text">Please enter a capacity of the cinema hall.</div>
                         </div>
-
-                        <!--                        <div th:if="${#fields.hasErrors('hallCapacity')}" class="mb-3 text-danger">-->
-                        <!--                            <ul>-->
-                        <!--                                <li th:each="err : ${#fields.errors('hallCapacity')}" th:text="'Cinema hall capacity ' + ${err}" />-->
-                        <!--                            </ul>-->
-                        <!--                        </div>-->
 
                         <div class="col-12 d-flex justify-content-between" style="text-align: center">
                             <button type="submit" class="btn" style="background-color: goldenrod">
@@ -78,17 +66,23 @@
     </div>
 </div>
 
-<script  th:inline="javascript">
+<script th:inline="javascript">
     function checkConsistency() {
-        return validateNumber(document.getElementById('hallNumber').value) && validateCapacity(document.getElementById('hallCapacity').value);}
-    function validateNumber(number) {
-        return number > 0 && number < 1000;
+        return validateNumber(document.getElementById('hallNumber').value) && validateCapacity(document.getElementById('hallCapacity').value);
     }
-    function validateCapacity(capacity) {
-        if (capacity>0 && capacity<1000) {
+    function validateNumber(number) {
+        if (number > 0 && number < 30) {
             return true;
         } else {
-            alert("Capacity must be greater than 0.")
+            alert("Cinema hall number must be greater than 0 and smaller than 30.")
+            return false;
+        }
+    }
+    function validateCapacity(capacity) {
+        if (capacity > 0 && capacity < 1000) {
+            return true;
+        } else {
+            alert("Cinema hall capacity must be greater than 0 and smaller than 1000.")
             return false;
         }
     }

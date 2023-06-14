@@ -120,7 +120,7 @@ public class AdministrationController {
     public String saveCinemaHall(@ModelAttribute("hall") Hall hall,Model model) {
         if (hallService.checkIsNumberAlreadyExist(hall.getNumber())) {
             model.addAttribute("numberOfHallAlreadyExist", true);
-            return "administration/hall/showFormForUpdateHall";
+            return "administration/hall/addNewCinemaHall";
         } else {
             hallService.save(hall);
             model.addAttribute("numberOfHallAlreadyExist", false);
