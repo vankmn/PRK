@@ -92,7 +92,7 @@
 
 <script th:inline="javascript">
     function checkConsistency() {
-        return validateColumn(document.getElementById('column').value) && validateRow(document.getElementById('row').value);}
+        return validateColumn(document.getElementById('seatNumber').value) && validateRow(document.getElementById('rowNumber').value);}
     function validateColumn(column){
         if(column>0 && column<100){
             return true;

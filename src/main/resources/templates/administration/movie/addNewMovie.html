@@ -90,7 +90,7 @@
 
 <script  th:inline="javascript">
     function checkConsistency() {
-        return !!validateDuration(document.getElementById('time').value);}
+        return !!validateDuration(document.getElementById('movieDuration').value);}
     function validateDuration(time){
         return time > 0 && time < 10000;
     }

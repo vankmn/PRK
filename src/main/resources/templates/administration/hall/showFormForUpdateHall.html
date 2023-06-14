@@ -65,7 +65,7 @@
 
 <script  th:inline="javascript">
     function checkConsistency() {
-        return validateNumber(document.getElementById('number').value) && validateCapacity(document.getElementById('capacity').value);}
+        return validateNumber(document.getElementById('hallNumber').value) && validateCapacity(document.getElementById('hallCapacity').value);}
     function validateNumber(number){
         return number > 0 && number < 1000;
     }

@@ -107,7 +107,7 @@
 
 <script  th:inline="javascript">
     function checkConsistency() {
-        return validateTime(document.getElementById('time').value) && validateDate(document.getElementById('date').value);}
+        return validateTime(document.getElementById('movieTime').value) && validateDate(document.getElementById('movieDate').value);}
     function validateTime(time){
         const re = /^([01]?\d|2[0-3]):([0-5]?\d):([0-5]?\d)$/;
         return re.test(time);}
