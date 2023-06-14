@@ -16,6 +16,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.regex.Pattern;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -65,6 +66,13 @@ public class UserServiceImpl implements UserService {
 		user.setRoles(Collections.singletonList(roleDao.findRoleByName("ROLE_USER")));
 		if(user.getUserName().equals("kamil")||user.getUserName().equals("szymon"))
 			user.setRoles(Arrays.asList(roleDao.findRoleByName("ROLE_ADMIN"),roleDao.findRoleByName("ROLE_USER")));
+
+		Pattern BCRYPT_PATTERN = Pattern.compile("\\A\\$2a?\\$\\d\\d\\$[./0-9A-Za-z]{53}");
+
+		if (!BCRYPT_PATTERN.matcher(user.getPassword()).matches()) {
+			user.setPassword(passwordEncoder.encode(user.getPassword()));
+		}
+
 		userDao.save(user);
 	}
 

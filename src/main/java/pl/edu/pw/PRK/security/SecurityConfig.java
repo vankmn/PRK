@@ -32,6 +32,7 @@ public class SecurityConfig {
         httpSecurity
                 .authorizeHttpRequests(configurer -> configurer
                         .requestMatchers("/home/**").permitAll()
+                        .requestMatchers("/images/**").permitAll()
 //                        .requestMatchers("/chooseLanguage").permitAll()
                         .requestMatchers("/register/**").permitAll()
                         .requestMatchers(HttpMethod.GET,"/administration/**").hasRole("ADMIN")

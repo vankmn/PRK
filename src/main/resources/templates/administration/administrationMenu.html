@@ -49,9 +49,6 @@
                 <li class="nav-item">
                     <a class="bi bi-person-circle nav-link active" href="/user/menu" th:text="'   ' + ${userName}"/>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="/loginPage">Login</a>
-                </li>
                 <form action="#" th:action="@{/logout}" method="post">
                     <li class="nav-item">
                         <button class="nav-link" type="submit" style="background-color: goldenrod; border: goldenrod">Logout</button>

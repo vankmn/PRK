@@ -28,6 +28,9 @@
 
             <div class="card-body" style="background-color: black">
                 <div class="card-text">
+                    <div style="color: goldenrod" th:if="${numberOfHallAlreadyExist}">
+                        Cinema hall number already exists!
+                    </div>
                     <form action="#" th:action="@{/administration/menu/cinemaHalls/saveHall}"
                           th:object="${hall}" method="POST" onsubmit="return checkConsistency()">
 

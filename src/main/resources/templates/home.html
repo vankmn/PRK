@@ -29,23 +29,35 @@
         </a>
         <div class="collapse navbar-collapse" id="navbarScroll">
             <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px;">
+                <div th:if="${userName != 'anonymousUser'}">
                 <li class="nav-item">
                     <a class="bi bi-person-circle nav-link active" href="/user/menu" th:text="'   ' + ${userName}"/>
                 </li>
+                </div>
+                <div th:if="${userName == 'anonymousUser'}">
                 <li class="nav-item">
                     <a class="nav-link active" aria-current="page" href="/loginPage">Login</a>
                 </li>
+                </div>
+                <div th:if="${userName != 'anonymousUser'}">
                 <form action="#" th:action="@{/logout}" method="post">
                 <li class="nav-item">
                     <button class="nav-link" type="submit" style="background-color: goldenrod; border: goldenrod">Logout</button>
                 </li>
                 </form>
+                </div>
+                <div th:if="${userName != 'anonymousUser'}">
+                <div th:if="${userAuthorities.size() == 2}">
                 <li class="nav-item">
                     <a class="nav-link active" aria-current="page" href="/administration/menu">Administration Menu</a>
                 </li>
+                </div>
+                </div>
+                <div th:if="${userName != 'anonymousUser'}">
                 <li class="nav-item">
                     <a class="nav-link active" aria-current="page" href="/user/menu">User Menu</a>
                 </li>
+                </div>
             </ul>
             <form th:action="@{/home/search}" class="d-flex" role="search">
                 <a th:href="@{/home}" class="btn col-3 me-2" style="opacity: 70%;">
