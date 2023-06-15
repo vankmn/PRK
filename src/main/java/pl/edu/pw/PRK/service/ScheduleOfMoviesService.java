@@ -8,6 +8,8 @@ public interface ScheduleOfMoviesService {
 
 	List<ScheduleOfMovie> findAll();
 
+	List<ScheduleOfMovie> findAllSortedByDateAndTime();
+
 	ScheduleOfMovie findById(int theId);
 
 	void save(ScheduleOfMovie scheduleOfMovie);

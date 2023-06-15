@@ -259,7 +259,7 @@ public class AdministrationController {
     //----------------schedule
     @GetMapping("/menu/schedule")
     public String showSchedule(Model model){
-        model.addAttribute("scheduleMovies", scheduleOfMoviesService.findAll());
+        model.addAttribute("scheduleMovies", scheduleOfMoviesService.findAllSortedByDateAndTime());
         return "administration/schedule/schedule";
     }
 

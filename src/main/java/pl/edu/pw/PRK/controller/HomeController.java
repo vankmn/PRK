@@ -38,7 +38,7 @@ public class HomeController {
         }
 
         //show all scheduled movies
-        model.addAttribute("scheduledMovies", scheduleOfMoviesService.findAll());
+        model.addAttribute("scheduledMovies", scheduleOfMoviesService.findAllSortedByDateAndTime());
 
         return "home";
     }
