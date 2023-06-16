@@ -40,24 +40,12 @@
                             <div id="ticketNameHelp" class="form-text">Update a name of the ticket type.</div>
                         </div>
 
-                        <!--                        <div th:if="${#fields.hasErrors('ticketName')}" class="mb-3 text-danger">-->
-                        <!--                            <ul>-->
-                        <!--                                <li th:each="err : ${#fields.errors('ticketName')}" th:text="'Ticket type name ' + ${err}" />-->
-                        <!--                            </ul>-->
-                        <!--                        </div>-->
-
                         <div class="mb-3" style="color: goldenrod">
                             <i class="fa-solid fa-money-bill-1"></i>
                             <label for="ticketPrice" class="form-label">Price (in PLN)</label>
                             <input id="ticketPrice" type="number" required step="0.01" th:field="*{price}" class="form-control" style="border-color: goldenrod; background-color: black; color: white" aria-describedby="ticketPriceHelp"/>
                             <div id="ticketPriceHelp" class="form-text">Update a price of the ticket type.</div>
                         </div>
-
-                        <!--                        <div th:if="${#fields.hasErrors('ticketPrice')}" class="mb-3 text-danger">-->
-                        <!--                            <ul>-->
-                        <!--                                <li th:each="err : ${#fields.errors('ticketPrice')}" th:text="'Ticket price ' + ${err}" />-->
-                        <!--                            </ul>-->
-                        <!--                        </div>-->
 
                         <div class="col-12 d-flex justify-content-between" style="text-align: center">
                             <button type="submit" class="btn" style="background-color: goldenrod">
@@ -78,11 +66,11 @@
 <script  th:inline="javascript">
     function checkConsistency() {
         return checkPrice(document.getElementById('ticketPrice').value);}
-    function checkPrice(price){
-        if(price>0 && price<1000){
+    function checkPrice(price) {
+        if (price > 0 && price < 100) {
             return true;
-        }else {
-            alert("Price must be greater than 0.")
+        } else {
+            alert("Price must be greater than 0 PLN and smaller than 100 PLN");
             return false;
         }
     }
