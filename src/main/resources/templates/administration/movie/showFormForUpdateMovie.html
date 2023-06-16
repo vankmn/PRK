@@ -40,12 +40,6 @@
                             <div id="movieNameHelp" class="form-text">Update a name of the movie.</div>
                         </div>
 
-                        <!--                        <div th:if="${#fields.hasErrors('movieName')}" class="mb-3 text-danger">-->
-                        <!--                            <ul>-->
-                        <!--                                <li th:each="err : ${#fields.errors('movieName')}" th:text="'Movie name ' + ${err}" />-->
-                        <!--                            </ul>-->
-                        <!--                        </div>-->
-
                         <div class="mb-3" style="color: goldenrod">
                             <i class="fa-solid fa-clapperboard"></i>
                             <label for="movieDescription" class="form-label">Description</label>
@@ -53,24 +47,12 @@
                             <div id="movieDescriptionHelp" class="form-text">Update a description of the movie.</div>
                         </div>
 
-                        <!--                        <div th:if="${#fields.hasErrors('movieDescription')}" class="mb-3 text-danger">-->
-                        <!--                            <ul>-->
-                        <!--                                <li th:each="err : ${#fields.errors('movieDescription')}" th:text="'Description ' + ${err}" />-->
-                        <!--                            </ul>-->
-                        <!--                        </div>-->
-
                         <div class="mb-3" style="color: goldenrod">
                             <i class="fa-solid fa-clock"></i>
                             <label for="movieDuration" class="form-label">Duration (in minutes)</label>
                             <input id="movieDuration" type="number" required pattern="[0-9]{1,4}" th:field="*{duration}" class="form-control" style="border-color: goldenrod; background-color: black; color: white" aria-describedby="movieDurationHelp"/>
                             <div id="movieDurationHelp" class="form-text">Update a duration of the movie.</div>
                         </div>
-
-                        <!--                        <div th:if="${#fields.hasErrors('movieDuration')}" class="mb-3 text-danger">-->
-                        <!--                            <ul>-->
-                        <!--                                <li th:each="err : ${#fields.errors('movieDuration')}" th:text="'Duration ' + ${err}" />-->
-                        <!--                            </ul>-->
-                        <!--                        </div>-->
 
                         <div class="col-12 d-flex justify-content-between" style="text-align: center">
                             <button type="submit" class="btn" style="background-color: goldenrod">
@@ -90,9 +72,15 @@
 
 <script  th:inline="javascript">
     function checkConsistency() {
-        return !!validateDuration(document.getElementById('movieDuration').value);}
+        return validateDuration(document.getElementById('movieDuration').value);
+    }
     function validateDuration(time){
-        return time > 0 && time < 10000;
+        if (time > 0 && time < 300) {
+            return true;
+        } else {
+            alert("Movie duration must be greater than 0 minutes and smaller than 300 minutes.")
+            return false;
+        }
     }
 </script>
 
