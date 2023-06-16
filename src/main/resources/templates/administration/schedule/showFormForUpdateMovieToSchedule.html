@@ -40,24 +40,12 @@
                             <div id="movieTimeHelp" class="form-text">Update a time of the movie.</div>
                         </div>
 
-                        <!--                        <div th:if="${#fields.hasErrors('movieTime')}" class="mb-3 text-danger">-->
-                        <!--                            <ul>-->
-                        <!--                                <li th:each="err : ${#fields.errors('movieTime')}" th:text="'Movie time ' + ${err}" />-->
-                        <!--                            </ul>-->
-                        <!--                        </div>-->
-
                         <div class="mb-3" style="color: goldenrod">
                             <i class="bi bi-calendar-date"></i>
                             <label for="movieDate" class="form-label">Date of movie</label>
                             <input id="movieDate" type="date" required pattern="\d{2,4}\-\d{1,2}\-\d{1,2}/" th:field="*{date}" class="form-control" style="border-color: goldenrod; background-color: black; color: white" aria-describedby="movieDateHelp"/>
                             <div id="movieDateHelp" class="form-text">Update a date of the movie.</div>
                         </div>
-
-                        <!--                        <div th:if="${#fields.hasErrors('movieDate')}" class="mb-3 text-danger">-->
-                        <!--                            <ul>-->
-                        <!--                                <li th:each="err : ${#fields.errors('movieDate')}" th:text="'Movie date ' + ${err}" />-->
-                        <!--                            </ul>-->
-                        <!--                        </div>-->
 
                         <div class="mb-3" style="color: goldenrod">
                             <i class="bi bi-camera-reels-fill"></i>
@@ -68,12 +56,6 @@
                             <div id="cinemaHallHelp" class="form-text">Please choose a cinema hall.</div>
                         </div>
 
-                        <!--                        <div th:if="${#fields.hasErrors('cinemaHall')}" class="mb-3 text-danger">-->
-                        <!--                            <ul>-->
-                        <!--                                <li th:each="err : ${#fields.errors('cinemaHall')}" th:text="'Cinema hall ' + ${err}" />-->
-                        <!--                            </ul>-->
-                        <!--                        </div>-->
-
                         <div class="mb-3" style="color: goldenrod">
                             <i class="bi bi-film"></i>
                             <label for="movie" class="form-label">Movie</label>
@@ -82,12 +64,6 @@
                             </select>
                             <div id="movieHelp" class="form-text">Please choose a movie.</div>
                         </div>
-
-                        <!--                        <div th:if="${#fields.hasErrors('movie')}" class="mb-3 text-danger">-->
-                        <!--                            <ul>-->
-                        <!--                                <li th:each="err : ${#fields.errors('movie')}" th:text="'Movie ' + ${err}" />-->
-                        <!--                            </ul>-->
-                        <!--                        </div>-->
 
                         <div class="col-12 d-flex justify-content-between" style="text-align: center">
                             <button type="submit" class="btn" style="background-color: goldenrod">

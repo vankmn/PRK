@@ -29,4 +29,18 @@ public class SeatDAO2Impl implements SeatDAO2 {
 
         return theQuery.getResultList();
     }
+
+//    @Override
+//    public Seat findByNumberByRowByHall(int seatNumber, int rowNumber, int hallNumber) {
+//
+//        Session currentSession = entityManager.unwrap(Session.class);
+//
+//        org.hibernate.query.Query<Seat> theQuery = currentSession.createQuery("from Seat where number = :seatNumber and row = :rowNumber and hall.number = :hallNumber", Seat.class);
+//
+//        theQuery.setParameter("seatNumber", seatNumber);
+//        theQuery.setParameter("rowNumber", rowNumber);
+//        theQuery.setParameter("hallNumber", hallNumber);
+//
+//        return theQuery.getSingleResultOrNull();
+//    }
 }

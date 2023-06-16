@@ -36,21 +36,21 @@
                         <div class="mb-3" style="color: goldenrod">
                             <i class="bi bi-film"></i>
                             <label for="movieName" class="form-label">Movie name</label>
-                            <input id="movieName" type="text" required pattern="[A-Za-z0-9]{1,20}" th:field="*{name}" class="form-control" style="border-color: goldenrod; background-color: black; color: white" aria-describedby="movieNameHelp"/>
+                            <input id="movieName" type="text" required th:field="*{name}" class="form-control" style="border-color: goldenrod; background-color: black; color: white" aria-describedby="movieNameHelp"/>
                             <div id="movieNameHelp" class="form-text">Update a name of the movie.</div>
                         </div>
 
                         <div class="mb-3" style="color: goldenrod">
                             <i class="fa-solid fa-clapperboard"></i>
                             <label for="movieDescription" class="form-label">Description</label>
-                            <textarea id="movieDescription" required pattern="[A-Za-z0-9]{1,500}" th:field="*{description}" class="form-control" rows="5" style="border-color: goldenrod; background-color: black; color: white" aria-describedby="movieDescriptionHelp"></textarea>
+                            <textarea id="movieDescription" required th:field="*{description}" class="form-control" rows="5" style="border-color: goldenrod; background-color: black; color: white" aria-describedby="movieDescriptionHelp"></textarea>
                             <div id="movieDescriptionHelp" class="form-text">Update a description of the movie.</div>
                         </div>
 
                         <div class="mb-3" style="color: goldenrod">
                             <i class="fa-solid fa-clock"></i>
                             <label for="movieDuration" class="form-label">Duration (in minutes)</label>
-                            <input id="movieDuration" type="number" required pattern="[0-9]{1,4}" th:field="*{duration}" class="form-control" style="border-color: goldenrod; background-color: black; color: white" aria-describedby="movieDurationHelp"/>
+                            <input id="movieDuration" type="number" th:field="*{duration}" class="form-control" style="border-color: goldenrod; background-color: black; color: white" aria-describedby="movieDurationHelp"/>
                             <div id="movieDurationHelp" class="form-text">Update a duration of the movie.</div>
                         </div>
 
@@ -72,7 +72,7 @@
 
 <script  th:inline="javascript">
     function checkConsistency() {
-        return validateDuration(document.getElementById('movieDuration').value);
+        return validateDuration(document.getElementById('movieDuration').value) && validateName() && validateDescription();
     }
     function validateDuration(time){
         if (time > 0 && time < 300) {
@@ -80,6 +80,24 @@
         } else {
             alert("Movie duration must be greater than 0 minutes and smaller than 300 minutes.")
             return false;
+        }
+    }
+    function validateName() {
+        const value = document.getElementById('movieName').value;
+        if (value.length > 50) {
+            alert("Movie name length can't be greater than 50 characters.")
+            return false;
+        } else {
+            return true;
+        }
+    }
+    function validateDescription() {
+        const value = document.getElementById('movieDescription').value;
+        if (value.length > 500) {
+            alert("Movie name length can't be greater than 500 characters.")
+            return false;
+        } else {
+            return true;
         }
     }
 </script>

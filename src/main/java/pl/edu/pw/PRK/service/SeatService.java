@@ -16,5 +16,7 @@ public interface SeatService {
 	
 	void deleteById(int theId);
 
+	boolean checkIfSeatNumberAlreadyExists(int seatNumber, int rowNumber, int hallNumber);
+
 	List <Seat> searchBy (String hallNumber);
 }

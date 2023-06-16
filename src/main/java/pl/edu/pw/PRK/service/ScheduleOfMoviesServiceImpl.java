@@ -25,7 +25,7 @@ public class ScheduleOfMoviesServiceImpl implements ScheduleOfMoviesService {
 	@Override
 	@Transactional
 	public List<ScheduleOfMovie> findAll() {
-		return scheduleOfMoviesDAO.findAll();
+		return scheduleOfMoviesDAO.findAllByOrderByDateAscTimeAsc();
 	}
 
 	@Override

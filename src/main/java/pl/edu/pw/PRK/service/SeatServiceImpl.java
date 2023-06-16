@@ -67,6 +67,12 @@ public class SeatServiceImpl implements SeatService {
 
 	@Override
 	@Transactional
+	public boolean checkIfSeatNumberAlreadyExists(int seatNumber, int rowNumber, int hallNumber) {
+		return seatDao.findSeatByNumberAndRowAndHallId(seatNumber, rowNumber, hallNumber) != null;
+	}
+
+	@Override
+	@Transactional
 	public List<Seat> searchBy(String hallNumber) {
 		return seatDAO2.searchBy(hallNumber);
 	}
