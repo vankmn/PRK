@@ -67,7 +67,7 @@ public class Seat {
 
 	@Override
 	public String toString() {
-		return "Row: " + row + ", Column: " + number;
+		return "Row: " + row + ", Seat: " + number;
 	}
 }
 
