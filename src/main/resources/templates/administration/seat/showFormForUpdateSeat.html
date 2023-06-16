@@ -40,24 +40,12 @@
                             <div id="seatNumberHelp" class="form-text">Update a number of the seat.</div>
                         </div>
 
-                        <!--                        <div th:if="${#fields.hasErrors('seatNumber')}" class="mb-3 text-danger">-->
-                        <!--                            <ul>-->
-                        <!--                                <li th:each="err : ${#fields.errors('seatNumber')}" th:text="'Seat number ' + ${err}" />-->
-                        <!--                            </ul>-->
-                        <!--                        </div>-->
-
                         <div class="mb-3" style="color: goldenrod">
                             <i class="fa-solid fa-diagram-predecessor"></i>
                             <label for="rowNumber" class="form-label">Row number</label>
                             <input id="rowNumber" type="number" required th:field="*{row}" class="form-control" style="border-color: goldenrod; background-color: black; color: white" aria-describedby="rowNumberHelp"/>
                             <div id="rowNumberHelp" class="form-text">Update a row number of the seat.</div>
                         </div>
-
-                        <!--                        <div th:if="${#fields.hasErrors('rowNumber')}" class="mb-3 text-danger">-->
-                        <!--                            <ul>-->
-                        <!--                                <li th:each="err : ${#fields.errors('rowNumber')}" th:text="'Row number ' + ${err}" />-->
-                        <!--                            </ul>-->
-                        <!--                        </div>-->
 
                         <div class="mb-3" style="color: goldenrod">
                             <i class="bi bi-camera-reels-fill"></i>
@@ -67,12 +55,6 @@
                             </select>
                             <div id="cinemaHallHelp" class="form-text">Please choose a cinema hall.</div>
                         </div>
-
-                        <!--                        <div th:if="${#fields.hasErrors('cinemaHall')}" class="mb-3 text-danger">-->
-                        <!--                            <ul>-->
-                        <!--                                <li th:each="err : ${#fields.errors('cinemaHall')}" th:text="'Cinema hall ' + ${err}" />-->
-                        <!--                            </ul>-->
-                        <!--                        </div>-->
 
                         <div class="col-12 d-flex justify-content-between" style="text-align: center">
                             <button type="submit" class="btn" style="background-color: goldenrod">
@@ -92,20 +74,20 @@
 
 <script th:inline="javascript">
     function checkConsistency() {
-        return validateColumn(document.getElementById('seatNumber').value) && validateRow(document.getElementById('rowNumber').value);}
-    function validateColumn(column){
-        if(column>0 && column<100){
+        return validateSeat(document.getElementById('seatNumber').value) && validateRow(document.getElementById('rowNumber').value);}
+    function validateSeat(seat){
+        if(seat > 0 && seat < 40){
             return true;
-        }else {
-            alert("Column must be greater than 0.")
+        } else {
+            alert("Seat number must be greater than 0 and smaller than 40.")
             return false;
         }
     }
     function validateRow(row){
-        if(row>0 && row<100){
+        if(row > 0 && row < 40){
             return true;
-        }else {
-            alert("Row must be greater than 0.")
+        } else {
+            alert("Row number must be greater than 0 and smaller than 40.")
             return false;
         }
     }

@@ -216,9 +216,16 @@ public class AdministrationController {
     }
 
     @PostMapping("/menu/seats/saveSeat")
-    public String saveSeat(@ModelAttribute("seat") Seat seat){
-        seatService.save(seat);
-        return "redirect:/administration/menu/seats";
+    public String saveSeat(@ModelAttribute("seat") Seat seat, Model model){
+        if (seatService.checkIfSeatNumberAlreadyExists(seat.getNumber(), seat.getRow(), seat.getHall().getNumber())) {
+            model.addAttribute("seatNumberAlreadyExists", true);
+            model.addAttribute("availableHalls",hallService.findAll());
+            return "administration/seat/addNewSeat";
+        } else {
+            seatService.save(seat);
+            model.addAttribute("seatNumberAlreadyExists", false);
+            return "redirect:/administration/menu/seats";
+        }
     }
 
     @GetMapping("/menu/seats/showFormForUpdateSeat")
@@ -274,15 +281,15 @@ public class AdministrationController {
         return "redirect:/administration/menu/schedule";
     }
 
-//    @GetMapping("/menu/schedule/showFormForUpdateMovieToSchedule")
-//    public String showFormForUpdateMovieToSchedule(@RequestParam("movieToScheduleId") int movieToScheduleId, Model model){
-//        ScheduleOfMovie movieToSchedule = scheduleOfMoviesService.findById(movieToScheduleId);
-//        model.addAttribute("movieToSchedule",movieToSchedule);
-//        // passing available halls and moves used in drop down lists
-//        model.addAttribute("availableHalls",hallService.findAll());
-//        model.addAttribute("availableMovies",movieService.findAll());
-//        return "administration/schedule/showFormForUpdateMovieToSchedule";
-//    }
+    @GetMapping("/menu/schedule/showFormForUpdateMovieToSchedule")
+    public String showFormForUpdateMovieToSchedule(@RequestParam("movieToScheduleId") int movieToScheduleId, Model model){
+        ScheduleOfMovie movieToSchedule = scheduleOfMoviesService.findById(movieToScheduleId);
+        model.addAttribute("movieToSchedule",movieToSchedule);
+        // passing available halls and moves used in drop down lists
+        model.addAttribute("availableHalls",hallService.findAll());
+        model.addAttribute("availableMovies",movieService.findAll());
+        return "administration/schedule/showFormForUpdateMovieToSchedule";
+    }
 
     @GetMapping("/menu/schedule/deleteMovieToSchedule")
     public String deleteMovieToSchedule(@RequestParam("movieToScheduleId") int movieToScheduleId){
