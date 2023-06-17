@@ -30,7 +30,7 @@ public class ScheduleOfMoviesServiceImpl implements ScheduleOfMoviesService {
 
 	@Override
 	public List<ScheduleOfMovie> findAllSortedByDateAndTime() {
-		return scheduleOfMoviesDAO.findAllSortedByDateAndTime();
+		return scheduleOfMoviesDAO.findAllByOrderByDateAscTimeAsc();
 	}
 
 	@Override
