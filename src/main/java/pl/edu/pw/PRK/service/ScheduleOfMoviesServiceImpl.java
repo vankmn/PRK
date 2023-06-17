@@ -7,6 +7,8 @@ import pl.edu.pw.PRK.dao.ScheduleOfMoviesDAO;
 import pl.edu.pw.PRK.dao.ScheduleOfMoviesDAO2;
 import pl.edu.pw.PRK.entity.ScheduleOfMovie;
 
+import java.sql.Date;
+import java.sql.Time;
 import java.util.List;
 import java.util.Optional;
 
@@ -70,6 +72,12 @@ public class ScheduleOfMoviesServiceImpl implements ScheduleOfMoviesService {
 	@Transactional
 	public List <ScheduleOfMovie> searchBy(String theName) {
 		return scheduleOfMoviesDAO2.searchBy(theName);
+	}
+
+	@Override
+	@Transactional
+	public boolean checkIfScheduleOfMovieExists(Time time, Date date, int hallId) {
+		return scheduleOfMoviesDAO.findScheduleOfMovieByTimeAndDateAndHallId(time, date, hallId) != null;
 	}
 }
 

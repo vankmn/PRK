@@ -273,12 +273,20 @@ public class AdministrationController {
 
     @Transactional
     @PostMapping("/menu/schedule/saveMovieToSchedule")
-    public String saveMovieToSchedule(@ModelAttribute("movieToSchedule") ScheduleOfMovie scheduleOfMovie) {
-        //add movie to schedule
-        scheduleOfMoviesService.save(scheduleOfMovie);
-        //creating a bunch of corresponding seats for added movie
-        movieSeatsService.createBunchOfSeatsForNewMovie(scheduleOfMovie,scheduleOfMovie.getHall());
-        return "redirect:/administration/menu/schedule";
+    public String saveMovieToSchedule(@ModelAttribute("movieToSchedule") ScheduleOfMovie scheduleOfMovie, Model model) {
+        if (scheduleOfMoviesService.checkIfScheduleOfMovieExists(scheduleOfMovie.getTime(), scheduleOfMovie.getDate(), scheduleOfMovie.getHall().getNumber())) {
+            model.addAttribute("scheduleOfMovieAlreadyExists", true);
+            model.addAttribute("availableHalls",hallService.findAll());
+            model.addAttribute("availableMovies",movieService.findAll());
+            return "administration/schedule/showAddMovieToScheduleForm";
+        } else {
+            model.addAttribute("scheduleOfMovieAlreadyExists", false);
+            //add movie to schedule
+            scheduleOfMoviesService.save(scheduleOfMovie);
+            //creating a bunch of corresponding seats for added movie
+            movieSeatsService.createBunchOfSeatsForNewMovie(scheduleOfMovie,scheduleOfMovie.getHall());
+            return "redirect:/administration/menu/schedule";
+        }
     }
 
     @GetMapping("/menu/schedule/showFormForUpdateMovieToSchedule")
