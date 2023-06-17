@@ -28,6 +28,9 @@
 
             <div class="card-body" style="background-color: black">
                 <div class="card-text">
+                    <div class="mb-3" style="color: red" th:if="${scheduleOfMovieAlreadyExists}">
+                        <i>Movie scheduled on this time, on this date and in this cinema hall already exists!</i>
+                    </div>
                     <form action="#" th:action="@{/administration/menu/schedule/saveMovieToSchedule}"
                           th:object="${movieToSchedule}" method="POST" onsubmit="return checkConsistency()">
 
