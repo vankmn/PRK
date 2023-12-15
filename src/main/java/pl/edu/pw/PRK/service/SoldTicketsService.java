@@ -1,7 +1,7 @@
 package pl.edu.pw.PRK.service;
 
-import pl.edu.pw.PRK.entity.SoldTicket;
-import pl.edu.pw.PRK.entity.User;
+import pl.edu.pw.PRK.entity.*;
+
 import java.util.List;
 
 public interface SoldTicketsService {
@@ -15,4 +15,6 @@ public interface SoldTicketsService {
 	void deleteById(int theId);
 
 	List <SoldTicket> findTicketListForTheUser(User user);
+
+	boolean checkIfTicketIsSold(MovieSeats movieSeats);
 }

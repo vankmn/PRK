@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import pl.edu.pw.PRK.dao.SoldTicketsDAO;
+import pl.edu.pw.PRK.entity.MovieSeats;
 import pl.edu.pw.PRK.entity.SoldTicket;
 import pl.edu.pw.PRK.entity.User;
 
@@ -62,6 +63,11 @@ public class SoldTicketsServiceImpl implements SoldTicketsService {
 	@Transactional
 	public List <SoldTicket> findTicketListForTheUser(User user) {
 		return soldTicketsDAO.findTicketListForTheUser(user);
+	}
+
+	@Override
+	public boolean checkIfTicketIsSold(MovieSeats movieSeats) {
+		return soldTicketsDAO.checkIfTicketIsSold(movieSeats) != null;
 	}
 }
 

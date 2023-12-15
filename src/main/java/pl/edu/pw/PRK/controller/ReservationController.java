@@ -53,20 +53,27 @@ public class ReservationController {
     }
 
     @PostMapping("/addSoldTicket")
-    public String addSoldTicket(@ModelAttribute("soldTicket") SoldTicket soldTicket){
-
-        //add user
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        soldTicket.setUser(userService.findByUserName(authentication.getName()));
-
-        //save soldTicket
-        soldTicketsService.save(soldTicket);
-
-        //set occupation to movieSeat
-        MovieSeats movieSeats = movieSeatsService.findById(soldTicket.getMovieSeat().getId());
-        movieSeats.setOccupied(true);
-        movieSeatsService.save(movieSeats);
-        return "redirect:/home";
+    public String addSoldTicket(@ModelAttribute("soldTicket") SoldTicket soldTicket, Model model){
+        if (soldTicketsService.checkIfTicketIsSold(soldTicket.getMovieSeat())) {
+            model.addAttribute("seatIsOccupied", true);
+            List<MovieSeats> movieSeatsNotOccupiedList = movieSeatsService.findNotOccupiedSeats(scheduleOfMoviesService.findById(soldTicket.getMovieSeat().getScheduleOfMovieId().getId()));
+            model.addAttribute("listOfSeats",movieSeatsNotOccupiedList);
+            List<Ticket> listOfTickets = ticketService.findAll();
+            model.addAttribute("listOfTickets",listOfTickets);
+            return "reservation/showReservationForm";
+        } else {
+            model.addAttribute("seatIsOccupied", false);
+            //add user
+            Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+            soldTicket.setUser(userService.findByUserName(authentication.getName()));
+            //save soldTicket
+            soldTicketsService.save(soldTicket);
+            //set occupation to movieSeat
+            MovieSeats movieSeats = movieSeatsService.findById(soldTicket.getMovieSeat().getId());
+            movieSeats.setOccupied(true);
+            movieSeatsService.save(movieSeats);
+            return "redirect:/user/reservations";
+        }
     }
 
 

@@ -28,6 +28,9 @@
 
             <div class="card-body" style="background-color: black">
                 <div class="card-text">
+                    <div class="mb-3" style="color: red" th:if="${seatIsOccupied}">
+                        <i>This seat has already been reserved. Please choose a different seat.</i>
+                    </div>
                     <!-- Reservation Form -->
                     <form action="#" th:action="@{/reservation/addSoldTicket}" th:object="${soldTicket}" method="post" class="form-horizontal">
 
